@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="pnlBotones" max="32767" attributes="0"/>
+                  <Component id="pnlCategoria" alignment="1" max="32767" attributes="0"/>
+                  <Component id="pnlDocumento" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnlImputacion" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="pnlPeticion" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="pnlEstados" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlCategoria" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="pnlEstados" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="pnlPeticion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlImputacion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="pnlDocumento" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlBotones" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="pnlCategoria">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="lblCategoria" min="-2" pref="56" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cmbCategoria" min="-2" pref="155" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblSubCategoria" min="-2" pref="89" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cmbSubCategoria" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="lblPeticion" min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cmbPeticion" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmbCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmbSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Component id="cmbPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="lblPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblCategoria">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Categoria"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbCategoria">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Categoria&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSubCategoria">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="SubCategor&#xed;a"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbSubCategoria">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;SubCategoria&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPeticion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Petici&#xf3;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbPeticion">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Peticion&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlEstados">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="chkPendiente" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="chkEnCurso" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="chkRetenida" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                  <Component id="chkAnulada" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                  <Component id="chkFinalizada" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <Component id="chkCerrada" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="chkPendiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkAnulada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkCerrada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkFinalizada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkEnCurso" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkRetenida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JCheckBox" name="chkPendiente">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pendiente"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkEnCurso">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="En curso"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkRetenida">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Retenida"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkAnulada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Anulada"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkFinalizada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Finalizada"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkCerrada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cerrada"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlPeticion">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblAsuntoContiene" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="lblFechaInicioProgramado" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtAsuntoContiene" alignment="0" min="-2" pref="713" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="txtFechaInicioRealDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <Component id="txtHorasProgramadasDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <Component id="txtlPorcentajeRealizacionDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtHorasProgramadasHasta" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <Component id="txtFechaInicioRealHasta" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <Component id="txtlPorcentajeRealizacionHasta" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="txtFechaInicioProgramadoDesde" min="-2" pref="78" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="txtFechaInicioProgramadoHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lblFechaFinReal" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtFechaFinRealDesde" min="-2" pref="78" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lblHorasReales" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtHorasRealesDesde" min="-2" pref="78" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtHorasRealesHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <Component id="txtFechaFinRealHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lblFechaFinProgramado" min="-2" pref="180" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtFechaFinProgramadoDesde" min="-2" pref="78" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="txtFechaFinProgramadoHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblUsuario" min="-2" pref="180" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cmbUsuario" min="-2" pref="168" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Component id="lblFechaInicioReal" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lblHorasProgramadas" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lblPorcentajeRealizacion" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblAsuntoContiene" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtAsuntoContiene" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblFechaInicioProgramado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaInicioProgramadoDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaInicioProgramadoHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblFechaFinProgramado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFechaFinProgramadoDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaFinProgramadoHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblFechaInicioReal" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaInicioRealDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaInicioRealHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblFechaFinReal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFechaFinRealDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaFinRealHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblHorasProgramadas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasProgramadasDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasProgramadasHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblHorasReales" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHorasRealesDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasRealesHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblPorcentajeRealizacion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtlPorcentajeRealizacionDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtlPorcentajeRealizacionHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblUsuario" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmbUsuario" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblAsuntoContiene">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Contiene en sus textos"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtAsuntoContiene">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFechaInicioProgramado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Inicio Programado "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaInicioProgramadoDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaInicioProgramadoHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFechaFinProgramado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Fin Programado "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaFinProgramadoDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaFinProgramadoHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFechaInicioReal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Inicio Real"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaInicioRealDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaInicioRealHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFechaFinReal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Fin Real"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaFinRealDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaFinRealHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHorasProgramadas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Horas Programadas "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasProgramadasDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasProgramadasHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHorasReales">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Horas Reales"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasRealesDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasRealesHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPorcentajeRealizacion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Porcentaje de realizaci&#xf3;n "/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtlPorcentajeRealizacionDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtlPorcentajeRealizacionHasta">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbUsuario">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Usuario&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblUsuario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Usuario"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlImputacion">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblFechaImputacion" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtFechaImputacionDesde" min="-2" pref="80" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="txtFechaImputacionHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="cmbPeriodoFecha" min="-2" pref="145" max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <Component id="lblHorasImputadas" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtHorasImputadasDesde" min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtHorasImputadasHasta" min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="lblTipoHoras" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cmbTipoHoras" min="-2" pref="139" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblFechaImputacion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaImputacionDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtFechaImputacionHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblHorasImputadas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasImputadasDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasImputadasHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblTipoHoras" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmbTipoHoras" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmbPeriodoFecha" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblFechaImputacion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Imputaci&#xf3;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaImputacionDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaImputacionHasta">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbPeriodoFecha">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHorasImputadas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Horas Imputadas "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasImputadasDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasImputadasHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTipoHoras">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tipo Horas"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbTipoHoras">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Todas"/>
+                <StringItem index="1" value="Normales"/>
+                <StringItem index="2" value="Extra"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlDocumento">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblRuta" min="-2" pref="80" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <Component id="btnRuta" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtRuta" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblTipoDocumento" min="-2" pref="80" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cmbTipoDocumento" min="-2" pref="188" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="lblNombreContiene" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtNombreContiene" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTipoDocumento" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmbTipoDocumento" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblNombreContiene" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtNombreContiene" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblRuta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="btnRuta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtRuta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblTipoDocumento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tipo Documento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbTipoDocumento">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNombreContiene">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nombre contiene"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtNombreContiene">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblRuta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ruta documento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnRuta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jButton1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtRuta">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlBotones">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+                  <Component id="btnLimpiar" min="-2" pref="130" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnGuardar" min="-2" pref="130" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" pref="130" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btnLimpiar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="10" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/limpiar.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[65, 65]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[65, 65]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[105, 41]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnGuardar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="10" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/salvar.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Guardar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCancelar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="10" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/salida_32.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

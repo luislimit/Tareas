@@ -6,15 +6,15 @@
 package es.luisev.tareas.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -24,23 +24,13 @@ import jakarta.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@SuperBuilder
 @Table (name="t_tipodocumento")
-public class TipoDocumento extends DataBaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@ToString(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+public class TipoDocumento extends DBEntity{
+    
+    @ToString.Include
     private String nombre;
-    
-    @Override
-    public String toString(){
-        return nombre;
-    }
-    
-    @Override
-    public Long getPrimaryKey() {
-        return id;
-    }     
-}
-
-
+   
+ }

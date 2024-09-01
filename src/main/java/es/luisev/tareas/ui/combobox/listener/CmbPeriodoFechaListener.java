@@ -21,19 +21,13 @@ import javax.swing.JTextField;
 public class CmbPeriodoFechaListener implements ActionListener {
 
     private final JComboBox cmbPeriodo;
-    private JTextField txtDesde;
-    private JTextField txtHasta;
+    private final JTextField txtDesde;
+    private final JTextField txtHasta;
 
-    public CmbPeriodoFechaListener(JComboBox cmbPeriodo) {
+    public CmbPeriodoFechaListener(JComboBox cmbPeriodo, JTextField txtDesde, JTextField txtHasta) {
         super();
         this.cmbPeriodo = cmbPeriodo;
-    }
-
-    public void setTxtDesde(JTextField txtDesde) {
         this.txtDesde = txtDesde;
-    }
-
-    public void setTxtHasta(JTextField txtHasta) {
         this.txtHasta = txtHasta;
     }
     

@@ -23,23 +23,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlBotones" max="32767" attributes="0"/>
-                  <Component id="pnlCategoria" alignment="1" max="32767" attributes="0"/>
                   <Component id="pnlDocumento" alignment="0" max="32767" attributes="0"/>
                   <Component id="pnlImputacion" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="pnlPeticion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="pnlPeticion" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="pnlEstados" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="pnlCategoria" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,8 +44,6 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlCategoria" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="pnlEstados" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="pnlPeticion" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -70,19 +64,25 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="lblCategoria" min="-2" pref="56" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmbCategoria" min="-2" pref="155" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblSubCategoria" min="-2" pref="89" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="lblCategoria" max="32767" attributes="0"/>
+                      <Component id="lblSubCategoria" pref="89" max="32767" attributes="0"/>
+                      <Component id="lblPeticion" alignment="0" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmbSubCategoria" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="lblPeticion" min="-2" pref="81" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmbPeticion" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="cmbPeticion" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lblEstado" min="-2" pref="70" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cmbEstado" min="-2" pref="171" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="cmbCategoria" min="-2" pref="892" max="-2" attributes="0"/>
+                      <Component id="cmbSubCategoria" min="-2" pref="892" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -93,11 +93,19 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="cmbCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cmbSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cmbPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                          <Component id="cmbPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="lblPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="lblEstado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="cmbEstado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -154,77 +162,15 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Peticion&gt;"/>
           </AuxValues>
         </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="pnlEstados">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="chkPendiente" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="chkEnCurso" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="chkRetenida" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                  <Component id="chkAnulada" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                  <Component id="chkFinalizada" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                  <Component id="chkCerrada" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="chkPendiente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkAnulada" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkCerrada" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkFinalizada" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkEnCurso" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkRetenida" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JCheckBox" name="chkPendiente">
+        <Component class="javax.swing.JLabel" name="lblEstado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pendiente"/>
+            <Property name="text" type="java.lang.String" value="Estado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chkEnCurso">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="En curso"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkRetenida">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Retenida"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkAnulada">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Anulada"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkFinalizada">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Finalizada"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkCerrada">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cerrada"/>
-          </Properties>
+        <Component class="javax.swing.JComboBox" name="cmbEstado">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Estado&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -240,78 +186,83 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblAsuntoContiene" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="lblFechaInicioProgramado" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="lblInicioPrevisto" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtAsuntoContiene" alignment="0" min="-2" pref="713" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="txtFechaInicioRealDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
-                                              <Component id="txtHorasProgramadasDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
-                                              <Component id="txtlPorcentajeRealizacionDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <Component id="txtHorasPrevistaDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <Component id="txtPorcentajeDesde" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtHorasProgramadasHasta" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <Component id="txtFechaInicioRealHasta" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <Component id="txtlPorcentajeRealizacionHasta" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="txtHorasPrevistaHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <Component id="txtPorcentajeHasta" min="-2" pref="80" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtFechaInicioProgramadoDesde" min="-2" pref="78" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtFechaInicioProgramadoHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Component id="dchInicioPrevistoDesde" min="-2" pref="98" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="dchInicioPrevistoHasta" min="-2" pref="98" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="dchInicioRealDesde" min="-2" pref="98" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="dchInicioRealHasta" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lblFechaFinReal" min="-2" pref="180" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="txtFechaFinRealDesde" min="-2" pref="78" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lblHorasReales" min="-2" pref="180" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="txtHorasRealesDesde" min="-2" pref="78" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtHorasRealesHasta" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <Component id="txtFechaFinRealHasta" min="-2" pref="80" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lblFechaFinProgramado" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblFinReal" min="-2" pref="180" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtFechaFinProgramadoDesde" min="-2" pref="78" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtFechaFinProgramadoHasta" min="-2" pref="80" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblUsuario" min="-2" pref="180" max="-2" attributes="0"/>
+                                          <Component id="dchFinRealDesde" min="-2" pref="98" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cmbUsuario" min="-2" pref="168" max="-2" attributes="0"/>
+                                          <Component id="dchFinRealHasta" min="-2" pref="98" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lblHorasReal" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtHorasRealDesde" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                              <Component id="txtHorasRealHasta" min="-2" pref="80" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="lblFinPrevisto" min="-2" pref="180" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="dchFinPrevistoDesde" min="-2" pref="98" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="dchFinPrevistoHasta" min="-2" pref="98" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="lblUsuario" min="-2" pref="180" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="cmbUsuario" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
+                              <Component id="txtAsuntoContiene" min="-2" pref="797" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="lblFechaInicioReal" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="lblHorasProgramadas" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="lblPorcentajeRealizacion" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lblInicioReal" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lblHorasPrevista" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lblPorcentaje" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -326,41 +277,43 @@
                       <Component id="txtAsuntoContiene" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblFechaInicioProgramado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaInicioProgramadoDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaInicioProgramadoHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblFechaFinProgramado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFechaFinProgramadoDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaFinProgramadoHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblInicioPrevisto" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="lblFinPrevisto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="dchInicioPrevistoDesde" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchInicioPrevistoHasta" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchFinPrevistoDesde" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchFinPrevistoHasta" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblInicioReal" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchInicioRealDesde" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchInicioRealHasta" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchFinRealDesde" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchFinRealHasta" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblFinReal" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblFechaInicioReal" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaInicioRealDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaInicioRealHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblFechaFinReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFechaFinRealDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaFinRealHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblHorasPrevista" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasPrevistaDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasPrevistaHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblHorasReal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHorasRealDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtHorasRealHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblHorasProgramadas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtHorasProgramadasDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtHorasProgramadasHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblHorasReales" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtHorasRealesDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtHorasRealesHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblPorcentajeRealizacion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtlPorcentajeRealizacionDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtlPorcentajeRealizacionHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lblPorcentaje" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtPorcentajeDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txtPorcentajeHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="lblUsuario" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="cmbUsuario" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -373,69 +326,93 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtAsuntoContiene">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblFechaInicioProgramado">
+        <Component class="javax.swing.JLabel" name="lblInicioPrevisto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha Inicio Programado "/>
+            <Property name="text" type="java.lang.String" value="Fecha Inicio Previsto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaInicioProgramadoDesde">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaInicioProgramadoHasta">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblFechaFinProgramado">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchInicioPrevistoDesde">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha Fin Programado "/>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaFinProgramadoDesde">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchInicioPrevistoHasta">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaFinProgramadoHasta">
+        <Component class="javax.swing.JLabel" name="lblFinPrevisto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Fin Previsto"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblFechaInicioReal">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFinPrevistoDesde">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFinPrevistoHasta">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblInicioReal">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fecha Inicio Real"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaInicioRealDesde">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchInicioRealDesde">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaInicioRealHasta">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchInicioRealHasta">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblFechaFinReal">
+        <Component class="javax.swing.JLabel" name="lblFinReal">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fecha Fin Real"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaFinRealDesde">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaFinRealHasta">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblHorasProgramadas">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFinRealDesde">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Horas Programadas "/>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHorasProgramadasDesde">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFinRealHasta">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHorasProgramadasHasta">
+        <Component class="javax.swing.JLabel" name="lblHorasPrevista">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Horas Previstas"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblHorasReales">
+        <Component class="javax.swing.JTextField" name="txtHorasPrevistaDesde">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtHorasPrevistaHasta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHorasReal">
           <Properties>
             <Property name="text" type="java.lang.String" value="Horas Reales"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHorasRealesDesde">
+        <Component class="javax.swing.JTextField" name="txtHorasRealDesde">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHorasRealesHasta">
+        <Component class="javax.swing.JTextField" name="txtHorasRealHasta">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPorcentajeRealizacion">
+        <Component class="javax.swing.JLabel" name="lblPorcentaje">
           <Properties>
             <Property name="text" type="java.lang.String" value="Porcentaje de realizaci&#xf3;n "/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtlPorcentajeRealizacionDesde">
+        <Component class="javax.swing.JTextField" name="txtPorcentajeDesde">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtlPorcentajeRealizacionHasta">
+        <Component class="javax.swing.JTextField" name="txtPorcentajeHasta">
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbUsuario">
           <Properties>
@@ -471,18 +448,16 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblFechaImputacion" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtFechaImputacionDesde" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="txtFechaImputacionHasta" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cmbPeriodoFecha" min="-2" pref="145" max="-2" attributes="0"/>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <Component id="dchFechaImputacionDesde" min="-2" pref="98" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="dchFechaImputacionHasta" min="-2" pref="98" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                   <Component id="lblHorasImputadas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtHorasImputadasDesde" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtHorasImputadasHasta" min="-2" pref="60" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                   <Component id="lblTipoHoras" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cmbTipoHoras" min="-2" pref="139" max="-2" attributes="0"/>
@@ -494,18 +469,19 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblFechaImputacion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaImputacionDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtFechaImputacionHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblHorasImputadas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtHorasImputadasDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txtHorasImputadasHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblTipoHoras" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="cmbTipoHoras" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="cmbPeriodoFecha" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="dchFechaImputacionHasta" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dchFechaImputacionDesde" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblFechaImputacion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="lblHorasImputadas" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="txtHorasImputadasDesde" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="txtHorasImputadasHasta" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="lblTipoHoras" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="cmbTipoHoras" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -516,19 +492,15 @@
             <Property name="text" type="java.lang.String" value="Fecha Imputaci&#xf3;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaImputacionDesde">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaImputacionHasta">
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cmbPeriodoFecha">
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFechaImputacionDesde">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
+            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFechaImputacionHasta">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblHorasImputadas">
           <Properties>
@@ -574,25 +546,27 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="lblTipoDocumento" max="32767" attributes="0"/>
+                      <Component id="lblRuta" pref="110" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblRuta" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnRuta" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtRuta" max="32767" attributes="0"/>
+                          <Component id="txtRuta" min="-2" pref="827" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblTipoDocumento" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cmbTipoDocumento" min="-2" pref="188" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="cmbTipoDocumento" min="-2" pref="160" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lblNombreContiene" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtNombreContiene" max="32767" attributes="0"/>
+                          <Component id="txtNombreContiene" min="-2" pref="616" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -660,7 +634,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
                   <Component id="btnLimpiar" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="btnGuardar" min="-2" pref="130" max="-2" attributes="0"/>

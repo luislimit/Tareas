@@ -10,7 +10,6 @@ import es.luisev.tareas.model.SubCategoria;
 import es.luisev.tareas.ui.listener.MantenimientoSubCategoriaListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /**
@@ -25,7 +24,7 @@ public class MantenimientoSubCategoriaDialog extends DialogoBase {
      * @param parent
      * @param subCategoria
      */
-    public MantenimientoSubCategoriaDialog(JFrame parent, SubCategoria subCategoria) {
+    public MantenimientoSubCategoriaDialog(VisorForm parent, SubCategoria subCategoria) {
         super(parent, subCategoria);
     }
 

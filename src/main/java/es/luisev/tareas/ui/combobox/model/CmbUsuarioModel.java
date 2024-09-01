@@ -37,8 +37,10 @@ public class CmbUsuarioModel extends AbstractListModel<Usuario> implements Combo
     public CmbUsuarioModel(List<Usuario> lista) {
         super();
         this.lista = new ArrayList<>();
-        this.lista.add(null);
-        this.lista.addAll(lista);
+        if (lista != null) {
+            this.lista.add(null);
+            this.lista.addAll(lista);
+        }
         setDefault();
     }
 

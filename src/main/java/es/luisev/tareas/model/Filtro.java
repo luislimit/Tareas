@@ -18,36 +18,39 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class Filtro extends DataBaseEntity{
+public class Filtro {
     Categoria categoria;
     SubCategoria subCategoria;
     Peticion peticion;
-    //
-    Boolean pendiente;
-    Boolean enCurso;
-    Boolean retenida;
-    Boolean anulada;
-    Boolean finalizada;
-    Boolean cerrada;
+    Estado estado;
     //
     String asuntoContiene;
-    Long fechaInicioProgramadoDesde;
-    Long fechaInicioProgramadoHasta;
-    Long fechaInicioRealDesde;
-    Long fechaInicioRealHasta;
+    Long inicioPrevistoDesde;
+    Long inicioPrevistoHasta;
+    Long inicioRealDesde;
+    Long inicioRealHasta;
+    
+    Long finPrevistoDesde;
+    Long finPrevistoHasta;
+    Long finRealDesde;
+    Long finRealHasta;    
+    
+    Double horasPrevistaDesde;
+    Double horasPrevistaHasta;
     Double horasRealesDesde;
     Double horasRealesHasta;
-    Double porcentajeRealizacionDesde;
-    Double porcentajeRealizacionHasta;
+    
+    Double porcentajeDesde;
+    Double porcentajeHasta;
     Usuario usuario;
     //
-    Long fechaImputacionDesde;
-    Long fechaImputacionHasta;
+    Long imputacionDesde;
+    Long imputacionHasta;
     Double horasImputadasDesde;
     Double horasImputadasHasta;
     int tipoHoras;
     //
-    Long tipoDocumento;
+    TipoDocumento tipoDocumento;
     String nombreContiene;
     String ruta;
 }

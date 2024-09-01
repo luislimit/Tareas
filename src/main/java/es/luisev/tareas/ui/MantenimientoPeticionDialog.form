@@ -29,15 +29,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="lblDescripcion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="lblInicioPrevisto" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtInicioPrevisto" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="dchInicioPrevisto" min="-2" pref="98" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblFinPrevisto" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -50,19 +50,19 @@
                                       <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="txtFinPrevisto" min="-2" pref="90" max="-2" attributes="0"/>
+                                      <Component id="dchFinPrevisto" min="-2" pref="98" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="lblHorasPrevista" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtHorasPrevista" min="-2" pref="50" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="lblInicioReal" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtInicioReal" min="-2" pref="90" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="dchInicioReal" min="-2" pref="98" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                       <Component id="lblFinReal" min="-2" pref="56" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtFinReal" min="-2" pref="90" max="-2" attributes="0"/>
+                                      <Component id="dchFinReal" min="-2" pref="98" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblHorasReal" min="-2" pref="84" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -119,48 +119,54 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblAsunto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAsunto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCodigo" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="txtCodigo" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="lblAsunto" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="txtAsunto" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSubCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbSubCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUsuario" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="cmbUsuario" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="lblCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="cmbCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="lblSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="cmbSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="lblEstado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="cmbEstado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblDescripcion" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scpDescripcion" pref="236" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblInicioPrevisto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtInicioPrevisto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblFinPrevisto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtFinPrevisto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblInicioReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtInicioReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblFinReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtFinReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblHorasReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtHorasReal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblHorasPrevista" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtHorasPrevista" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPorcentaje" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPorcentaje" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblInicioPrevisto" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblFinPrevisto" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblInicioReal" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblFinReal" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblHorasReal" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtHorasReal" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblHorasPrevista" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtHorasPrevista" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblPorcentaje" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtPorcentaje" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="dchFinPrevisto" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="dchInicioReal" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="dchFinReal" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="dchInicioPrevisto" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
@@ -248,15 +254,11 @@
         <Property name="text" type="java.lang.String" value="Inicio Previsto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtInicioPrevisto">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblFinPrevisto">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Fin Previsto"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtFinPrevisto">
     </Component>
     <Component class="javax.swing.JLabel" name="lblHorasPrevista">
       <Properties>
@@ -272,17 +274,10 @@
         <Property name="text" type="java.lang.String" value="Inicio Real"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtInicioReal">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblFinReal">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Fin Real"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtFinReal">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblHorasReal">
@@ -341,6 +336,26 @@
           <Image iconType="3" name="/salida_32.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dchInicioPrevisto">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dchFinPrevisto">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dchInicioReal">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dchFinReal">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
       </Properties>
     </Component>
   </SubComponents>

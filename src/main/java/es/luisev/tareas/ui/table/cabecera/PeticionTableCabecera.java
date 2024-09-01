@@ -17,14 +17,16 @@ public class PeticionTableCabecera extends Cabecera {
         addColumn("lblSubCategoria");
         addColumn("lblPeticion");
         addColumn("lblAsunto");
-        addColumn("lblInicioProgramado");
-        addColumn("lblFinProgramado");
+        addColumn("lblInicioPrevisto");
+        addColumn("lblFinPrevisto");
         addColumn("lblInicioReal");
         addColumn("lblFinReal");
-        addColumn("lblHorasProgramada");
+        addColumn("lblHorasPrevista");
         addColumn("lblHorasReal");
+        addColumn("lblPorcentaje");
         addColumn("lblEstado");
 
+        columnClasses.add(String.class);
         columnClasses.add(String.class);
         columnClasses.add(String.class);
         columnClasses.add(String.class);
@@ -42,10 +44,11 @@ public class PeticionTableCabecera extends Cabecera {
         columnSizes.add(100);
         columnSizes.add(600);
         columnSizes.add(80);
+        columnSizes.add(100);
+        columnSizes.add(100);
         columnSizes.add(80);
-        columnSizes.add(80);
-        columnSizes.add(80);
-        columnSizes.add(80);
+        columnSizes.add(100);
+        columnSizes.add(100);
         columnSizes.add(80);
         columnSizes.add(80);
     }

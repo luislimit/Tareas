@@ -5,14 +5,18 @@
  */
 package es.luisev.tareas.ui.listener;
 
+import es.luisev.tareas.model.*;
 import es.luisev.tareas.ui.DialogoBase;
 import es.luisev.tareas.ui.MantenimientoFiltroDialog;
 import es.luisev.tareas.ui.combobox.listener.CmbCategoriaListener;
 import es.luisev.tareas.ui.combobox.listener.CmbSubCategoriaListener;
 import es.luisev.tareas.ui.combobox.model.CmbCategoriaModel;
+import es.luisev.tareas.ui.combobox.model.CmbEstadoModel;
 import es.luisev.tareas.ui.combobox.model.CmbSubCategoriaModel;
 import es.luisev.tareas.ui.combobox.model.CmbUsuarioModel;
+import es.luisev.tareas.utils.UIHelper;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 /**
  *
@@ -21,61 +25,164 @@ import javax.swing.JComboBox;
 public class MantenimientoFiltroListener extends ListenerBase {
 
     private final MantenimientoFiltroDialog pantalla;
-    
+
     public MantenimientoFiltroListener(DialogoBase dialogo) {
         super(dialogo);
         this.pantalla = (MantenimientoFiltroDialog) dialogo;
         iniciaDialogo();
     }
-    
+
     @Override
     public void evtLimpiar() {
-        pantalla.getCmbCategoria().setSelectedIndex(0);
-        pantalla.getCmbSubCategoria().setSelectedIndex(0);
-        pantalla.getCmbPeticion().setSelectedIndex(0);
+        pantalla.getCmbCategoria().setSelectedIndex(-1);
+        pantalla.getCmbSubCategoria().setSelectedIndex(-1);
+        pantalla.getCmbPeticion().setSelectedIndex(-1);
         //Peticion
         pantalla.getTxtAsuntoContiene().setText("");
-        pantalla.getTxtFechaInicioProgramadoDesde().setText("");
-        pantalla.getTxtFechaInicioProgramadoHasta().setText("");
-        pantalla.getTxtFechaInicioRealDesde().setText("");
-        pantalla.getTxtFechaInicioRealHasta().setText("");
+
+        pantalla.getDchInicioPrevistoDesde().setDate(null);
+        pantalla.getDchInicioPrevistoHasta().setDate(null);
+        pantalla.getDchFinPrevistoDesde().setDate(null);
+        pantalla.getDchFinPrevistoHasta().setDate(null);
+        pantalla.getDchInicioRealDesde().setDate(null);
+        pantalla.getDchInicioRealHasta().setDate(null);
+        pantalla.getDchFinRealDesde().setDate(null);
+        pantalla.getDchFinRealHasta().setDate(null);
+
+        pantalla.getTxtHorasPrevistaDesde().setText("");
+        pantalla.getTxtHorasPrevistaHasta().setText("");        
         pantalla.getTxtHorasRealesDesde().setText("");
         pantalla.getTxtHorasRealesHasta().setText("");
-        pantalla.getTxtlPorcentajeRealizacionDesde().setText("");
-        pantalla.getTxtlPorcentajeRealizacionHasta().setText("");
-        pantalla.getCmbUsuario().setSelectedIndex(0);
+        
+        pantalla.getTxtPorcentajeDesde().setText("");
+        pantalla.getTxtPorcentajeHasta().setText("");
+
+        pantalla.getCmbUsuario().setSelectedIndex(-1);
         //Horas
-        pantalla.getTxtFechaImputacionDesde().setText("");
-        pantalla.getTxtFechaImputacionHasta().setText("");
+        pantalla.getDchImputacionDesde().setDate(null);
+        pantalla.getDchImputacionHasta().setDate(null);
         pantalla.getTxtHorasImputadasDesde().setText("");
         pantalla.getTxtHorasImputadasHasta().setText("");
         pantalla.getCmbTipoHoras().setSelectedIndex(-1);
         //Documento
         pantalla.getCmbTipoDocumento().setSelectedIndex(-1);
         pantalla.getTxtNombreContiene().setText("");
-        pantalla.getTxtRuta().setText("");        
+        pantalla.getTxtRuta().setText("");
     }
-    
+
     @Override
     public boolean evtGuardar() {
+        Filtro filtro = new Filtro();
+        filtro.setCategoria((Categoria) pantalla.getCmbCategoria().getSelectedItem());
+        filtro.setSubCategoria((SubCategoria) pantalla.getCmbSubCategoria().getSelectedItem());
+        filtro.setPeticion((Peticion) pantalla.getCmbPeticion().getSelectedItem());
+        filtro.setEstado((Estado) pantalla.getCmbEstado().getSelectedItem());
+        //
+        //
+        filtro.setAsuntoContiene(pantalla.getTxtAsuntoContiene().getText());
+        filtro.setInicioPrevistoDesde(UIHelper.getDateDB(pantalla.getDchInicioPrevistoDesde()));
+        filtro.setInicioPrevistoHasta(UIHelper.getDateDB(pantalla.getDchInicioPrevistoHasta()));
+        filtro.setFinPrevistoDesde(UIHelper.getDateDB(pantalla.getDchFinPrevistoDesde()));
+        filtro.setFinPrevistoHasta(UIHelper.getDateDB(pantalla.getDchFinPrevistoHasta()));
+
+        filtro.setInicioRealDesde(UIHelper.getDateDB(pantalla.getDchInicioRealDesde()));
+        filtro.setInicioRealHasta(UIHelper.getDateDB(pantalla.getDchInicioRealHasta()));
+        filtro.setFinRealDesde(UIHelper.getDateDB(pantalla.getDchFinRealDesde()));
+        filtro.setFinRealHasta(UIHelper.getDateDB(pantalla.getDchFinRealHasta()));
+        
+        filtro.setHorasPrevistaDesde(UIHelper.getDouble(pantalla.getTxtHorasPrevistaDesde()));
+        filtro.setHorasPrevistaHasta(UIHelper.getDouble(pantalla.getTxtHorasPrevistaHasta()));
+        filtro.setHorasRealesDesde(UIHelper.getDouble(pantalla.getTxtHorasRealesDesde()));
+        filtro.setHorasRealesHasta(UIHelper.getDouble(pantalla.getTxtHorasRealesHasta()));
+
+        filtro.setPorcentajeDesde(UIHelper.getDouble(pantalla.getTxtPorcentajeDesde()));
+        filtro.setPorcentajeHasta(UIHelper.getDouble(pantalla.getTxtPorcentajeHasta()));
+
+        setComboBoxItem(pantalla.getCmbUsuario(), filtro.getUsuario());
+        //
+        filtro.setImputacionDesde(UIHelper.getDateDB(pantalla.getDchImputacionDesde()));
+        filtro.setImputacionHasta(UIHelper.getDateDB(pantalla.getDchImputacionHasta()));
+        filtro.setHorasImputadasDesde(UIHelper.getDouble(pantalla.getTxtHorasImputadasDesde()));
+        filtro.setHorasImputadasHasta(UIHelper.getDouble(pantalla.getTxtHorasImputadasHasta()));
+        filtro.setTipoHoras(pantalla.getCmbTipoHoras().getSelectedIndex());
+        //
+        filtro.setTipoDocumento((TipoDocumento) pantalla.getCmbTipoDocumento().getSelectedItem());
+        filtro.setNombreContiene(pantalla.getTxtNombreContiene().getText());
+        filtro.setRuta(pantalla.getTxtRuta().getText());
+
+        pantalla.setReturnObject(filtro);
         return true;
-    }    
-    
+    }
+
     private void iniciaDialogo() {
         JComboBox cmbCategoria = pantalla.getCmbCategoria();
         JComboBox cmbSubCategoria = pantalla.getCmbSubCategoria();
+        JComboBox cmbPeticion = pantalla.getCmbPeticion();
         //
         cmbCategoria.setModel(new CmbCategoriaModel());
         cmbSubCategoria.setModel(new CmbSubCategoriaModel());
         // Al cambiar la categoría, se rellenan las subCategorías
-        CmbCategoriaListener cmbCategoriaListener = new CmbCategoriaListener(cmbSubCategoria);
+        CmbCategoriaListener cmbCategoriaListener = new CmbCategoriaListener(cmbSubCategoria, cmbPeticion);
         cmbCategoria.addItemListener(cmbCategoriaListener);
         // Al cambiar la SubCategoría, se rellenan las peticiones
-        CmbSubCategoriaListener cmbSubCategoriaListener = new CmbSubCategoriaListener(pantalla.getCmbPeticion());
+        CmbSubCategoriaListener cmbSubCategoriaListener = new CmbSubCategoriaListener(cmbPeticion);
         cmbSubCategoria.addItemListener(cmbSubCategoriaListener);
         //
         pantalla.getCmbUsuario().setModel(new CmbUsuarioModel());
+        pantalla.getCmbEstado().setModel(new CmbEstadoModel());
+        //pantalla.getCmbTipoDocumento().setModel(new CmbTipoDocumento());
         //
-        evtLimpiar();
+        Filtro filtro = (Filtro) pantalla.getParamObject();
+        if (filtro == null) {
+            evtLimpiar();
+        } else {
+            setComboBoxItem(cmbCategoria, filtro.getCategoria());
+            setComboBoxItem(cmbSubCategoria, filtro.getSubCategoria());
+            cmbPeticion.setSelectedItem(filtro.getPeticion());
+            pantalla.getCmbEstado().setSelectedItem(filtro.getEstado());
+            //
+            pantalla.getTxtAsuntoContiene().setText(filtro.getAsuntoContiene());
+            UIHelper.setDateChooserValue(pantalla.getDchInicioPrevistoDesde(), filtro.getInicioPrevistoDesde());
+            UIHelper.setDateChooserValue(pantalla.getDchInicioPrevistoHasta(), filtro.getInicioPrevistoHasta());
+            UIHelper.setDateChooserValue(pantalla.getDchFinPrevistoDesde(), filtro.getFinPrevistoDesde());
+            UIHelper.setDateChooserValue(pantalla.getDchFinPrevistoHasta(), filtro.getFinPrevistoHasta());
+
+            UIHelper.setDateChooserValue(pantalla.getDchInicioRealDesde(), filtro.getInicioRealDesde());
+            UIHelper.setDateChooserValue(pantalla.getDchInicioRealHasta(), filtro.getInicioRealHasta());
+            UIHelper.setDateChooserValue(pantalla.getDchFinRealDesde(), filtro.getFinRealDesde());
+            UIHelper.setDateChooserValue(pantalla.getDchFinRealHasta(), filtro.getFinRealHasta());
+
+            setTextDouble(pantalla.getTxtHorasPrevistaDesde(), filtro.getHorasPrevistaDesde());
+            setTextDouble(pantalla.getTxtHorasPrevistaHasta(), filtro.getHorasPrevistaHasta());
+            setTextDouble(pantalla.getTxtHorasRealesDesde(), filtro.getHorasRealesDesde());
+            setTextDouble(pantalla.getTxtHorasRealesHasta(), filtro.getHorasRealesHasta());
+            
+            
+            setTextDouble(pantalla.getTxtPorcentajeDesde(), filtro.getPorcentajeDesde());
+            setTextDouble(pantalla.getTxtPorcentajeHasta(), filtro.getPorcentajeHasta());
+            setComboBoxItem(pantalla.getCmbUsuario(), filtro.getUsuario());
+            //
+            UIHelper.setDateChooserValue(pantalla.getDchImputacionDesde(), filtro.getImputacionDesde());
+            UIHelper.setDateChooserValue(pantalla.getDchImputacionHasta(), filtro.getImputacionHasta());
+            setTextDouble(pantalla.getTxtHorasImputadasDesde(), filtro.getHorasImputadasDesde());
+            setTextDouble(pantalla.getTxtHorasImputadasHasta(), filtro.getHorasImputadasHasta());
+            pantalla.getCmbTipoHoras().setSelectedIndex(filtro.getTipoHoras());
+            //
+            setComboBoxItem(pantalla.getCmbTipoDocumento(), filtro.getTipoDocumento());
+            pantalla.getTxtNombreContiene().setText(filtro.getNombreContiene());
+            pantalla.getTxtRuta().setText(filtro.getRuta());
+        }
+    }
+
+    private void setTextDouble(JTextField txtField, Double valor) {
+        txtField.setText(valor == null ? null : valor.toString());
+    }
+
+    private void setComboBoxItem(JComboBox comboBox, Object valor) {
+        if (valor == null) {
+            comboBox.setSelectedIndex(-1);
+        } else {
+            comboBox.setSelectedItem(valor);
+        }
     }
 }

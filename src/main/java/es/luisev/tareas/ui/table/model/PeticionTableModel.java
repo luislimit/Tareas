@@ -55,6 +55,9 @@ public class PeticionTableModel extends DefaultTableModel<Peticion> {
                 return row.getHorasReal();
             }
             case 10 -> {
+                return row.getPorcentaje();
+            }
+            case 11 -> {
                 return row.getEstado()==null?null:row.getEstado().getNombre();
             }
             default -> {

@@ -6,6 +6,7 @@
 package es.luisev.tareas.service;
 
 import es.luisev.tareas.exception.TareasApplicationException;
+import es.luisev.tareas.model.DBEntity;
 import es.luisev.tareas.model.Filtro;
 import es.luisev.tareas.model.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import es.luisev.tareas.repository.PeticionRepository;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -34,7 +34,7 @@ public class PeticionService extends BaseService {
     }
 
     public List<Peticion> findByCriteria(Filtro criterio) {
-        List<Peticion> lista =repository.findAll();
+        /*List<Peticion> lista =repository.findAll();
         if (criterio == null) {
             return lista;
         }
@@ -49,7 +49,41 @@ public class PeticionService extends BaseService {
                 || (p.getDescripcion() != null && p.getDescripcion().toUpperCase().contains(criterio.getAsuntoContiene().toUpperCase())))
                 && (isInRange(p.getHorasReal(), criterio.getHorasRealesDesde(), criterio.getHorasRealesHasta()))
                 && (isInRange(p.getPorcentaje(), criterio.getPorcentajeRealizacionDesde(), criterio.getPorcentajeRealizacionHasta())))
-        ).collect(Collectors.toList());
+        ).collect(Collectors.toList());*/
+        
+        Long idCategoria = DBEntity.getPK(criterio.getCategoria());
+        Long idSubCategoria = DBEntity.getPK(criterio.getSubCategoria());
+        Long idPeticion = DBEntity.getPK(criterio.getPeticion());
+        Long idEstado = DBEntity.getPK(criterio.getEstado());
+        String asuntoContiene = criterio.getAsuntoContiene();
+        asuntoContiene = (asuntoContiene == null)? null: "%"+asuntoContiene +"%";
+
+        return repository.findByCriteria(
+                idCategoria, 
+                idSubCategoria, 
+                idPeticion, 
+                idEstado, 
+                asuntoContiene,
+                criterio.getInicioPrevistoDesde(),
+                criterio.getInicioPrevistoHasta(),
+                criterio.getInicioRealDesde(),
+                criterio.getInicioRealHasta(),
+                criterio.getFinPrevistoDesde(),
+                criterio.getFinPrevistoHasta(),
+                criterio.getFinRealDesde(),
+                criterio.getFinRealHasta(), 
+                criterio.getHorasPrevistaDesde(),
+                criterio.getHorasPrevistaHasta(),
+                criterio.getHorasRealesDesde(),
+                criterio.getHorasRealesHasta(),
+                criterio.getPorcentajeDesde(),
+                criterio.getPorcentajeHasta(),
+                //
+                criterio.getImputacionDesde(),
+                criterio.getImputacionHasta(),
+                criterio.getHorasImputadasDesde(),
+                criterio.getHorasImputadasHasta()
+        );
     }
 
     public Peticion insert(Peticion peticion) throws TareasApplicationException {

@@ -6,7 +6,6 @@
 package es.luisev.tareas.ui.combobox.listener;
 
 import es.luisev.tareas.model.Categoria;
-import es.luisev.tareas.model.Peticion;
 import es.luisev.tareas.model.SubCategoria;
 import es.luisev.tareas.ui.combobox.model.CmbPeticionModel;
 import es.luisev.tareas.ui.combobox.model.CmbSubCategoriaModel;
@@ -23,20 +22,27 @@ import javax.swing.JComboBox;
 public class CmbCategoriaListener implements ItemListener {
 
     private final JComboBox cmbSubCategoria;
+    private final JComboBox cmbPeticion;
 
     public CmbCategoriaListener(JComboBox cmbSubCategoria) {
+        this(cmbSubCategoria, null);
+    }
+    
+    public CmbCategoriaListener(JComboBox cmbSubCategoria, JComboBox cmbPeticion) {
         super();
         this.cmbSubCategoria = cmbSubCategoria;
-    }
-
+        this.cmbPeticion = cmbPeticion;
+    }    
 
     @Override
     public void itemStateChanged(ItemEvent e) {
         Categoria categoria = (Categoria) e.getItem();
         List<SubCategoria> subCategorias = AppHelper.getSubCategoriaService().findByCategoria(categoria);
         cmbSubCategoria.setModel(new CmbSubCategoriaModel(subCategorias));
-        if (subCategorias.size() <= 1) {
-            cmbSubCategoria.setSelectedIndex(subCategorias.size());
+        cmbSubCategoria.setSelectedIndex(subCategorias.size() == 1? 1: -1);
+        if (cmbPeticion != null) {
+            cmbPeticion.setModel(new CmbPeticionModel(null));
         }
+        
     }
 }

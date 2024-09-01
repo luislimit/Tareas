@@ -6,15 +6,13 @@
 package es.luisev.tareas.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -24,27 +22,17 @@ import jakarta.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@SuperBuilder
 @Table (name="t_usuario")
-public class Usuario extends DataBaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+public class Usuario extends DBEntity{
+
     private String codigo;
+    
     private String email;
     
     @Override
     public String toString(){
         return codigo;
-    }  
-    
-    @Override
-    public Long getPrimaryKey() {
-        return id;
-    }      
+    }
 }
-
-
-
-
-

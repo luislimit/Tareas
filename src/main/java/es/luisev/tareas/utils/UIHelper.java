@@ -5,14 +5,16 @@
  */
 package es.luisev.tareas.utils;
 
+import com.toedter.calendar.JDateChooser;
 import es.luisev.tareas.exception.TareasApplicationException;
-import es.luisev.tareas.model.DataBaseEntity;
+import es.luisev.tareas.model.DBEntity;
 import es.luisev.tareas.ui.DialogoBase;
 import es.luisev.tareas.ui.table.cabecera.Cabecera;
 import es.luisev.tareas.ui.table.model.DefaultTableModel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -56,8 +59,8 @@ public class UIHelper {
         return dialogo.getReturnObject();
     }
 
-    public static void selectComboBoxById(JComboBox comboBox, DataBaseEntity dBEntity) {
-        if (dBEntity == null || dBEntity.getPrimaryKey() == null) {
+    public static void selectComboBoxById(JComboBox comboBox, DBEntity dBEntity) {
+        if (dBEntity == null || dBEntity.getId() == null) {
             comboBox.setSelectedIndex(-1);
             return;
         }
@@ -127,5 +130,27 @@ public class UIHelper {
             table.getColumnModel().getColumn(i).setPreferredWidth(cabecera.getColumnSizes().get(i));
         }
     }
+
+    
+    public static Long getDateDB(JDateChooser dateChooser){
+        Date date = dateChooser.getDate();
+        if (date == null){
+            return null;
+        }
+        return date.getTime();
+    }
+    
+    public static void setDateChooserValue(JDateChooser dchField, Long valor) {
+        dchField.setDate((valor == null)? null : new Date(valor));
+    }
+    
+    public static Double getDouble(JTextField textField){
+        if (textField == null || textField.getText().isEmpty()){
+            return null;
+        }
+        String texto = textField.getText();
+        return Double.parseDouble(texto);
+    }
+    
     
 }

@@ -67,7 +67,6 @@ public class VisorForm extends JFrame {
         sepUsuario = new javax.swing.JToolBar.Separator();
         btnFiltrar = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
-        cmbPeriodoFecha = new javax.swing.JComboBox<>();
         pnlVisor = new javax.swing.JPanel();
         sppArbol = new javax.swing.JSplitPane();
         scpArbol = new javax.swing.JScrollPane();
@@ -97,7 +96,6 @@ public class VisorForm extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visor de Peticiones");
         setMinimumSize(new java.awt.Dimension(640, 480));
-        setPreferredSize(new java.awt.Dimension(1080, 800));
 
         toolbar.setRollover(true);
 
@@ -221,12 +219,6 @@ public class VisorForm extends JFrame {
         lblUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         toolbar.add(lblUsuario);
-
-        cmbPeriodoFecha.setMaximumSize(new java.awt.Dimension(120, 24));
-        cmbPeriodoFecha.setMinimumSize(new java.awt.Dimension(120, 24));
-        cmbPeriodoFecha.setName(""); // NOI18N
-        cmbPeriodoFecha.setPreferredSize(new java.awt.Dimension(120, 24));
-        toolbar.add(cmbPeriodoFecha);
 
         sppArbol.setDividerLocation(150);
 
@@ -450,7 +442,6 @@ public class VisorForm extends JFrame {
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnImportar;
     private javax.swing.JButton btnInformacion;
-    private javax.swing.JComboBox<String> cmbPeriodoFecha;
     private javax.swing.JLabel lblFechaMaxima;
     private javax.swing.JLabel lblFechaMinima;
     private javax.swing.JLabel lblHorasExtra;
@@ -579,15 +570,10 @@ public class VisorForm extends JFrame {
         return btnImportar;
     }
 
-    public JComboBox<String> getCmbPeriodoFecha() {
-        return cmbPeriodoFecha;
-    }
-    
     private void initForm() {
         initListener();
         initLiterals();
         initModels();
-        cmbPeriodoFecha.setVisible(false);
         visorListener.rellenaArbol();
     }
     private void initListener() {
@@ -605,7 +591,10 @@ public class VisorForm extends JFrame {
         btnFiltrar.addActionListener(visorListener);
         btnInformacion.addActionListener(visorListener);
         btnConfiguracion.addActionListener(visorListener);
+        //
         arbol.addTreeSelectionListener(visorListener);
+        arbol.addTreeExpansionListener(visorListener);
+        //
         tbpPanel.addChangeListener(visorListener);
         
         VisorMouseListener mouseListener = new VisorMouseListener(this);
@@ -614,7 +603,6 @@ public class VisorForm extends JFrame {
         tblDocumento.addMouseListener(mouseListener);
         arbol.addMouseListener(mouseListener);
         tblPeticion.getSelectionModel().addListSelectionListener(visorListener);
-        cmbPeriodoFecha.addActionListener(new CmbPeriodoFechaListener(cmbPeriodoFecha));
     }
     
     public void initLiterals() {
@@ -642,7 +630,5 @@ public class VisorForm extends JFrame {
         Cabecera cabeceraImputacion = new ImputacionTableCabecera();
         ImputacionTableModel imputacionTableModel = new ImputacionTableModel(cabeceraImputacion);
         UIHelper.setTableModel(tblImputacion, imputacionTableModel);
-        
-        cmbPeriodoFecha.setModel(new CmbPeriodoFecha());
     }
 }

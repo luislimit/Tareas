@@ -5,6 +5,7 @@
  */
 package es.luisev.tareas.ui;
 
+import com.toedter.calendar.JDateChooser;
 import es.luisev.tareas.model.Categoria;
 import es.luisev.tareas.model.Estado;
 import es.luisev.tareas.model.Peticion;
@@ -13,7 +14,6 @@ import es.luisev.tareas.model.Usuario;
 import es.luisev.tareas.ui.listener.MantenimientoPeticionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -29,7 +29,7 @@ public class MantenimientoPeticionDialog extends DialogoBase {
      * @param parent
      * @param peticion
      */
-    public MantenimientoPeticionDialog(JFrame parent, Peticion peticion) {
+    public MantenimientoPeticionDialog(VisorForm parent, Peticion peticion) {
         super(parent, peticion);
     }
 
@@ -58,15 +58,11 @@ public class MantenimientoPeticionDialog extends DialogoBase {
         scpDescripcion = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         lblInicioPrevisto = new javax.swing.JLabel();
-        txtInicioPrevisto = new javax.swing.JTextField();
         lblFinPrevisto = new javax.swing.JLabel();
-        txtFinPrevisto = new javax.swing.JTextField();
         lblHorasPrevista = new javax.swing.JLabel();
         txtHorasPrevista = new javax.swing.JTextField();
         lblInicioReal = new javax.swing.JLabel();
-        txtInicioReal = new javax.swing.JTextField();
         lblFinReal = new javax.swing.JLabel();
-        txtFinReal = new javax.swing.JTextField();
         lblHorasReal = new javax.swing.JLabel();
         txtHorasReal = new javax.swing.JTextField();
         lblPorcentaje = new javax.swing.JLabel();
@@ -74,6 +70,10 @@ public class MantenimientoPeticionDialog extends DialogoBase {
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        dchInicioPrevisto = new com.toedter.calendar.JDateChooser();
+        dchFinPrevisto = new com.toedter.calendar.JDateChooser();
+        dchInicioReal = new com.toedter.calendar.JDateChooser();
+        dchFinReal = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mantenimiento de Peticiones");
@@ -111,8 +111,6 @@ public class MantenimientoPeticionDialog extends DialogoBase {
         lblFinReal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblFinReal.setText("Fin Real");
 
-        txtFinReal.setToolTipText("");
-
         lblHorasReal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblHorasReal.setText("Horas Reales");
 
@@ -135,6 +133,14 @@ public class MantenimientoPeticionDialog extends DialogoBase {
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salida_32.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
 
+        dchInicioPrevisto.setDateFormatString("dd/MM/yyyy");
+
+        dchFinPrevisto.setDateFormatString("dd/MM/yyyy");
+
+        dchInicioReal.setDateFormatString("dd/MM/yyyy");
+
+        dchFinReal.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,14 +150,14 @@ public class MantenimientoPeticionDialog extends DialogoBase {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDescripcion)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, 0))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dchInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,19 +169,19 @@ public class MantenimientoPeticionDialog extends DialogoBase {
                                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(292, 292, 292))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dchFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lblHorasPrevista)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(lblInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dchInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)
                                         .addComponent(lblFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dchFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblHorasReal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -218,45 +224,48 @@ public class MantenimientoPeticionDialog extends DialogoBase {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAsunto)
-                    .addComponent(txtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario)
-                    .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCategoria)
-                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubCategoria)
-                    .addComponent(cmbSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEstado)
-                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblDescripcion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblInicioPrevisto)
-                    .addComponent(txtInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFinPrevisto)
-                    .addComponent(txtFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInicioReal)
-                    .addComponent(txtInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFinReal)
-                    .addComponent(txtFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHorasReal)
-                    .addComponent(txtHorasReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHorasPrevista)
-                    .addComponent(txtHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPorcentaje)
-                    .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblHorasReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtHorasReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dchFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dchInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dchFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelar)
+                            .addComponent(btnGuardar)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(dchInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -271,6 +280,10 @@ public class MantenimientoPeticionDialog extends DialogoBase {
     private javax.swing.JComboBox<Estado> cmbEstado;
     private javax.swing.JComboBox<SubCategoria> cmbSubCategoria;
     private javax.swing.JComboBox<Usuario> cmbUsuario;
+    private com.toedter.calendar.JDateChooser dchFinPrevisto;
+    private com.toedter.calendar.JDateChooser dchFinReal;
+    private com.toedter.calendar.JDateChooser dchInicioPrevisto;
+    private com.toedter.calendar.JDateChooser dchInicioReal;
     private javax.swing.JLabel lblAsunto;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
@@ -289,12 +302,8 @@ public class MantenimientoPeticionDialog extends DialogoBase {
     private javax.swing.JTextField txtAsunto;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextField txtFinPrevisto;
-    private javax.swing.JTextField txtFinReal;
     private javax.swing.JTextField txtHorasPrevista;
     private javax.swing.JTextField txtHorasReal;
-    private javax.swing.JTextField txtInicioPrevisto;
-    private javax.swing.JTextField txtInicioReal;
     private javax.swing.JTextField txtPorcentaje;
     // End of variables declaration//GEN-END:variables
 
@@ -350,14 +359,6 @@ public class MantenimientoPeticionDialog extends DialogoBase {
         return txtDescripcion;
     }
 
-    public JTextField getTxtFinPrevisto() {
-        return txtFinPrevisto;
-    }
-
-    public JTextField getTxtFinReal() {
-        return txtFinReal;
-    }
-
     public JTextField getTxtHorasPrevista() {
         return txtHorasPrevista;
     }
@@ -366,17 +367,27 @@ public class MantenimientoPeticionDialog extends DialogoBase {
         return txtHorasReal;
     }
 
-    public JTextField getTxtInicioPrevisto() {
-        return txtInicioPrevisto;
-    }
-
-    public JTextField getTxtInicioReal() {
-        return txtInicioReal;
-    }
-
     public JTextField getTxtPorcentaje() {
         return txtPorcentaje;
     }
+
+    public JDateChooser getDchFinPrevisto() {
+        return dchFinPrevisto;
+    }
+
+    public JDateChooser getDchFinReal() {
+        return dchFinReal;
+    }
+
+    public JDateChooser getDchInicioPrevisto() {
+        return dchInicioPrevisto;
+    }
+
+    public JDateChooser getDchInicioReal() {
+        return dchInicioReal;
+    }
+    
+    
 
     @Override
     protected void initLiterals() {

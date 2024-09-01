@@ -65,7 +65,7 @@ public final class MantenimientoImputacionListener extends ListenerBase {
         pantalla.getCmbSubCategoria().setSelectedItem(subCategoria);
         pantalla.getCmbPeticion().setSelectedItem(peticion);
         pantalla.getTxtDescripcion().setText(descripcion);
-        pantalla.getTxtFecha().setText(AppHelper.dateBdToString(fecha));
+        pantalla.getDchFecha().setDate(new Date(fecha));
         pantalla.getTxtHoras().setText(horas);
         pantalla.getTxtHoras().requestFocus();
         pantalla.getChkExtra().setSelected(extra.equals("S"));
@@ -81,8 +81,8 @@ public final class MantenimientoImputacionListener extends ListenerBase {
         ImputacionService service = AppHelper.getImputacionService();
         try {
             String descripcion = pantalla.getTxtDescripcion().getText();
-            Long fecha = AppHelper.getDateBD(pantalla.getTxtFecha());
-            Double horas = AppHelper.getDouble(pantalla.getTxtHoras());
+            Long fecha = UIHelper.getDateDB(pantalla.getDchFecha());
+            Double horas = UIHelper.getDouble(pantalla.getTxtHoras());
             Long id = paramImputacion == null ? null : paramImputacion.getId();
             Peticion peticion = (Peticion) pantalla.getCmbPeticion().getSelectedItem();
             Usuario usuario = (Usuario) pantalla.getCmbUsuario().getSelectedItem();
@@ -119,14 +119,15 @@ public final class MantenimientoImputacionListener extends ListenerBase {
     private void iniciaDialogo() {
         JComboBox cmbCategoria = pantalla.getCmbCategoria();
         JComboBox cmbSubCategoria = pantalla.getCmbSubCategoria();
+        JComboBox cmbPeticion = pantalla.getCmbPeticion();
         //
         cmbCategoria.setModel(new CmbCategoriaModel());
         cmbSubCategoria.setModel(new CmbSubCategoriaModel());
         // Al cambiar la categoría, se rellenan las subCategorías
-        CmbCategoriaListener cmbCategoriaListener = new CmbCategoriaListener(cmbSubCategoria);
+        CmbCategoriaListener cmbCategoriaListener = new CmbCategoriaListener(cmbSubCategoria, cmbPeticion);
         cmbCategoria.addItemListener(cmbCategoriaListener);
         // Al cambiar la SubCategoría, se rellenan las peticiones
-        CmbSubCategoriaListener cmbSubCategoriaListener = new CmbSubCategoriaListener(pantalla.getCmbPeticion());
+        CmbSubCategoriaListener cmbSubCategoriaListener = new CmbSubCategoriaListener(cmbPeticion);
         cmbSubCategoria.addItemListener(cmbSubCategoriaListener);
         //
         pantalla.getCmbUsuario().setModel(new CmbUsuarioModel());

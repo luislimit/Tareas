@@ -18,44 +18,46 @@ import javax.swing.ComboBoxModel;
  */
 public class CmbPeticionModel extends AbstractListModel<Peticion> implements ComboBoxModel<Peticion> {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -3700195174395455435L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3700195174395455435L;
 
-	private final List<Peticion> lista;
+    private final List<Peticion> lista;
 
-	private Peticion selection = null;
+    private Peticion selection = null;
 
-	public CmbPeticionModel() {
-		super();
-		lista = AppHelper.getPeticionService().findAll();
-	}
+    public CmbPeticionModel() {
+        super();
+        lista = AppHelper.getPeticionService().findAll();
+    }
 
-	public CmbPeticionModel(List<Peticion> lista) {
-		super();
-		this.lista = new ArrayList<>();
-		this.lista.add(null);
-		this.lista.addAll(lista);
-	}
+    public CmbPeticionModel(List<Peticion> lista) {
+        super();
+        this.lista = new ArrayList<>();
+        if (lista != null) {
+            this.lista.add(null);
+            this.lista.addAll(lista);
+        }
+    }
 
-	@Override
-	public int getSize() {
-		return lista.size();
-	}
+    @Override
+    public int getSize() {
+        return lista.size();
+    }
 
-	@Override
-	public Peticion getElementAt(int index) {
-		return lista.get(index);
-	}
+    @Override
+    public Peticion getElementAt(int index) {
+        return lista.get(index);
+    }
 
-	@Override
-	public void setSelectedItem(Object anItem) {
-		selection = (Peticion) anItem;
-	}
+    @Override
+    public void setSelectedItem(Object anItem) {
+        selection = (Peticion) anItem;
+    }
 
-	@Override
-	public Object getSelectedItem() {
-		return selection;
-	}
+    @Override
+    public Object getSelectedItem() {
+        return selection;
+    }
 }

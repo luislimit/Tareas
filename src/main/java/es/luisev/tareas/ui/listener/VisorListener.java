@@ -8,20 +8,20 @@ package es.luisev.tareas.ui.listener;
 import es.luisev.tareas.exception.TareasApplicationException;
 import es.luisev.tareas.model.Categoria;
 import es.luisev.tareas.model.Filtro;
-import es.luisev.tareas.model.DataBaseEntity;
+import es.luisev.tareas.model.DBEntity;
 import es.luisev.tareas.model.Imputacion;
 import es.luisev.tareas.model.Peticion;
 import es.luisev.tareas.model.SubCategoria;
 import es.luisev.tareas.service.ImportarService;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
 import es.luisev.tareas.ui.MantenimientoCategoriaDialog;
+import es.luisev.tareas.ui.MantenimientoFiltroDialog;
 import es.luisev.tareas.ui.MantenimientoImputacionDialog;
 import es.luisev.tareas.ui.MantenimientoPeticionDialog;
 import es.luisev.tareas.ui.MantenimientoSubCategoriaDialog;
 import es.luisev.tareas.ui.VisorForm;
 import es.luisev.tareas.ui.table.model.ImputacionTableModel;
 import es.luisev.tareas.utils.AppHelper;
-import es.luisev.tareas.utils.LiteralesSingleton;
 import es.luisev.tareas.utils.UIHelper;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
@@ -37,6 +37,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -47,7 +49,7 @@ import javax.swing.tree.TreePath;
  *
  * @author Luis-Enrique.Varona
  */
-public class VisorListener implements ActionListener, TreeSelectionListener, ChangeListener, ListSelectionListener {
+public class VisorListener implements ActionListener, TreeSelectionListener, TreeExpansionListener, ChangeListener, ListSelectionListener {
 
     private final VisorForm pantalla;
     private DefaultMutableTreeNode root;
@@ -64,6 +66,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
 
     public VisorListener(VisorForm visorForm) {
         this.pantalla = visorForm;
+        filtro = new Filtro();
     }
 
     @Override
@@ -113,7 +116,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         return peticion;
     }
 
-    private void selectNode(DataBaseEntity object) {
+    private void selectNode(DBEntity object) {
         rellenaArbol();
         selectNodeById(pantalla.getArbol(), object);
     }
@@ -133,7 +136,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         }
         //Actualizamos el arbol
         if (result != null) {
-            selectNode((DataBaseEntity) result);
+            selectNode((DBEntity) result);
         }
     }
 
@@ -186,7 +189,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         }
         // Si han ocurrido cambios que puedan implicar cambios en el arbol, lo refrescamos
         if (result != null) {
-            selectNode((DataBaseEntity) result);
+            selectNode((DBEntity) result);
         }
     }
 
@@ -197,7 +200,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         String message;
         try {
             Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-            DataBaseEntity object = null;
+            DBEntity object = null;
             if (focusedComponent == pantalla.getArbol()) {
                 Peticion peticion = getPeticionNode();
                 if (peticion.getId() != null) {
@@ -245,7 +248,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         }
     }
 
-    private DataBaseEntity borrarPeticion(Peticion peticion) throws TareasApplicationException {
+    private DBEntity borrarPeticion(Peticion peticion) throws TareasApplicationException {
         String message;
         message = UIHelper.getLiteral("confirmacion.borrar.peticion", peticion.toString());
         if (!UIHelper.confirmAction(pantalla, message)) {
@@ -273,7 +276,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
     public void rellenaArbol() {
         // Consultamos la información en la BBDD
         List<Categoria> categorias = AppHelper.getCategoriaService().findAll();
-        peticiones = AppHelper.getPeticionService().findAll();
+        peticiones = AppHelper.getPeticionService().findByCriteria(filtro);
         //        
         JTree arbol = pantalla.getArbol();
         //Creamos la raíz
@@ -299,7 +302,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         arbol.setSelectionPath(path);
     }
 
-    public void selectNodeById(JTree tree, DataBaseEntity object) {
+    public void selectNodeById(JTree tree, DBEntity object) {
         if (tree == null) {
             return;
         }
@@ -322,9 +325,9 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         }
     }
 
-    public static DefaultMutableTreeNode findNodeById(DefaultMutableTreeNode root, DataBaseEntity object) {
-        if (root.getUserObject() instanceof DataBaseEntity) {
-            DataBaseEntity treeObject = ((DataBaseEntity) root.getUserObject());
+    public static DefaultMutableTreeNode findNodeById(DefaultMutableTreeNode root, DBEntity object) {
+        if (root.getUserObject() instanceof DBEntity) {
+            DBEntity treeObject = ((DBEntity) root.getUserObject());
             if (treeObject.equals(object)) {
                 return root;
             }
@@ -340,79 +343,15 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
     }
 
     private void evtBtnFiltrar() {
-
-    }
-
-    /**
-     * Se ejecuta al cambiar el elemento seleccionado el arbol
-     *
-     * @param e
-     */
-    @Override
-    public void valueChanged(TreeSelectionEvent e) {
-        List<Peticion> peticionesFiltradas = null;
-
-        Peticion peticion = getPeticionNode();
-
-        //TODO: hacer algo similar si selecciona las tablas y no hay elementos seleccionados
-        boolean isRoot = (peticion == null);
-        pantalla.getBtnEditar().setEnabled(!isRoot);
-        pantalla.getBtnBorrar().setEnabled(!isRoot);
-        //Desmarcar la seleccion de las tablas
-        pantalla.getTblPeticion().clearSelection();
-        pantalla.getTblImputacion().clearSelection();
-        pantalla.getTblDocumento().clearSelection();
-
-        String texto = null;
-
-        if (peticion == null) {
-            texto = "btnCrearCategoria";
-            peticionesFiltradas = peticiones;
-        } else if (peticion.getId() == null) {
-            Long idCategoria = null;
-            Long idSubCategoria = null;
-            if (peticion.getSubCategoria() != null) {
-                idCategoria = peticion.getSubCategoria().getCategoria().getId();
-                idSubCategoria = peticion.getSubCategoria().getId();
-                texto = "btnCrearTarea";
-            } else if (peticion.getCategoria() != null) {
-                idCategoria = peticion.getCategoria().getId();
-                texto = "btnCrearSubCategoria";
-            }
-            peticionesFiltradas = filtraPeticion(idCategoria, idSubCategoria);
+        Object result = UIHelper.showDialog(new MantenimientoFiltroDialog(pantalla, filtro));
+        if (result != null) {
+            filtro = (Filtro) result;
+            rellenaArbol();
+            updateTabPane();
         }
-        PeticionTableModel tableModel = (PeticionTableModel) pantalla.getTblPeticion().getModel();
-        // Si hay una petición la seleccionamos en la tabla
-        if (peticion != null && peticion.getId() != null) {
-            if (!peticion.equals(getTblPeticionSelection())) {
-                peticionesFiltradas = tableModel.getData();
-                int row = peticionesFiltradas.indexOf(peticion);
-                if (row >= 0) {
-                    pantalla.getTblPeticion().setRowSelectionInterval(row, row);
-                } 
-            }
-        } else {
-            //Actualizar el texto del botón crear
-            UIHelper.setComponentText(pantalla.getBtnCrear(), texto);
-            pantalla.getBtnCrear().repaint();
-            tableModel.clearData();
-            tableModel.setData(peticionesFiltradas);
-        }
-        updateTabPane();
     }
 
-    /**
-     * Se ejecuta al cambiar una pestaña
-     *
-     * @param e
-     */
-    @Override
-    public void stateChanged(ChangeEvent e
-    ) {
-        updateTabPane();
-    }
-
-    /* Retorna la peticion seleccionada en la tabla de peticiones */
+    /* Retorna la peticionArbol seleccionada en la tabla de peticiones */
     private Peticion getTblPeticionSelection() {
         JTable tblPeticion = pantalla.getTblPeticion();
         int selectedRow = tblPeticion.getSelectedRow();
@@ -424,7 +363,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
         return peticion;
     }
 
-    /* Retorna la peticion seleccionada en la tabla de peticiones */
+    /* Retorna la peticionArbol seleccionada en la tabla de peticiones */
     private Imputacion getTblImputacionSelection() {
         JTable tblImputacion = pantalla.getTblImputacion();
         int selectedRow = tblImputacion.getSelectedRow();
@@ -514,12 +453,131 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Cha
     private void evtBtnExportar() {
     }
 
+    /**
+     * Se dispara al seleccionar un elemento en la tabla de Peticiones
+     *
+     * @param e
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
-      Peticion peticionTabla = getTblPeticionSelection();
-      Peticion peticionArbol = getPeticionNode();     
-      if (peticionArbol == null || (peticionTabla != null && !peticionTabla.equals(peticionArbol))){
-          selectNode(peticionTabla);
-      }
+        Peticion peticionTabla = getTblPeticionSelection();
+        if (peticionTabla == null){
+            return;
+        }
+
+        Peticion peticionArbol = getPeticionNode();
+
+        if (peticionArbol != null && peticionTabla != null && peticionTabla.equals(peticionArbol)) {
+            // Si el elemento seleccionado coincide en el árbol y en la tabla, no hacemos nada
+            return;
+        }
+        //En caso de que no coincida, si su rama estuviera expandida, lo seleccionamos en el árbol 
+        /*SubCategoria subCategoria = peticionTabla.getSubCategoria();
+        DefaultMutableTreeNode node = findNodeById(root, subCategoria);
+        if (pantalla.getArbol().isExpanded(new TreePath(node.getPath()))){
+            selectNode(peticionTabla);
+        }*/
+        selectNodeById(pantalla.getArbol(), peticionTabla);
     }
+
+    /**
+     * Se ejecuta al cambiar el elemento seleccionado el arbol
+     *
+     * @param e
+     */
+    @Override
+    public void valueChanged(TreeSelectionEvent e) {
+
+        List<Peticion> peticionesFiltradas = null;
+
+        Peticion peticionArbol = getPeticionNode();
+        Peticion peticionTabla = getTblPeticionSelection();
+        
+        //TODO: hacer algo similar si selecciona las tablas y no hay elementos seleccionados
+        boolean isRoot = (peticionArbol == null);
+        pantalla.getBtnEditar().setEnabled(!isRoot);
+        pantalla.getBtnBorrar().setEnabled(!isRoot);
+
+        String texto = null;
+        PeticionTableModel tableModel = (PeticionTableModel) pantalla.getTblPeticion().getModel();
+        boolean cambiaModelo = true;
+        
+        // Ha seleccionado una peticion
+        if (peticionTabla != null && peticionArbol != null && peticionArbol.getId() != null) {
+            // Si coinciden las peticiones del árbol y la pantalla => no hay nada que hacer
+            if (peticionArbol.equals(peticionTabla)) {
+                return;
+            }
+            // Si la SubCategoria de la peticion del arbol difiere de la de la tabla, hay que recalcular el modelo de la 
+            cambiaModelo = !peticionTabla.getSubCategoria().equals(peticionArbol.getSubCategoria());
+        }
+
+        if (peticionArbol == null) {
+            texto = "btnCrearCategoria";
+            peticionesFiltradas = peticiones;
+        } else if (peticionArbol.getId() == null || cambiaModelo) {
+            // El elemento del árbol no es una peticion y si lo fuera no coincide con la subCategoria del elemento seleccionado en la tabla
+            Long idCategoria = null;
+            Long idSubCategoria = null;
+            if (peticionArbol.getSubCategoria() != null) {
+                idCategoria = peticionArbol.getSubCategoria().getCategoria().getId();
+                idSubCategoria = peticionArbol.getSubCategoria().getId();
+                texto = "btnCrearTarea";
+            } else if (peticionArbol.getCategoria() != null) {
+                idCategoria = peticionArbol.getCategoria().getId();
+                texto = "btnCrearSubCategoria";
+            }
+            peticionesFiltradas = filtraPeticion(idCategoria, idSubCategoria);
+        }
+        // Actualizamos el modelo si fuera necesario
+        if (cambiaModelo) {
+            tableModel.clearData();
+            tableModel.setData(peticionesFiltradas);
+            pantalla.getTblPeticion().clearSelection();
+            pantalla.getTblImputacion().clearSelection();
+            pantalla.getTblDocumento().clearSelection();            
+        }   
+        
+        // Si el elemento del Arbol es una petición la seleccionamos en la tabla        
+        if (peticionArbol != null && peticionArbol.getId() != null){
+            peticionesFiltradas = tableModel.getData();
+            int row = peticionesFiltradas.indexOf(peticionArbol);
+            if (row >= 0) {
+                pantalla.getTblPeticion().setRowSelectionInterval(row, row);
+            }
+        } else {
+            //Actualizar el texto del botón crear
+            UIHelper.setComponentText(pantalla.getBtnCrear(), texto);
+            pantalla.getBtnCrear().repaint();
+        }
+        updateTabPane();
+    }
+
+    /**
+     * Se ejecuta al cambiar una pestaña
+     *
+     * @param e
+     */
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        updateTabPane();
+    }
+
+    /**
+     * Eventos que se disparan al expandir/colapsar un nodo En caso de expandir,
+     * seleccionamos el nodo
+     *
+     * @param event
+     */
+    @Override
+    public void treeExpanded(TreeExpansionEvent event) {
+        TreePath path = event.getPath();
+        // Seleccionar el nodo que se acaba de expandir
+        pantalla.getArbol().setSelectionPath(path);
+    }
+
+    @Override
+    public void treeCollapsed(TreeExpansionEvent event) {
+    }
+
 }

@@ -14,10 +14,8 @@ import es.luisev.tareas.service.PeticionService;
 import es.luisev.tareas.service.SubCategoriaService;
 import es.luisev.tareas.service.TipoDocumentoService;
 import es.luisev.tareas.service.UsuarioService;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JTextField;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -75,34 +73,12 @@ public class AppHelper{
         // Convertir la fecha a una cadena con el formato deseado
         return sdf.format(date);
     } 
-    
-    public static Long getDateBD(JTextField textField){
-        if (textField == null){
-            return null;
-        }
-        String dateString = textField.getText();
-        // Crear un formateador de fecha con el mismo formato que la cadena
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Long fechaBd = null;
-        try {
-            // Convertir la cadena a un objeto Date
-            Date date = sdf.parse(dateString);
-            // Convertir a Long
-            fechaBd = date.getTime();
-        } catch (ParseException e) {}
-        return fechaBd;
-    }     
-    
-    public static Double getDouble(JTextField textField){
-        if (textField == null || textField.getText().isEmpty()){
-            return null;
-        }
-        String texto = textField.getText();
-        return Double.parseDouble(texto);
-    }
-    
+
     public static Usuario getDefaultUser(){
         AppGlobalSingleton appGlobalSingleton = AppGlobalSingleton.getInstance();
         return (Usuario) appGlobalSingleton.getProperty(Constantes.DEFAULT_USER);
     }
+    
+    
+    
 }

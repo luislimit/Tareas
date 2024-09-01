@@ -23,7 +23,7 @@ public class MantenimientoCategoriaDialog extends DialogoBase {
      * @param parent
      * @param categoria
      */
-    public MantenimientoCategoriaDialog(JFrame parent, Categoria categoria) {
+    public MantenimientoCategoriaDialog(VisorForm parent, Categoria categoria) {
         super(parent, categoria);
     }
 

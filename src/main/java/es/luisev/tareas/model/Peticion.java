@@ -7,18 +7,14 @@ package es.luisev.tareas.model;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -28,13 +24,11 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@SuperBuilder
 @Table(name = "t_peticion")
-public class Peticion extends DataBaseEntity{
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+public class Peticion extends DBEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String codigo;
     private String asunto;
     private Double porcentaje;
@@ -81,27 +75,5 @@ public class Peticion extends DataBaseEntity{
     @Override
     public String toString(){
         return codigo + "-" + asunto;
-    }    
-    @Override
-    public Long getPrimaryKey() {
-        return id;
-    }     
-    
- @Override
-    public boolean equals(Object o) {
-        // Verifica si es el mismo objeto
-        if (this == o) return true;
-        // Verifica si el objeto es null o si las clases son diferentes
-        if (o == null || getClass() != o.getClass()) return false;
-        // Convierte el objeto al tipo Peticion
-        Peticion peticion = (Peticion) o;
-        // Compara los campos relevantes
-        return Objects.equals(id, peticion.id);
-    }
-
-    @Override
-    public int hashCode() {
-        // Usa Objects.hash para generar el hash code basado en los campos relevantes
-        return Objects.hash(id);
     }    
 }

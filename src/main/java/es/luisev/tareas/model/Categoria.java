@@ -12,10 +12,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -25,25 +24,20 @@ import jakarta.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@SuperBuilder
 @Table (name="t_categoria")
-public class Categoria extends DataBaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String codigo;
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+public class Categoria extends DBEntity{
+
     private String nombre;
     
+    private String codigo;
+        
     @Column(name = "fec_alta")
     private Long fecAlta;    
     
     @Override
     public String toString(){
-        return codigo +"-" +nombre;
-    }
-
-    @Override
-    public Long getPrimaryKey() {
-        return id;
+        return codigo + "-" +getNombre();
     }
 }

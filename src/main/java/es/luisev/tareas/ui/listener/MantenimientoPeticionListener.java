@@ -21,6 +21,7 @@ import es.luisev.tareas.ui.combobox.model.CmbSubCategoriaModel;
 import es.luisev.tareas.ui.combobox.model.CmbUsuarioModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
+import java.util.Date;
 
 /**
  *
@@ -51,10 +52,12 @@ public final class MantenimientoPeticionListener extends ListenerBase {
         pantalla.getCmbSubCategoria().setSelectedItem(paramPeticion.getSubCategoria());
         pantalla.getCmbEstado().setSelectedItem(paramPeticion.getEstado());
         pantalla.getTxtDescripcion().setText(paramPeticion.getDescripcion());
-        pantalla.getTxtInicioPrevisto().setText(AppHelper.dateBdToString(paramPeticion.getFecPrevistaInicio()));
-        pantalla.getTxtFinPrevisto().setText(AppHelper.dateBdToString(paramPeticion.getFecPrevistaFin()));
-        pantalla.getTxtInicioReal().setText(AppHelper.dateBdToString(paramPeticion.getFecRealInicio()));
-        pantalla.getTxtFinReal().setText(AppHelper.dateBdToString(paramPeticion.getFecRealFin()));
+        
+        UIHelper.setDateChooserValue(pantalla.getDchInicioPrevisto(), paramPeticion.getFecPrevistaInicio());
+        UIHelper.setDateChooserValue(pantalla.getDchFinPrevisto(), paramPeticion.getFecPrevistaFin());
+        UIHelper.setDateChooserValue(pantalla.getDchInicioReal(), paramPeticion.getFecRealInicio());
+        UIHelper.setDateChooserValue(pantalla.getDchFinReal(), paramPeticion.getFecRealFin());
+        
         pantalla.getTxtHorasPrevista().setText(paramPeticion.getHorasPrevista() == null ? "" : paramPeticion.getHorasPrevista().toString());
         pantalla.getTxtHorasReal().setText(paramPeticion.getHorasReal() == null ? "" : paramPeticion.getHorasReal().toString());
         pantalla.getTxtPorcentaje().setText(paramPeticion.getPorcentaje() == null ? "" : paramPeticion.getPorcentaje().toString());
@@ -76,13 +79,13 @@ public final class MantenimientoPeticionListener extends ListenerBase {
             SubCategoria subCategoria = (SubCategoria) pantalla.getCmbSubCategoria().getSelectedItem();
             Estado estado = (Estado) pantalla.getCmbEstado().getSelectedItem();
             String descripcion = pantalla.getTxtDescripcion().getText();
-            Long fecPrevistaInicio = AppHelper.getDateBD(pantalla.getTxtInicioPrevisto());
-            Long fecPrevistaFin = AppHelper.getDateBD(pantalla.getTxtFinPrevisto());
-            Long fecRealInicio = AppHelper.getDateBD(pantalla.getTxtInicioReal());
-            Long fecRealFin = AppHelper.getDateBD(pantalla.getTxtFinReal());
-            Double horasPrevista = AppHelper.getDouble(pantalla.getTxtHorasPrevista());
-            Double horasReal = AppHelper.getDouble(pantalla.getTxtHorasReal());
-            Double porcentaje = AppHelper.getDouble(pantalla.getTxtPorcentaje());
+            Long fecPrevistaInicio = UIHelper.getDateDB(pantalla.getDchInicioPrevisto());
+            Long fecPrevistaFin = UIHelper.getDateDB(pantalla.getDchFinPrevisto());
+            Long fecRealInicio = UIHelper.getDateDB(pantalla.getDchInicioReal());
+            Long fecRealFin = UIHelper.getDateDB(pantalla.getDchFinReal());
+            Double horasPrevista = UIHelper.getDouble(pantalla.getTxtHorasPrevista());
+            Double horasReal = UIHelper.getDouble(pantalla.getTxtHorasReal());
+            Double porcentaje = UIHelper.getDouble(pantalla.getTxtPorcentaje());
             Long fecAlta = paramPeticion.getFecAlta();
 
             Peticion p = Peticion.builder().

@@ -31,14 +31,16 @@ public class CmbSubCategoriaListener implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         List<Peticion> peticiones = null;
         SubCategoria subCategoria = (SubCategoria) e.getItem();
-        if (subCategoria != null) {
+        if (subCategoria != null && subCategoria.getId() != null) {
             Long idCategoria = subCategoria.getCategoria().getId();
             Long idSubCategoria = subCategoria.getId();
             peticiones = AppHelper.getPeticionService().findByCategoriaSubCategoria(idCategoria, idSubCategoria);
         }
         cmbPeticion.setModel(new CmbPeticionModel(peticiones));
-        if (peticiones != null && peticiones.size() <= 1) {
-            cmbPeticion.setSelectedIndex(peticiones.size());
+        if (peticiones != null && peticiones.size() == 1) {
+            cmbPeticion.setSelectedIndex(1);
+        } else{
+            cmbPeticion.setSelectedIndex(-1);
         }
     }
 }

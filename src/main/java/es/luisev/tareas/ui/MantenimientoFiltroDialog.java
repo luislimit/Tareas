@@ -5,12 +5,11 @@
  */
 package es.luisev.tareas.ui;
 
+import com.toedter.calendar.JDateChooser;
 import es.luisev.tareas.model.*;
 import es.luisev.tareas.ui.listener.MantenimientoFiltroListener;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /**
@@ -25,16 +24,12 @@ public class MantenimientoFiltroDialog extends DialogoBase {
      * @param parent
      * @param paramObject
      */
-    public MantenimientoFiltroDialog(JFrame parent, DataBaseEntity paramObject) {
+    public MantenimientoFiltroDialog(VisorForm parent, Object paramObject) {
         super(parent, paramObject);
     }
 
-    /**
-     * Creates new form FiltroDialog
-     * @param parent
-     */
-    public MantenimientoFiltroDialog(JFrame parent) {
-        this(parent, null);
+    public MantenimientoFiltroDialog(VisorForm frame, Object paramObject, boolean modal) {
+        super(frame, paramObject, modal);
     }
 
     /**
@@ -53,44 +48,38 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         cmbSubCategoria = new javax.swing.JComboBox<>();
         lblPeticion = new javax.swing.JLabel();
         cmbPeticion = new javax.swing.JComboBox<>();
-        pnlEstados = new javax.swing.JPanel();
-        chkPendiente = new javax.swing.JCheckBox();
-        chkEnCurso = new javax.swing.JCheckBox();
-        chkRetenida = new javax.swing.JCheckBox();
-        chkAnulada = new javax.swing.JCheckBox();
-        chkFinalizada = new javax.swing.JCheckBox();
-        chkCerrada = new javax.swing.JCheckBox();
+        lblEstado = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
         pnlPeticion = new javax.swing.JPanel();
         lblAsuntoContiene = new javax.swing.JLabel();
         txtAsuntoContiene = new javax.swing.JTextField();
-        lblFechaInicioProgramado = new javax.swing.JLabel();
-        txtFechaInicioProgramadoDesde = new javax.swing.JTextField();
-        txtFechaInicioProgramadoHasta = new javax.swing.JTextField();
-        lblFechaFinProgramado = new javax.swing.JLabel();
-        txtFechaFinProgramadoDesde = new javax.swing.JTextField();
-        txtFechaFinProgramadoHasta = new javax.swing.JTextField();
-        lblFechaInicioReal = new javax.swing.JLabel();
-        txtFechaInicioRealDesde = new javax.swing.JTextField();
-        txtFechaInicioRealHasta = new javax.swing.JTextField();
-        lblFechaFinReal = new javax.swing.JLabel();
-        txtFechaFinRealDesde = new javax.swing.JTextField();
-        txtFechaFinRealHasta = new javax.swing.JTextField();
-        lblHorasProgramadas = new javax.swing.JLabel();
-        txtHorasProgramadasDesde = new javax.swing.JTextField();
-        txtHorasProgramadasHasta = new javax.swing.JTextField();
-        lblHorasReales = new javax.swing.JLabel();
-        txtHorasRealesDesde = new javax.swing.JTextField();
-        txtHorasRealesHasta = new javax.swing.JTextField();
-        lblPorcentajeRealizacion = new javax.swing.JLabel();
-        txtlPorcentajeRealizacionDesde = new javax.swing.JTextField();
-        txtlPorcentajeRealizacionHasta = new javax.swing.JTextField();
+        lblInicioPrevisto = new javax.swing.JLabel();
+        dchInicioPrevistoDesde = new com.toedter.calendar.JDateChooser();
+        dchInicioPrevistoHasta = new com.toedter.calendar.JDateChooser();
+        lblFinPrevisto = new javax.swing.JLabel();
+        dchFinPrevistoDesde = new com.toedter.calendar.JDateChooser();
+        dchFinPrevistoHasta = new com.toedter.calendar.JDateChooser();
+        lblInicioReal = new javax.swing.JLabel();
+        dchInicioRealDesde = new com.toedter.calendar.JDateChooser();
+        dchInicioRealHasta = new com.toedter.calendar.JDateChooser();
+        lblFinReal = new javax.swing.JLabel();
+        dchFinRealDesde = new com.toedter.calendar.JDateChooser();
+        dchFinRealHasta = new com.toedter.calendar.JDateChooser();
+        lblHorasPrevista = new javax.swing.JLabel();
+        txtHorasPrevistaDesde = new javax.swing.JTextField();
+        txtHorasPrevistaHasta = new javax.swing.JTextField();
+        lblHorasReal = new javax.swing.JLabel();
+        txtHorasRealDesde = new javax.swing.JTextField();
+        txtHorasRealHasta = new javax.swing.JTextField();
+        lblPorcentaje = new javax.swing.JLabel();
+        txtPorcentajeDesde = new javax.swing.JTextField();
+        txtPorcentajeHasta = new javax.swing.JTextField();
         cmbUsuario = new javax.swing.JComboBox<>();
         lblUsuario = new javax.swing.JLabel();
         pnlImputacion = new javax.swing.JPanel();
         lblFechaImputacion = new javax.swing.JLabel();
-        txtFechaImputacionDesde = new javax.swing.JTextField();
-        txtFechaImputacionHasta = new javax.swing.JTextField();
-        cmbPeriodoFecha = new javax.swing.JComboBox<>();
+        dchFechaImputacionDesde = new com.toedter.calendar.JDateChooser();
+        dchFechaImputacionHasta = new com.toedter.calendar.JDateChooser();
         lblHorasImputadas = new javax.swing.JLabel();
         txtHorasImputadasDesde = new javax.swing.JTextField();
         txtHorasImputadasHasta = new javax.swing.JTextField();
@@ -123,24 +112,29 @@ public class MantenimientoFiltroDialog extends DialogoBase {
 
         cmbPeticion.setToolTipText("");
 
+        lblEstado.setText("Estado");
+
         javax.swing.GroupLayout pnlCategoriaLayout = new javax.swing.GroupLayout(pnlCategoria);
         pnlCategoria.setLayout(pnlCategoriaLayout);
         pnlCategoriaLayout.setHorizontalGroup(
             pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCategoriaLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSubCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(lblPeticion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbSubCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(19, 19, 19)
-                .addComponent(lblPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbPeticion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCategoriaLayout.createSequentialGroup()
+                        .addComponent(cmbPeticion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCategoriaLayout.setVerticalGroup(
             pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,78 +142,55 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                 .addContainerGap()
                 .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmbPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        chkPendiente.setText("Pendiente");
-
-        chkEnCurso.setText("En curso");
-
-        chkRetenida.setText("Retenida");
-
-        chkAnulada.setText("Anulada");
-
-        chkFinalizada.setText("Finalizada");
-
-        chkCerrada.setText("Cerrada");
-
-        javax.swing.GroupLayout pnlEstadosLayout = new javax.swing.GroupLayout(pnlEstados);
-        pnlEstados.setLayout(pnlEstadosLayout);
-        pnlEstadosLayout.setHorizontalGroup(
-            pnlEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlEstadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chkPendiente)
-                .addGap(100, 100, 100)
-                .addComponent(chkEnCurso)
-                .addGap(100, 100, 100)
-                .addComponent(chkRetenida)
-                .addGap(102, 102, 102)
-                .addComponent(chkAnulada)
-                .addGap(94, 94, 94)
-                .addComponent(chkFinalizada)
-                .addGap(81, 81, 81)
-                .addComponent(chkCerrada)
-                .addContainerGap())
-        );
-        pnlEstadosLayout.setVerticalGroup(
-            pnlEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlEstadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkPendiente)
-                    .addComponent(chkAnulada)
-                    .addComponent(chkCerrada)
-                    .addComponent(chkFinalizada)
-                    .addComponent(chkEnCurso)
-                    .addComponent(chkRetenida))
-                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pnlPeticion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblAsuntoContiene.setText("Contiene en sus textos");
 
-        lblFechaInicioProgramado.setText("Fecha Inicio Programado ");
+        lblInicioPrevisto.setText("Fecha Inicio Previsto");
 
-        lblFechaFinProgramado.setText("Fecha Fin Programado ");
+        dchInicioPrevistoDesde.setDateFormatString("dd/MM/yyyy");
 
-        lblFechaInicioReal.setText("Fecha Inicio Real");
+        dchInicioPrevistoHasta.setDateFormatString("dd/MM/yyyy");
 
-        lblFechaFinReal.setText("Fecha Fin Real");
+        lblFinPrevisto.setText("Fecha Fin Previsto");
 
-        lblHorasProgramadas.setText("Horas Programadas ");
+        dchFinPrevistoDesde.setDateFormatString("dd/MM/yyyy");
 
-        lblHorasReales.setText("Horas Reales");
+        dchFinPrevistoHasta.setDateFormatString("dd/MM/yyyy");
 
-        lblPorcentajeRealizacion.setText("Porcentaje de realización ");
-        lblPorcentajeRealizacion.setToolTipText("");
+        lblInicioReal.setText("Fecha Inicio Real");
+
+        dchInicioRealDesde.setDateFormatString("dd/MM/yyyy");
+
+        dchInicioRealHasta.setDateFormatString("dd/MM/yyyy");
+
+        lblFinReal.setText("Fecha Fin Real");
+
+        dchFinRealDesde.setDateFormatString("dd/MM/yyyy");
+
+        dchFinRealHasta.setDateFormatString("dd/MM/yyyy");
+
+        lblHorasPrevista.setText("Horas Previstas");
+
+        lblHorasReal.setText("Horas Reales");
+
+        lblPorcentaje.setText("Porcentaje de realización ");
+        lblPorcentaje.setToolTipText("");
 
         cmbUsuario.setToolTipText("");
 
@@ -235,55 +206,59 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                     .addGroup(pnlPeticionLayout.createSequentialGroup()
                         .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAsuntoContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFechaInicioProgramado, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAsuntoContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlPeticionLayout.createSequentialGroup()
                                 .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlPeticionLayout.createSequentialGroup()
                                         .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtFechaInicioRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtHorasProgramadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtlPorcentajeRealizacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtHorasProgramadasHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtFechaInicioRealHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtlPorcentajeRealizacionHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(pnlPeticionLayout.createSequentialGroup()
-                                        .addComponent(txtFechaInicioProgramadoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFechaInicioProgramadoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(10, 10, 10)
-                                .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pnlPeticionLayout.createSequentialGroup()
+                                            .addComponent(txtHorasPrevistaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPorcentajeDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(23, 23, 23)
                                         .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pnlPeticionLayout.createSequentialGroup()
-                                                .addComponent(lblFechaFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtFechaFinRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pnlPeticionLayout.createSequentialGroup()
-                                                .addComponent(lblHorasReales, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtHorasRealesDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtHorasRealesHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtFechaFinRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtHorasPrevistaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPorcentajeHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(pnlPeticionLayout.createSequentialGroup()
-                                        .addComponent(lblFechaFinProgramado, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dchInicioPrevistoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFechaFinProgramadoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFechaFinProgramadoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPeticionLayout.createSequentialGroup()
-                                        .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dchInicioPrevistoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlPeticionLayout.createSequentialGroup()
+                                        .addComponent(dchInicioRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addComponent(lblFechaInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHorasProgramadas, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPorcentajeRealizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(dchInicioRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(220, 220, 220)
+                                .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlPeticionLayout.createSequentialGroup()
+                                        .addComponent(lblFinReal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dchFinRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dchFinRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPeticionLayout.createSequentialGroup()
+                                            .addComponent(lblHorasReal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtHorasRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(23, 23, 23)
+                                            .addComponent(txtHorasRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pnlPeticionLayout.createSequentialGroup()
+                                            .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(pnlPeticionLayout.createSequentialGroup()
+                                                    .addComponent(lblFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(dchFinPrevistoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(dchFinPrevistoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPeticionLayout.createSequentialGroup()
+                                                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(cmbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addGap(0, 0, 0)))))
+                            .addComponent(txtAsuntoContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPeticionLayout.setVerticalGroup(
@@ -294,42 +269,47 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                     .addComponent(lblAsuntoContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAsuntoContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaInicioProgramado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaInicioProgramadoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaInicioProgramadoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFechaFinProgramado)
-                    .addComponent(txtFechaFinProgramadoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaFinProgramadoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblInicioPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFinPrevisto))
+                    .addComponent(dchInicioPrevistoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchInicioPrevistoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchFinPrevistoDesde, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchFinPrevistoHasta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchInicioRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchInicioRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchFinRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchFinRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFinReal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaInicioRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaInicioRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFechaFinReal)
-                    .addComponent(txtFechaFinRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaFinRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHorasPrevistaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHorasPrevistaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHorasReal)
+                    .addComponent(txtHorasRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHorasRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHorasProgramadas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHorasProgramadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHorasProgramadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHorasReales)
-                    .addComponent(txtHorasRealesDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHorasRealesHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPorcentajeRealizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtlPorcentajeRealizacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtlPorcentajeRealizacionHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentajeDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentajeHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pnlImputacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblFechaImputacion.setText("Fecha Imputación");
+
+        dchFechaImputacionDesde.setDateFormatString("dd-MM-yyyy");
+
+        dchFechaImputacionHasta.setDateFormatString("dd-MM-yyyy");
 
         lblHorasImputadas.setText("Horas Imputadas ");
 
@@ -345,18 +325,16 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                 .addContainerGap()
                 .addComponent(lblFechaImputacion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFechaImputacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFechaImputacionHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbPeriodoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(dchFechaImputacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dchFechaImputacionHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
                 .addComponent(lblHorasImputadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHorasImputadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHorasImputadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(180, 180, 180)
                 .addComponent(lblTipoHoras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,17 +344,17 @@ public class MantenimientoFiltroDialog extends DialogoBase {
             pnlImputacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlImputacionLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(pnlImputacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaImputacion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaImputacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaImputacionHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHorasImputadas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHorasImputadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHorasImputadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbPeriodoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlImputacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dchFechaImputacionHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchFechaImputacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlImputacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblFechaImputacion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblHorasImputadas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHorasImputadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHorasImputadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pnlDocumento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -395,22 +373,23 @@ public class MantenimientoFiltroDialog extends DialogoBase {
             pnlDocumentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDocumentoLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pnlDocumentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblTipoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                 .addGroup(pnlDocumentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDocumentoLayout.createSequentialGroup()
-                        .addComponent(lblRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRuta))
-                    .addGroup(pnlDocumentoLayout.createSequentialGroup()
-                        .addComponent(lblTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(txtRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 827, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDocumentoLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblNombreContiene)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreContiene)))
-                .addContainerGap())
+                        .addComponent(txtNombreContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlDocumentoLayout.setVerticalGroup(
             pnlDocumentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +429,7 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         pnlBotonesLayout.setHorizontalGroup(
             pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBotonesLayout.createSequentialGroup()
-                .addGap(215, 215, 215)
+                .addGap(250, 250, 250)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -477,15 +456,12 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlImputacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pnlPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                        .addGap(2, 2, 2)
+                        .addComponent(pnlPeticion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -493,8 +469,6 @@ public class MantenimientoFiltroDialog extends DialogoBase {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -514,32 +488,37 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRuta;
-    private javax.swing.JCheckBox chkAnulada;
-    private javax.swing.JCheckBox chkCerrada;
-    private javax.swing.JCheckBox chkEnCurso;
-    private javax.swing.JCheckBox chkFinalizada;
-    private javax.swing.JCheckBox chkPendiente;
-    private javax.swing.JCheckBox chkRetenida;
     private javax.swing.JComboBox<Categoria> cmbCategoria;
-    private javax.swing.JComboBox<String> cmbPeriodoFecha;
+    private javax.swing.JComboBox<Estado> cmbEstado;
     private javax.swing.JComboBox<Peticion> cmbPeticion;
     private javax.swing.JComboBox<SubCategoria> cmbSubCategoria;
     private javax.swing.JComboBox<String> cmbTipoDocumento;
     private javax.swing.JComboBox<String> cmbTipoHoras;
     private javax.swing.JComboBox<Usuario> cmbUsuario;
+    private com.toedter.calendar.JDateChooser dchFechaImputacionDesde;
+    private com.toedter.calendar.JDateChooser dchFechaImputacionHasta;
+    private com.toedter.calendar.JDateChooser dchFinPrevistoDesde;
+    private com.toedter.calendar.JDateChooser dchFinPrevistoHasta;
+    private com.toedter.calendar.JDateChooser dchFinRealDesde;
+    private com.toedter.calendar.JDateChooser dchFinRealHasta;
+    private com.toedter.calendar.JDateChooser dchInicioPrevistoDesde;
+    private com.toedter.calendar.JDateChooser dchInicioPrevistoHasta;
+    private com.toedter.calendar.JDateChooser dchInicioRealDesde;
+    private com.toedter.calendar.JDateChooser dchInicioRealHasta;
     private javax.swing.JLabel lblAsuntoContiene;
     private javax.swing.JLabel lblCategoria;
-    private javax.swing.JLabel lblFechaFinProgramado;
-    private javax.swing.JLabel lblFechaFinReal;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFechaImputacion;
-    private javax.swing.JLabel lblFechaInicioProgramado;
-    private javax.swing.JLabel lblFechaInicioReal;
+    private javax.swing.JLabel lblFinPrevisto;
+    private javax.swing.JLabel lblFinReal;
     private javax.swing.JLabel lblHorasImputadas;
-    private javax.swing.JLabel lblHorasProgramadas;
-    private javax.swing.JLabel lblHorasReales;
+    private javax.swing.JLabel lblHorasPrevista;
+    private javax.swing.JLabel lblHorasReal;
+    private javax.swing.JLabel lblInicioPrevisto;
+    private javax.swing.JLabel lblInicioReal;
     private javax.swing.JLabel lblNombreContiene;
     private javax.swing.JLabel lblPeticion;
-    private javax.swing.JLabel lblPorcentajeRealizacion;
+    private javax.swing.JLabel lblPorcentaje;
     private javax.swing.JLabel lblRuta;
     private javax.swing.JLabel lblSubCategoria;
     private javax.swing.JLabel lblTipoDocumento;
@@ -548,30 +527,19 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private javax.swing.JPanel pnlBotones;
     private javax.swing.JPanel pnlCategoria;
     private javax.swing.JPanel pnlDocumento;
-    private javax.swing.JPanel pnlEstados;
     private javax.swing.JPanel pnlImputacion;
     private javax.swing.JPanel pnlPeticion;
     private javax.swing.JTextField txtAsuntoContiene;
-    private javax.swing.JTextField txtFechaFinProgramadoDesde;
-    private javax.swing.JTextField txtFechaFinProgramadoHasta;
-    private javax.swing.JTextField txtFechaFinRealDesde;
-    private javax.swing.JTextField txtFechaFinRealHasta;
-    private javax.swing.JTextField txtFechaImputacionDesde;
-    private javax.swing.JTextField txtFechaImputacionHasta;
-    private javax.swing.JTextField txtFechaInicioProgramadoDesde;
-    private javax.swing.JTextField txtFechaInicioProgramadoHasta;
-    private javax.swing.JTextField txtFechaInicioRealDesde;
-    private javax.swing.JTextField txtFechaInicioRealHasta;
     private javax.swing.JTextField txtHorasImputadasDesde;
     private javax.swing.JTextField txtHorasImputadasHasta;
-    private javax.swing.JTextField txtHorasProgramadasDesde;
-    private javax.swing.JTextField txtHorasProgramadasHasta;
-    private javax.swing.JTextField txtHorasRealesDesde;
-    private javax.swing.JTextField txtHorasRealesHasta;
+    private javax.swing.JTextField txtHorasPrevistaDesde;
+    private javax.swing.JTextField txtHorasPrevistaHasta;
+    private javax.swing.JTextField txtHorasRealDesde;
+    private javax.swing.JTextField txtHorasRealHasta;
     private javax.swing.JTextField txtNombreContiene;
+    private javax.swing.JTextField txtPorcentajeDesde;
+    private javax.swing.JTextField txtPorcentajeHasta;
     private javax.swing.JTextField txtRuta;
-    private javax.swing.JTextField txtlPorcentajeRealizacionDesde;
-    private javax.swing.JTextField txtlPorcentajeRealizacionHasta;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -582,11 +550,16 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     @Override
     protected void initListener() {
         initComponents();
-        MantenimientoFiltroListener listener = new MantenimientoFiltroListener(this);        
+        MantenimientoFiltroListener listener = new MantenimientoFiltroListener(this);
         btnGuardar.addActionListener(listener);
         btnCancelar.addActionListener(listener);
         btnLimpiar.addActionListener(listener);
     }
+
+   /* private void addRangoMouseListener(JTextField txtField) {
+        RangoFechaFocusListener listener = new RangoFechaFocusListener(this, txtField);
+        txtField.addFocusListener(listener);
+    }*/
 
     @Override
     public JButton getBtnCancelar() {
@@ -602,7 +575,7 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     public JButton getBtnLimpiar() {
         return btnLimpiar;
     }
-    
+
     //************************************************
     // Elementos de pantalla
     //*************************************************
@@ -610,36 +583,12 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         return btnRuta;
     }
 
-    public JCheckBox getChkAnulada() {
-        return chkAnulada;
-    }
-
-    public JCheckBox getChkCerrada() {
-        return chkCerrada;
-    }
-
-    public JCheckBox getChkEnCurso() {
-        return chkEnCurso;
-    }
-
-    public JCheckBox getChkFinalizada() {
-        return chkFinalizada;
-    }
-
-    public JCheckBox getChkPendiente() {
-        return chkPendiente;
-    }
-
-    public JCheckBox getChkRetenida() {
-        return chkRetenida;
+    public JComboBox<Estado> getCmbEstado() {
+        return cmbEstado;
     }
 
     public JComboBox<Categoria> getCmbCategoria() {
         return cmbCategoria;
-    }
-
-    public JComboBox<String> getCmbPeriodoFecha() {
-        return cmbPeriodoFecha;
     }
 
     public JComboBox<Peticion> getCmbPeticion() {
@@ -666,44 +615,52 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         return txtAsuntoContiene;
     }
 
-    public JTextField getTxtFechaFinProgramadoDesde() {
-        return txtFechaFinProgramadoDesde;
+    public JDateChooser getDchFinPrevistoDesde() {
+        return dchFinPrevistoDesde;
     }
 
-    public JTextField getTxtFechaFinProgramadoHasta() {
-        return txtFechaFinProgramadoHasta;
+    public JDateChooser getDchFinPrevistoHasta() {
+        return dchFinPrevistoHasta;
     }
 
-    public JTextField getTxtFechaFinRealDesde() {
-        return txtFechaFinRealDesde;
+    public JDateChooser getDchFinRealDesde() {
+        return dchFinRealDesde;
     }
 
-    public JTextField getTxtFechaFinRealHasta() {
-        return txtFechaFinRealHasta;
+    public JDateChooser getDchFinRealHasta() {
+        return dchFinRealHasta;
     }
 
-    public JTextField getTxtFechaImputacionDesde() {
-        return txtFechaImputacionDesde;
+    public JDateChooser getDchImputacionDesde() {
+        return dchFechaImputacionDesde;
     }
 
-    public JTextField getTxtFechaImputacionHasta() {
-        return txtFechaImputacionHasta;
+    public JDateChooser getDchImputacionHasta() {
+        return dchFechaImputacionHasta;
     }
 
-    public JTextField getTxtFechaInicioProgramadoDesde() {
-        return txtFechaInicioProgramadoDesde;
+    public JDateChooser getDchFechaImputacionDesde() {
+        return dchFechaImputacionDesde;
     }
 
-    public JTextField getTxtFechaInicioProgramadoHasta() {
-        return txtFechaInicioProgramadoHasta;
+    public JDateChooser getDchFechaImputacionHasta() {
+        return dchFechaImputacionHasta;
     }
 
-    public JTextField getTxtFechaInicioRealDesde() {
-        return txtFechaInicioRealDesde;
+    public JDateChooser getDchInicioPrevistoDesde() {
+        return dchInicioPrevistoDesde;
     }
 
-    public JTextField getTxtFechaInicioRealHasta() {
-        return txtFechaInicioRealHasta;
+    public JDateChooser getDchInicioPrevistoHasta() {
+        return dchInicioPrevistoHasta;
+    }
+
+    public JDateChooser getDchInicioRealDesde() {
+        return dchInicioRealDesde;
+    }
+
+    public JDateChooser getDchInicioRealHasta() {
+        return dchInicioRealHasta;
     }
 
     public JTextField getTxtHorasImputadasDesde() {
@@ -714,20 +671,20 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         return txtHorasImputadasHasta;
     }
 
-    public JTextField getTxtHorasProgramadasDesde() {
-        return txtHorasProgramadasDesde;
+    public JTextField getTxtHorasPrevistaDesde() {
+        return txtHorasPrevistaDesde;
     }
 
-    public JTextField getTxtHorasProgramadasHasta() {
-        return txtHorasProgramadasHasta;
+    public JTextField getTxtHorasPrevistaHasta() {
+        return txtHorasPrevistaHasta;
     }
 
     public JTextField getTxtHorasRealesDesde() {
-        return txtHorasRealesDesde;
+        return txtHorasRealDesde;
     }
 
     public JTextField getTxtHorasRealesHasta() {
-        return txtHorasRealesHasta;
+        return txtHorasRealHasta;
     }
 
     public JTextField getTxtNombreContiene() {
@@ -738,11 +695,11 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         return txtRuta;
     }
 
-    public JTextField getTxtlPorcentajeRealizacionDesde() {
-        return txtlPorcentajeRealizacionDesde;
+    public JTextField getTxtPorcentajeDesde() {
+        return txtPorcentajeDesde;
     }
 
-    public JTextField getTxtlPorcentajeRealizacionHasta() {
-        return txtlPorcentajeRealizacionHasta;
+    public JTextField getTxtPorcentajeHasta() {
+        return txtPorcentajeHasta;
     }
 }

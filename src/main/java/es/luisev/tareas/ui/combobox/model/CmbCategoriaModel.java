@@ -18,46 +18,48 @@ import javax.swing.ComboBoxModel;
  */
 public class CmbCategoriaModel extends AbstractListModel<Categoria> implements ComboBoxModel<Categoria> {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -3700195174395455435L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3700195174395455435L;
 
-	private final List<Categoria> lista;
+    private final List<Categoria> lista;
 
-	private Categoria selection = null;
+    private Categoria selection = null;
 
-	public CmbCategoriaModel() {
-		super();
-		lista = AppHelper.getCategoriaService().findAll();
-                lista.add(0, null);
-	}
+    public CmbCategoriaModel() {
+        super();
+        lista = AppHelper.getCategoriaService().findAll();
+        lista.add(0, null);
+    }
 
-	public CmbCategoriaModel(List<Categoria> lista) {
-		super();
-		this.lista = new ArrayList<>();
-		this.lista.add(null);
-		this.lista.addAll(lista);
-	}
+    public CmbCategoriaModel(List<Categoria> lista) {
+        super();
+        this.lista = new ArrayList<>();
+        if (lista != null) {
+            this.lista.add(null);
+            this.lista.addAll(lista);
+        }
+    }
 
-	@Override
-	public int getSize() {
-		return lista.size();
-	}
+    @Override
+    public int getSize() {
+        return lista.size();
+    }
 
-	@Override
-	public Categoria getElementAt(int index) {
-		return lista.get(index);
-	}
+    @Override
+    public Categoria getElementAt(int index) {
+        return lista.get(index);
+    }
 
-	@Override
-	public void setSelectedItem(Object anItem) {
-		selection = (Categoria) anItem;
-	}
+    @Override
+    public void setSelectedItem(Object anItem) {
+        selection = (Categoria) anItem;
+    }
 
-	@Override
-	public Object getSelectedItem() {
-		return selection;
-	}
+    @Override
+    public Object getSelectedItem() {
+        return selection;
+    }
 
 }

@@ -5,9 +5,6 @@
  */
 package es.luisev.tareas.exception;
 
-import java.awt.Component;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Luis-Enrique.Varona
@@ -20,9 +17,5 @@ public class TareasApplicationException extends Exception{
     
     public static void raise(String message) throws TareasApplicationException{
         throw new TareasApplicationException(message);
-    }
-    
-    public void showErrors(Component component){
-        JOptionPane.showMessageDialog(component, this.getMessage());
     }
 }

@@ -67,8 +67,8 @@ public final class MantenimientoSubCategoriaListener extends ListenerBase {
             }
             pantalla.setReturnObject(p);
             return true;
-        } catch (TareasApplicationException ex1) {
-            ex1.showErrors(dialogo);
+        } catch (TareasApplicationException e) {
+            UIHelper.showErrors(dialogo, e);
             return false;
         }
     }

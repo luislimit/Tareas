@@ -6,6 +6,7 @@
 package es.luisev.tareas.service;
 
 import es.luisev.tareas.exception.TareasApplicationException;
+import es.luisev.tareas.model.Filtro;
 import es.luisev.tareas.model.Imputacion;
 import es.luisev.tareas.model.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import es.luisev.tareas.repository.ImputacionRepository;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -33,28 +33,31 @@ public class ImputacionService extends BaseService {
         return repository.findAll();
     }
 
-    public List<Imputacion> findByPeticiones(List<Peticion> peticiones) {
-        /*if (peticiones == null || peticiones.isEmpty()){
-            return null;
-        }
-        List<Imputacion> lista = repository.findAll();
-        return lista.stream().filter(
-                p -> (contiene(peticiones, p.getPeticion()))//criterio.getPeticiones().contains(p.getPeticion())
-        ).collect(Collectors.toList());*/
+    public List<Imputacion> findByCriteria(List<Peticion> peticiones, Filtro criterio) {
         List<Imputacion> lista = null;
-        if (peticiones == null || !peticiones.isEmpty()) {
-           lista= repository.findByPeticiones(peticiones);
-        }
-        return lista;
-    }
-
-    private boolean contiene(List<Peticion> peticiones, Peticion peticion) {
-        for (Peticion p : peticiones) {
-            if (p.getId().equals(peticion.getId())) {
-                return true;
+        String extra;
+        switch (criterio.getTipoHoras()) {
+            case 1 -> {
+                extra = "N"; // Horas normales
+            }
+            case 2 -> {
+                extra = "S"; // Horas extra
+            }
+            default -> {
+                extra = null; // Todas
             }
         }
-        return false;
+        if (peticiones == null || !peticiones.isEmpty()) {
+            //
+            lista = repository.findByCriteria(
+                    peticiones,
+                    criterio.getImputacionDesde(),
+                    criterio.getImputacionHasta(),
+                    criterio.getHorasImputadasDesde(),
+                    criterio.getHorasImputadasHasta(),
+                    extra);
+        }
+        return lista;
     }
 
     public Imputacion insert(Imputacion imputacion) throws TareasApplicationException {

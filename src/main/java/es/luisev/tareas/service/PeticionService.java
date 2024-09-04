@@ -33,57 +33,54 @@ public class PeticionService extends BaseService {
         return repository.findAll();
     }
 
-    public List<Peticion> findByCriteria(Filtro criterio) {
-        /*List<Peticion> lista =repository.findAll();
-        if (criterio == null) {
-            return lista;
-        }
-        Long idCategoria = criterio.getCategoria() == null? criterio.getCategoria().getId(): null;
-        Long idSubCategoria = criterio.getSubCategoria() == null? criterio.getSubCategoria().getId(): null;
-        return lista.stream().filter(
-                p -> ((criterio.getAsuntoContiene().isEmpty()
-                || (idCategoria != null && p.getCategoria().getId().equals(idCategoria))
-                || (idSubCategoria != null && p.getSubCategoria().getId().equals(idSubCategoria))
-                || (p.getCodigo() != null && p.getCodigo().toUpperCase().contains(criterio.getAsuntoContiene().toUpperCase()))
-                || (p.getAsunto() != null && p.getAsunto().toUpperCase().contains(criterio.getAsuntoContiene().toUpperCase()))
-                || (p.getDescripcion() != null && p.getDescripcion().toUpperCase().contains(criterio.getAsuntoContiene().toUpperCase())))
-                && (isInRange(p.getHorasReal(), criterio.getHorasRealesDesde(), criterio.getHorasRealesHasta()))
-                && (isInRange(p.getPorcentaje(), criterio.getPorcentajeRealizacionDesde(), criterio.getPorcentajeRealizacionHasta())))
-        ).collect(Collectors.toList());*/
-        
-        Long idCategoria = DBEntity.getPK(criterio.getCategoria());
-        Long idSubCategoria = DBEntity.getPK(criterio.getSubCategoria());
-        Long idPeticion = DBEntity.getPK(criterio.getPeticion());
-        Long idEstado = DBEntity.getPK(criterio.getEstado());
-        String asuntoContiene = criterio.getAsuntoContiene();
-        asuntoContiene = (asuntoContiene == null)? null: "%"+asuntoContiene +"%";
+    public List<Peticion> findByCriteria(Filtro filtro) {
+        Long idCategoria = DBEntity.getPK(filtro.getCategoria());
+        Long idSubCategoria = DBEntity.getPK(filtro.getSubCategoria());
+       // Long idPeticion = DBEntity.getPK(filtro.getPeticion());
+        Long idEstado = DBEntity.getPK(filtro.getEstado());
+        String asuntoContiene = filtro.getAsuntoContiene();
+        asuntoContiene = (asuntoContiene == null) ? null : "%" + asuntoContiene + "%";
 
-        return repository.findByCriteria(
-                idCategoria, 
-                idSubCategoria, 
-                idPeticion, 
-                idEstado, 
+        String extra;
+        switch (filtro.getTipoHoras()) {
+            case 1 -> {
+                extra = "N"; // Horas normales
+            }
+            case 2 -> {
+                extra = "S"; // Horas extra
+            }
+            default -> {
+                extra = null; // Todas
+            }
+        }
+
+        return repository.findByCriteria(idCategoria,
+                idSubCategoria,
+                idEstado,
                 asuntoContiene,
-                criterio.getInicioPrevistoDesde(),
-                criterio.getInicioPrevistoHasta(),
-                criterio.getInicioRealDesde(),
-                criterio.getInicioRealHasta(),
-                criterio.getFinPrevistoDesde(),
-                criterio.getFinPrevistoHasta(),
-                criterio.getFinRealDesde(),
-                criterio.getFinRealHasta(), 
-                criterio.getHorasPrevistaDesde(),
-                criterio.getHorasPrevistaHasta(),
-                criterio.getHorasRealesDesde(),
-                criterio.getHorasRealesHasta(),
-                criterio.getPorcentajeDesde(),
-                criterio.getPorcentajeHasta(),
+                filtro.getInicioPrevistoDesde(),
+                filtro.getInicioPrevistoHasta(),
+                filtro.getInicioRealDesde(),
+                filtro.getInicioRealHasta(),
+                filtro.getFinPrevistoDesde(),
+                filtro.getFinPrevistoHasta(),
+                filtro.getFinRealDesde(),
+                filtro.getFinRealHasta(),
+                filtro.getHorasPrevistaDesde(),
+                filtro.getHorasPrevistaHasta(),
+                filtro.getHorasRealesDesde(),
+                filtro.getHorasRealesHasta(),
+                filtro.getPorcentajeDesde(),
+                filtro.getPorcentajeHasta(),
                 //
-                criterio.getImputacionDesde(),
-                criterio.getImputacionHasta(),
-                criterio.getHorasImputadasDesde(),
-                criterio.getHorasImputadasHasta()
-        );
+                filtro.getImputacionDesde(),
+                filtro.getImputacionHasta(),
+                filtro.getHorasImputadasDesde(),
+                filtro.getHorasImputadasHasta(),
+                extra,
+                //
+                filtro.getTipoListado() // Tipo de listado
+                ); 
     }
 
     public Peticion insert(Peticion peticion) throws TareasApplicationException {

@@ -23,6 +23,7 @@ C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\BaseService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\CategoriaService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\DocumentoService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\EstadoService.java
+C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\ExportarService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\ImportarService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\ImputacionService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\PeticionService.java
@@ -34,6 +35,7 @@ C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbCatego
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbPeriodoFechaListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbSubCategoriaListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbCategoriaModel.java
+C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbCriteriosPeticionModel.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbEstadoModel.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbPeriodoFecha.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbPeticionModel.java

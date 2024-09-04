@@ -39,7 +39,7 @@ public final class MantenimientoCategoriaListener extends ListenerBase {
     @Override
     public boolean evtGuardar() {
         Categoria paramCategoria = (Categoria) pantalla.getParamObject();
-        if (!UIHelper.confirmAction(pantalla, UIHelper.getLiteral("confirmacion.guardar") )){
+        if (!UIHelper.confirmAction(pantalla, "confirmacion.guardar")){
            return false;
         } 
         CategoriaService service = AppHelper.getCategoriaService();
@@ -63,8 +63,8 @@ public final class MantenimientoCategoriaListener extends ListenerBase {
             }
             pantalla.setReturnObject(p);
             return true;
-        } catch (TareasApplicationException ex1) {
-            ex1.showErrors(dialogo);
+        } catch (TareasApplicationException e) {
+            UIHelper.showErrors(dialogo, e);
             return false;
         }
     }

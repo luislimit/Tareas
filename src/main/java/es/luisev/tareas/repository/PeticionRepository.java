@@ -30,7 +30,6 @@ public interface PeticionRepository extends JpaRepository<Peticion, Long> {
     List<Peticion> findByCriteria(
             @Param("idCategoria") Long idCategoria, 
             @Param("idSubCategoria") Long idSubCategoria,
-            @Param("idPeticion") Long idPeticion,
             @Param("idEstado") Long estado,
             @Param("asuntoContiene") String asuntoContiene,
             @Param("inicioPrevistoDesde") Long inicioPrevistoDesde,
@@ -51,7 +50,10 @@ public interface PeticionRepository extends JpaRepository<Peticion, Long> {
             @Param("imputacionDesde") Long imputacionDesde,
             @Param("imputacionHasta") Long imputacionHasta,
             @Param("horasImputadasDesde") Double horasImputadasDesde,
-            @Param("horasImputadasHasta") Double horasImputadasHasta
+            @Param("horasImputadasHasta") Double horasImputadasHasta,
+            @Param("extra") String extra,
+            //
+            @Param("tipoListado") int tipoListado
     );              
 }
 

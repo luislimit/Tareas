@@ -21,7 +21,6 @@ import es.luisev.tareas.ui.combobox.model.CmbSubCategoriaModel;
 import es.luisev.tareas.ui.combobox.model.CmbUsuarioModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
-import java.util.Date;
 
 /**
  *
@@ -114,8 +113,8 @@ public final class MantenimientoPeticionListener extends ListenerBase {
             }
             pantalla.setReturnObject(p);
             return true;
-        } catch (TareasApplicationException ex1) {
-            ex1.showErrors(dialogo);
+        } catch (TareasApplicationException e) {
+            UIHelper.showErrors(dialogo, e);
             return false;
         }
     }

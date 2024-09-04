@@ -16,6 +16,7 @@ es\luisev\tareas\ui\combobox\model\CmbPeticionModel.class
 es\luisev\tareas\ui\table\model\ImputacionTableModel.class
 es\luisev\tareas\service\EstadoService.class
 es\luisev\tareas\ui\combobox\listener\CmbSubCategoriaListener.class
+es\luisev\tareas\service\ExportarService.class
 es\luisev\tareas\ui\combobox\model\CmbEstadoModel.class
 es\luisev\tareas\repository\TipoDocumentoRepository.class
 es\luisev\tareas\model\Peticion$PeticionBuilderImpl.class
@@ -28,7 +29,6 @@ es\luisev\tareas\ui\listener\MantenimientoCategoriaListener.class
 es\luisev\tareas\ui\listener\RangoFechaFocusListener.class
 es\luisev\tareas\connection\config\DataSourceConfig.class
 es\luisev\tareas\model\Usuario$UsuarioBuilder.class
-es\luisev\tareas\utils\UIHelper.class
 es\luisev\tareas\service\UsuarioService.class
 es\luisev\tareas\ui\combobox\model\CmbCategoriaModel.class
 es\luisev\tareas\ui\MantenimientoPeticionDialog.class
@@ -42,6 +42,7 @@ es\luisev\tareas\utils\LiteralesSingleton.class
 es\luisev\tareas\repository\UsuarioRepository.class
 es\luisev\tareas\ui\listener\VisorMouseListener.class
 es\luisev\tareas\model\DBEntity.class
+es\luisev\tareas\ui\combobox\model\CmbCriteriosPeticionModel.class
 es\luisev\tareas\ui\combobox\model\CmbUsuarioModel.class
 es\luisev\tareas\utils\Constantes.class
 es\luisev\tareas\repository\EstadoRepository.class

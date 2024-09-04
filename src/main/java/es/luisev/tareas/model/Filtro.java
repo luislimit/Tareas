@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Filtro {
     Categoria categoria;
     SubCategoria subCategoria;
-    Peticion peticion;
+    int tipoListado;
     Estado estado;
     //
     String asuntoContiene;

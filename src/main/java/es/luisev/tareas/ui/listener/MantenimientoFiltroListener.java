@@ -6,14 +6,10 @@
 package es.luisev.tareas.ui.listener;
 
 import es.luisev.tareas.model.*;
+import es.luisev.tareas.ui.combobox.model.*;
 import es.luisev.tareas.ui.DialogoBase;
 import es.luisev.tareas.ui.MantenimientoFiltroDialog;
 import es.luisev.tareas.ui.combobox.listener.CmbCategoriaListener;
-import es.luisev.tareas.ui.combobox.listener.CmbSubCategoriaListener;
-import es.luisev.tareas.ui.combobox.model.CmbCategoriaModel;
-import es.luisev.tareas.ui.combobox.model.CmbEstadoModel;
-import es.luisev.tareas.ui.combobox.model.CmbSubCategoriaModel;
-import es.luisev.tareas.ui.combobox.model.CmbUsuarioModel;
 import es.luisev.tareas.utils.UIHelper;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -36,7 +32,7 @@ public class MantenimientoFiltroListener extends ListenerBase {
     public void evtLimpiar() {
         pantalla.getCmbCategoria().setSelectedIndex(-1);
         pantalla.getCmbSubCategoria().setSelectedIndex(-1);
-        pantalla.getCmbPeticion().setSelectedIndex(-1);
+        pantalla.getCmbCriteriosPeticion().setSelectedIndex(0);
         //Peticion
         pantalla.getTxtAsuntoContiene().setText("");
 
@@ -75,7 +71,7 @@ public class MantenimientoFiltroListener extends ListenerBase {
         Filtro filtro = new Filtro();
         filtro.setCategoria((Categoria) pantalla.getCmbCategoria().getSelectedItem());
         filtro.setSubCategoria((SubCategoria) pantalla.getCmbSubCategoria().getSelectedItem());
-        filtro.setPeticion((Peticion) pantalla.getCmbPeticion().getSelectedItem());
+        filtro.setTipoListado(pantalla.getCmbCriteriosPeticion().getSelectedIndex());
         filtro.setEstado((Estado) pantalla.getCmbEstado().getSelectedItem());
         //
         //
@@ -117,16 +113,15 @@ public class MantenimientoFiltroListener extends ListenerBase {
     private void iniciaDialogo() {
         JComboBox cmbCategoria = pantalla.getCmbCategoria();
         JComboBox cmbSubCategoria = pantalla.getCmbSubCategoria();
-        JComboBox cmbPeticion = pantalla.getCmbPeticion();
+        JComboBox cmbCriterio = pantalla.getCmbCriteriosPeticion();
+        //
+        cmbCriterio.setModel(new CmbCriteriosPeticionModel());
         //
         cmbCategoria.setModel(new CmbCategoriaModel());
         cmbSubCategoria.setModel(new CmbSubCategoriaModel());
         // Al cambiar la categoría, se rellenan las subCategorías
-        CmbCategoriaListener cmbCategoriaListener = new CmbCategoriaListener(cmbSubCategoria, cmbPeticion);
+        CmbCategoriaListener cmbCategoriaListener = new CmbCategoriaListener(cmbSubCategoria);
         cmbCategoria.addItemListener(cmbCategoriaListener);
-        // Al cambiar la SubCategoría, se rellenan las peticiones
-        CmbSubCategoriaListener cmbSubCategoriaListener = new CmbSubCategoriaListener(cmbPeticion);
-        cmbSubCategoria.addItemListener(cmbSubCategoriaListener);
         //
         pantalla.getCmbUsuario().setModel(new CmbUsuarioModel());
         pantalla.getCmbEstado().setModel(new CmbEstadoModel());
@@ -138,7 +133,7 @@ public class MantenimientoFiltroListener extends ListenerBase {
         } else {
             setComboBoxItem(cmbCategoria, filtro.getCategoria());
             setComboBoxItem(cmbSubCategoria, filtro.getSubCategoria());
-            cmbPeticion.setSelectedItem(filtro.getPeticion());
+            cmbCriterio.setSelectedIndex(filtro.getTipoListado());
             pantalla.getCmbEstado().setSelectedItem(filtro.getEstado());
             //
             pantalla.getTxtAsuntoContiene().setText(filtro.getAsuntoContiene());
@@ -156,7 +151,6 @@ public class MantenimientoFiltroListener extends ListenerBase {
             setTextDouble(pantalla.getTxtHorasPrevistaHasta(), filtro.getHorasPrevistaHasta());
             setTextDouble(pantalla.getTxtHorasRealesDesde(), filtro.getHorasRealesDesde());
             setTextDouble(pantalla.getTxtHorasRealesHasta(), filtro.getHorasRealesHasta());
-            
             
             setTextDouble(pantalla.getTxtPorcentajeDesde(), filtro.getPorcentajeDesde());
             setTextDouble(pantalla.getTxtPorcentajeHasta(), filtro.getPorcentajeHasta());

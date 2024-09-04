@@ -12,6 +12,7 @@ import es.luisev.tareas.model.DBEntity;
 import es.luisev.tareas.model.Imputacion;
 import es.luisev.tareas.model.Peticion;
 import es.luisev.tareas.model.SubCategoria;
+import es.luisev.tareas.service.ExportarService;
 import es.luisev.tareas.service.ImportarService;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
 import es.luisev.tareas.ui.MantenimientoCategoriaDialog;
@@ -27,10 +28,13 @@ import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.event.ChangeEvent;
@@ -88,6 +92,8 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             evtBtnImportar();
         } else if (obj == pantalla.getBtnFiltrar()) {
             evtBtnFiltrar();
+        }else if (obj == pantalla.getBtnInformacion()) {
+            JOptionPane.showMessageDialog(pantalla, "Aplicación de registro de tareas versión 1.0 \n\n Desarollada por LVARONA \n\n Septiembre 2024");
         }
     }
 
@@ -197,7 +203,6 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
      * Borra el elemento seleccionado
      */
     public void evtBtnBorrar() {
-        String message;
         try {
             Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
             DBEntity object = null;
@@ -208,15 +213,13 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                     object = borrarPeticion(peticion);
 
                 } else if (peticion.getSubCategoria() != null) {
-                    message = UIHelper.getLiteral("confirmacion.borrar.subcategoria", peticion.getSubCategoria().toString());
-                    if (!UIHelper.confirmAction(pantalla, message)) {
+                    if (!UIHelper.confirmAction(pantalla,"confirmacion.borrar.subcategoria", peticion.getSubCategoria().toString())) {
                         return;
                     }
                     AppHelper.getSubCategoriaService().delete(peticion.getSubCategoria().getId());
                     object = peticion.getCategoria();
                 } else {
-                    message = UIHelper.getLiteral("confirmacion.borrar.categoria", peticion.getCategoria().toString());
-                    if (!UIHelper.confirmAction(pantalla, message)) {
+                    if (!UIHelper.confirmAction(pantalla, "confirmacion.borrar.categoria", peticion.getCategoria().toString())) {
                         return;
                     }
                     AppHelper.getCategoriaService().delete(peticion.getCategoria().getId());
@@ -235,8 +238,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             } else if (focusedComponent == pantalla.getTblImputacion()) {
                 Imputacion imputacion = getTblImputacionSelection();
                 if (imputacion != null) {
-                    message = UIHelper.getLiteral("confirmacion.borrar.imputacion");
-                    if (!UIHelper.confirmAction(pantalla, message)) {
+                    if (!UIHelper.confirmAction(pantalla, "confirmacion.borrar.imputacion")) {
                         return;
                     }
                     AppHelper.getImputacionService().delete(imputacion.getId());
@@ -244,7 +246,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                 }
             }
         } catch (TareasApplicationException e) {
-            e.showErrors(pantalla);
+            UIHelper.showErrors(pantalla, e);
         }
     }
 
@@ -391,7 +393,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                     peticionesFiltradas = new ArrayList();
                     peticionesFiltradas.add(peticion);
                 }
-                List<Imputacion> imputaciones = AppHelper.getImputacionService().findByPeticiones(peticionesFiltradas);
+                List<Imputacion> imputaciones = AppHelper.getImputacionService().findByCriteria(peticionesFiltradas, filtro);
                 ImputacionTableModel tableModel = (ImputacionTableModel) pantalla.getTblImputacion().getModel();
                 tableModel.clearData();
                 tableModel.setData(imputaciones);
@@ -441,16 +443,46 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
     }
 
     private void evtBtnImportar() {
-        try {
-            String excelFilePath = "c:\\temp\\Peticiones.xlsx"; // Ruta al archivo Excel
-            ImportarService.importFromExcel(excelFilePath);
-            UIHelper.showMessage(pantalla, "importacion.finalizada.ok");
-        } catch (TareasApplicationException e) {
-            e.showErrors(pantalla);
+        if (UIHelper.confirmAction(pantalla, "confirmacion.importar")) {
+            try {
+                String excelFilePath = "c:\\temp\\Peticiones.xlsx"; // Ruta al archivo Excel
+                ImportarService.importFromExcel(excelFilePath);
+                UIHelper.showMessage(pantalla, "importacion.finalizada.ok");
+            } catch (TareasApplicationException e) {
+                UIHelper.showErrors(pantalla, e);
+            }
         }
     }
 
     private void evtBtnExportar() {
+        if (UIHelper.confirmAction(pantalla, "confirmacion.exportar")) {
+            try {
+                JTable tblPeticion = pantalla.getTblPeticion();
+                List<Peticion> listaPeticion = ((PeticionTableModel) tblPeticion.getModel()).getData();
+                List<Imputacion> listaImputacion = AppHelper.getImputacionService().findByCriteria(listaPeticion, filtro);
+
+                String fileName = getFileName("filename.export.peticiones");
+                fileName = ExportarService.exportPeticiones(fileName, listaPeticion, listaImputacion);
+                
+                UIHelper.showMessage(pantalla, "exportar.ok", fileName);
+            } catch (TareasApplicationException e) {
+                UIHelper.showErrors(pantalla, e);
+            }
+        }
+    }
+    
+    private String getFileName(String clave) throws TareasApplicationException{
+        Peticion peticion = getPeticionNode();
+        String prefix ="";
+        if (peticion == null){
+            prefix = "root";
+        } else if (peticion.getSubCategoria()!=null){
+            prefix = peticion.getCategoria().getCodigo() + "-" + peticion.getSubCategoria().getCodigo();
+        } else {
+            prefix = peticion.getCategoria().getCodigo();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        return prefix + "_" + AppHelper.getConfigurationValue(clave)+ "_" + sdf.format(new Date());  
     }
 
     /**
@@ -461,7 +493,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
     @Override
     public void valueChanged(ListSelectionEvent e) {
         Peticion peticionTabla = getTblPeticionSelection();
-        if (peticionTabla == null){
+        if (peticionTabla == null) {
             return;
         }
 
@@ -492,7 +524,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
 
         Peticion peticionArbol = getPeticionNode();
         Peticion peticionTabla = getTblPeticionSelection();
-        
+
         //TODO: hacer algo similar si selecciona las tablas y no hay elementos seleccionados
         boolean isRoot = (peticionArbol == null);
         pantalla.getBtnEditar().setEnabled(!isRoot);
@@ -501,7 +533,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
         String texto = null;
         PeticionTableModel tableModel = (PeticionTableModel) pantalla.getTblPeticion().getModel();
         boolean cambiaModelo = true;
-        
+
         // Ha seleccionado una peticion
         if (peticionTabla != null && peticionArbol != null && peticionArbol.getId() != null) {
             // Si coinciden las peticiones del árbol y la pantalla => no hay nada que hacer
@@ -535,11 +567,11 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             tableModel.setData(peticionesFiltradas);
             pantalla.getTblPeticion().clearSelection();
             pantalla.getTblImputacion().clearSelection();
-            pantalla.getTblDocumento().clearSelection();            
-        }   
-        
+            pantalla.getTblDocumento().clearSelection();
+        }
+
         // Si el elemento del Arbol es una petición la seleccionamos en la tabla        
-        if (peticionArbol != null && peticionArbol.getId() != null){
+        if (peticionArbol != null && peticionArbol.getId() != null) {
             peticionesFiltradas = tableModel.getData();
             int row = peticionesFiltradas.indexOf(peticionArbol);
             if (row >= 0) {

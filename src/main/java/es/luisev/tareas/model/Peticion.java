@@ -10,9 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
@@ -71,6 +74,9 @@ public class Peticion extends DBEntity{
     @ManyToOne
     @JoinColumn(name="id_subcategoria")
     private SubCategoria subCategoria;
+    
+    @OneToMany(mappedBy = "peticion", fetch = FetchType.LAZY) //, cascade = CascadeType.ALL, orphanRemoval = true
+    private List<Imputacion> imputaciones;
     
     @Override
     public String toString(){

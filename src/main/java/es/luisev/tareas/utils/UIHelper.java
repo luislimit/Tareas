@@ -49,7 +49,7 @@ public class UIHelper {
      */
     public static void show(java.awt.Window component) {
         if (!Objects.isNull(component)) {
-            UIHelper.centerOnScreen(component);
+            centerOnScreen(component);
             component.setVisible(Boolean.TRUE);
         }
     }
@@ -67,36 +67,38 @@ public class UIHelper {
         comboBox.setSelectedItem(dBEntity);
     }
 
-    public static boolean confirmAction(Component component, String message) {
-        String titulo = UIHelper.getLiteral("confirmacion.titulo");
+    public static boolean confirmAction(Component component, String clave, String... params) {
+        String titulo = getLiteral("confirmacion.titulo");
+        String message = getLiteral(clave, params);
         int option = JOptionPane.showConfirmDialog(component, message, titulo, JOptionPane.YES_NO_OPTION);
         return (option == JOptionPane.YES_OPTION);
     }
 
-    public static String getLiteral(String key) {
+    public static String getLiteral(String key, String... params) {
         String texto = null;
         try {
-            texto= LiteralesSingleton.getInstance().getLiteral(key);
+            texto = LiteralesSingleton.getInstance().getLiteral(key);
         } catch (TareasApplicationException ex) {
             Logger.getLogger(UIHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (texto == null || texto.isEmpty()) {
-            texto = "{" + key + "}";
+            texto = key;
+        }
+        // Recorrer el array usando sus índices
+        for (int i = 0; i < params.length; i++) {
+            String id = ":" + String.valueOf(i+1);
+            texto = texto.replace(id, params[i]);
         }
         return texto;
     }
 
-    public static String getLiteral(String key, String param) {
-        String texto = getLiteral(key);
-        return texto.replace(":1", param);
-    }
-
     public static void setWindowTitle(Component window) {
         String clave = window.getClass().getSimpleName();
+        String titulo = getLiteral(clave);
         if (window instanceof JDialog) {
-            ((JDialog) window).setTitle(UIHelper.getLiteral(clave));
+            ((JDialog) window).setTitle(titulo);
         } else {
-            ((JFrame) window).setTitle(UIHelper.getLiteral(clave));
+            ((JFrame) window).setTitle(titulo);
         }
     }
 
@@ -104,7 +106,7 @@ public class UIHelper {
         if (component == null) {
             return;
         }
-        String texto = UIHelper.getLiteral(clave);
+        String texto = getLiteral(clave);
         if (component instanceof JLabel) {
             ((JLabel) component).setText(texto);
         } else {
@@ -114,43 +116,56 @@ public class UIHelper {
 
     /**
      * Muestra un mensaje por pantalla
+     *
      * @param component
-     * @param clave 
+     * @param clave
      */
-    public static void showMessage(Component component, String clave){
+    public static void showMessage(Component component, String clave) {
         JOptionPane.showMessageDialog(component, getLiteral(clave));
     }
- 
-    public static void setTableModel(JTable table, DefaultTableModel tableModel){
+
+    /**
+     * Muestra un mensaje por pantalla
+     *
+     * @param component
+     * @param clave
+     * @param params
+     */
+    public static void showMessage(Component component, String clave, String... params) {
+        JOptionPane.showMessageDialog(component, getLiteral(clave, params));
+    }
+
+    public static void showErrors(Component component, Exception e) {
+        JOptionPane.showMessageDialog(component, e.getMessage());
+    }
+
+    public static void setTableModel(JTable table, DefaultTableModel tableModel) {
         table.setModel(tableModel);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         Cabecera cabecera = tableModel.getCabecera();
         // Dar el ancho a las columnas de la tabla
-        for (int i= 0; i<cabecera.getColumnSizes().size(); i++){
+        for (int i = 0; i < cabecera.getColumnSizes().size(); i++) {
             table.getColumnModel().getColumn(i).setPreferredWidth(cabecera.getColumnSizes().get(i));
         }
     }
 
-    
-    public static Long getDateDB(JDateChooser dateChooser){
+    public static Long getDateDB(JDateChooser dateChooser) {
         Date date = dateChooser.getDate();
-        if (date == null){
+        if (date == null) {
             return null;
         }
         return date.getTime();
     }
-    
+
     public static void setDateChooserValue(JDateChooser dchField, Long valor) {
-        dchField.setDate((valor == null)? null : new Date(valor));
+        dchField.setDate((valor == null) ? null : new Date(valor));
     }
-    
-    public static Double getDouble(JTextField textField){
-        if (textField == null || textField.getText().isEmpty()){
+
+    public static Double getDouble(JTextField textField) {
+        if (textField == null || textField.getText().isEmpty()) {
             return null;
         }
         String texto = textField.getText();
         return Double.parseDouble(texto);
     }
-    
-    
 }

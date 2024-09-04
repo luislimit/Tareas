@@ -59,13 +59,13 @@ public class VisorForm extends JFrame {
         btnEditar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         sepFiltrarExcel = new javax.swing.JToolBar.Separator();
+        btnFiltrar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
         btnImportar = new javax.swing.JButton();
         sepUsuario1 = new javax.swing.JToolBar.Separator();
         btnConfiguracion = new javax.swing.JButton();
         btnInformacion = new javax.swing.JButton();
         sepUsuario = new javax.swing.JToolBar.Separator();
-        btnFiltrar = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
         pnlVisor = new javax.swing.JPanel();
         sppArbol = new javax.swing.JSplitPane();
@@ -156,6 +156,18 @@ public class VisorForm extends JFrame {
         toolbar.add(btnBorrar);
         toolbar.add(sepFiltrarExcel);
 
+        btnFiltrar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/filtrar.png"))); // NOI18N
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.setToolTipText("Filtrar");
+        btnFiltrar.setFocusable(false);
+        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltrar.setMaximumSize(new java.awt.Dimension(60, 60));
+        btnFiltrar.setMinimumSize(new java.awt.Dimension(60, 60));
+        btnFiltrar.setPreferredSize(new java.awt.Dimension(60, 60));
+        btnFiltrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbar.add(btnFiltrar);
+
         btnExportar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/excel.png"))); // NOI18N
         btnExportar.setText("Exportar");
@@ -201,18 +213,6 @@ public class VisorForm extends JFrame {
         btnInformacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolbar.add(btnInformacion);
         toolbar.add(sepUsuario);
-
-        btnFiltrar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/filtrar.png"))); // NOI18N
-        btnFiltrar.setText("Filtrar");
-        btnFiltrar.setToolTipText("Filtrar");
-        btnFiltrar.setFocusable(false);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFiltrar.setMaximumSize(new java.awt.Dimension(60, 60));
-        btnFiltrar.setMinimumSize(new java.awt.Dimension(60, 60));
-        btnFiltrar.setPreferredSize(new java.awt.Dimension(60, 60));
-        btnFiltrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolbar.add(btnFiltrar);
 
         lblUsuario.setText(" LVARONA ");
         lblUsuario.setBorder(javax.swing.BorderFactory.createCompoundBorder());

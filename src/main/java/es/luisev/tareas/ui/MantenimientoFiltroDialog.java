@@ -46,8 +46,8 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         cmbCategoria = new javax.swing.JComboBox<>();
         lblSubCategoria = new javax.swing.JLabel();
         cmbSubCategoria = new javax.swing.JComboBox<>();
-        lblPeticion = new javax.swing.JLabel();
-        cmbPeticion = new javax.swing.JComboBox<>();
+        lblCriteriosPeticion = new javax.swing.JLabel();
+        cmbCriteriosPeticion = new javax.swing.JComboBox<>();
         lblEstado = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
         pnlPeticion = new javax.swing.JPanel();
@@ -108,9 +108,10 @@ public class MantenimientoFiltroDialog extends DialogoBase {
 
         cmbSubCategoria.setToolTipText("");
 
-        lblPeticion.setText("Petición");
+        lblCriteriosPeticion.setText("Condición");
 
-        cmbPeticion.setToolTipText("");
+        cmbCriteriosPeticion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Petiones con margen (Estimadas > Reales)" }));
+        cmbCriteriosPeticion.setToolTipText("");
 
         lblEstado.setText("Estado");
 
@@ -123,11 +124,11 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                 .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblSubCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                    .addComponent(lblPeticion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCriteriosPeticion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCategoriaLayout.createSequentialGroup()
-                        .addComponent(cmbPeticion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbCriteriosPeticion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,12 +149,13 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                     .addComponent(cmbSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSubCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbCriteriosPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCriteriosPeticion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -242,19 +244,17 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                                             .addComponent(txtHorasRealDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(23, 23, 23)
                                             .addComponent(txtHorasRealHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlPeticionLayout.createSequentialGroup()
-                                            .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(pnlPeticionLayout.createSequentialGroup()
-                                                    .addComponent(lblFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(dchFinPrevistoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(dchFinPrevistoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPeticionLayout.createSequentialGroup()
-                                                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(cmbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                            .addGap(0, 0, 0)))))
+                                        .addGroup(pnlPeticionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(pnlPeticionLayout.createSequentialGroup()
+                                                .addComponent(lblFinPrevisto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dchFinPrevistoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dchFinPrevistoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPeticionLayout.createSequentialGroup()
+                                                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cmbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                             .addComponent(txtAsuntoContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblInicioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblHorasPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -489,8 +489,8 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRuta;
     private javax.swing.JComboBox<Categoria> cmbCategoria;
+    private javax.swing.JComboBox<String> cmbCriteriosPeticion;
     private javax.swing.JComboBox<Estado> cmbEstado;
-    private javax.swing.JComboBox<Peticion> cmbPeticion;
     private javax.swing.JComboBox<SubCategoria> cmbSubCategoria;
     private javax.swing.JComboBox<String> cmbTipoDocumento;
     private javax.swing.JComboBox<String> cmbTipoHoras;
@@ -507,6 +507,7 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private com.toedter.calendar.JDateChooser dchInicioRealHasta;
     private javax.swing.JLabel lblAsuntoContiene;
     private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblCriteriosPeticion;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFechaImputacion;
     private javax.swing.JLabel lblFinPrevisto;
@@ -517,7 +518,6 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private javax.swing.JLabel lblInicioPrevisto;
     private javax.swing.JLabel lblInicioReal;
     private javax.swing.JLabel lblNombreContiene;
-    private javax.swing.JLabel lblPeticion;
     private javax.swing.JLabel lblPorcentaje;
     private javax.swing.JLabel lblRuta;
     private javax.swing.JLabel lblSubCategoria;
@@ -591,8 +591,8 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         return cmbCategoria;
     }
 
-    public JComboBox<Peticion> getCmbPeticion() {
-        return cmbPeticion;
+    public JComboBox<String> getCmbCriteriosPeticion() {
+        return cmbCriteriosPeticion;
     }
 
     public JComboBox<SubCategoria> getCmbSubCategoria() {

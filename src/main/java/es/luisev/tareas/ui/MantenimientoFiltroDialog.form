@@ -68,12 +68,12 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblCategoria" max="32767" attributes="0"/>
                       <Component id="lblSubCategoria" pref="89" max="32767" attributes="0"/>
-                      <Component id="lblPeticion" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblCriteriosPeticion" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="cmbPeticion" max="32767" attributes="0"/>
+                          <Component id="cmbCriteriosPeticion" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lblEstado" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -100,12 +100,14 @@
                       <Component id="lblSubCategoria" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cmbPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="lblEstado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="cmbEstado" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cmbCriteriosPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="lblCriteriosPeticion" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -146,20 +148,23 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;SubCategoria&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPeticion">
+        <Component class="javax.swing.JLabel" name="lblCriteriosPeticion">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Petici&#xf3;n"/>
+            <Property name="text" type="java.lang.String" value="Condici&#xf3;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbPeticion">
+        <Component class="javax.swing.JComboBox" name="cmbCriteriosPeticion">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Todos"/>
+                <StringItem index="1" value="Petiones con margen (Estimadas &gt; Reales)"/>
+              </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Peticion&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEstado">
@@ -237,22 +242,19 @@
                                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                               <Component id="txtHorasRealHasta" min="-2" pref="80" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="lblFinPrevisto" min="-2" pref="180" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="dchFinPrevistoDesde" min="-2" pref="98" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="dchFinPrevistoHasta" min="-2" pref="98" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="lblUsuario" min="-2" pref="180" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="cmbUsuario" max="32767" attributes="0"/>
-                                                  </Group>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lblFinPrevisto" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="dchFinPrevistoDesde" min="-2" pref="98" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="dchFinPrevistoHasta" min="-2" pref="98" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="lblUsuario" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="cmbUsuario" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>

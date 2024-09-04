@@ -8,6 +8,7 @@ package es.luisev.tareas.service;
 import es.luisev.tareas.exception.TareasApplicationException;
 import es.luisev.tareas.model.*;
 import es.luisev.tareas.utils.AppHelper;
+import es.luisev.tareas.utils.Constantes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,35 +21,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Luis-Enrique.Varona
  */
 public class ImportarService {
-
-    private static final int SHEET_PETICION = 0;
-    private static final int SHEET_IMPUTACION = 1;
-    // Columnas de la hoja de Petición
-    private static final int COL_CATEGORIA_COD = 0;
-    private static final int COL_CATEGORIA_DES = 1;
-    private static final int COL_SUBCATEGORIA_COD = 2;
-    private static final int COL_SUBCATEGORIA_DES = 3;
-    private static final int COL_PETICION_COD = 4;
-    private static final int COL_PETICION_ASUNTO = 5;
-    private static final int COL_HORA_PREVISTA = 6;
-    private static final int COL_HORA_REAL = 7;
-    private static final int COL_PORCENTAJE = 8;
-    private static final int COL_ESTADO = 9;
-    private static final int COL_DESCRIPCION = 10;
-    private static final int COL_FECHA_PREV_INICIO = 11;
-    private static final int COL_FECHA_PREV_FIN = 12;
-    private static final int COL_FECHA_REAL_INICIO = 13;
-    private static final int COL_FECHA_REAL_FIN = 14;
-    private static final int COL_INCIDENCIA = 15;
-    // Columnas de la hoja de Imputación
-    private static final int COL_IMPUTA_CATEGORIA_COD = 0;
-    private static final int COL_IMPUTA_SUBCATEGORIA_COD = 1;
-    private static final int COL_IMPUTA_PETICION_COD = 2;
-    private static final int COL_IMPUTA_FECHA = 3;
-    private static final int COL_IMPUTA_HORA = 4;
-    private static final int COL_IMPUTA_EXTRA = 5;
-    private static final int COL_IMPUTA_OBSERVACIONES = 6;
-    private static final int COL_IMPUTA_INCIDENCIA = 7;
 
     private static CategoriaService categoriaService;
     private static SubCategoriaService subCategoriaService;
@@ -86,7 +58,7 @@ public class ImportarService {
 
     private static int importPeticion(Workbook workbook) throws IOException {
         // Obtener la primera hoja del Excel
-        Sheet sheet = workbook.getSheetAt(SHEET_PETICION);
+        Sheet sheet = workbook.getSheetAt(Constantes.SHEET_PETICION);
         int cantError = 0;
 
         // Iterar sobre las filas
@@ -102,35 +74,35 @@ public class ImportarService {
                     for (Cell cell : row) {
                         // Obtener el tipo de celda y leer el valor
                         switch (cell.getColumnIndex()) {
-                            case COL_CATEGORIA_COD ->
+                            case Constantes.COL_CATEGORIA_COD ->
                                 categoria.setCodigo(cell.getStringCellValue());
-                            case COL_CATEGORIA_DES ->
+                            case Constantes.COL_CATEGORIA_DES ->
                                 categoria.setNombre(cell.getStringCellValue());
-                            case COL_SUBCATEGORIA_COD ->
+                            case Constantes.COL_SUBCATEGORIA_COD ->
                                 subCategoria.setCodigo(cell.getStringCellValue());
-                            case COL_SUBCATEGORIA_DES ->
+                            case Constantes.COL_SUBCATEGORIA_DES ->
                                 subCategoria.setNombre(cell.getStringCellValue());
-                            case COL_PETICION_COD ->
+                            case Constantes.COL_PETICION_COD ->
                                 peticion.setCodigo(cell.getStringCellValue());
-                            case COL_PETICION_ASUNTO ->
+                            case Constantes.COL_PETICION_ASUNTO ->
                                 peticion.setAsunto(cell.getStringCellValue());
-                            case COL_HORA_PREVISTA ->
+                            case Constantes.COL_HORA_PREVISTA ->
                                 peticion.setHorasPrevista(cell.getNumericCellValue());
-                            case COL_HORA_REAL ->
+                            case Constantes.COL_HORA_REAL ->
                                 peticion.setHorasReal(cell.getNumericCellValue());
-                            case COL_PORCENTAJE ->
+                            case Constantes.COL_PORCENTAJE ->
                                 peticion.setPorcentaje(cell.getNumericCellValue());
-                            case COL_ESTADO ->
+                            case Constantes.COL_ESTADO ->
                                 peticion.setEstado(getEstado(cell.getStringCellValue()));
-                            case COL_DESCRIPCION ->
+                            case Constantes.COL_DESCRIPCION ->
                                 peticion.setDescripcion(cell.getStringCellValue());
-                            case COL_FECHA_PREV_INICIO ->
+                            case Constantes.COL_FECHA_PREV_INICIO ->
                                 peticion.setFecPrevistaInicio(getDateValue(cell));
-                            case COL_FECHA_PREV_FIN ->
+                            case Constantes.COL_FECHA_PREV_FIN ->
                                 peticion.setFecPrevistaFin(getDateValue(cell));
-                            case COL_FECHA_REAL_INICIO ->
+                            case Constantes.COL_FECHA_REAL_INICIO ->
                                 peticion.setFecRealInicio(getDateValue(cell));
-                            case COL_FECHA_REAL_FIN ->
+                            case Constantes.COL_FECHA_REAL_FIN ->
                                 peticion.setFecRealFin(getDateValue(cell));
                         }
                     }
@@ -150,9 +122,9 @@ public class ImportarService {
                         peticionService.insert(peticion);
                     }
                 } catch (TareasApplicationException e) {
-                    Cell cellIncidencia = row.getCell(COL_INCIDENCIA);
+                    Cell cellIncidencia = row.getCell(Constantes.COL_INCIDENCIA);
                     if (cellIncidencia == null) {
-                        cellIncidencia = row.createCell(COL_INCIDENCIA);
+                        cellIncidencia = row.createCell(Constantes.COL_INCIDENCIA);
                     }
                     cellIncidencia.setCellValue(e.toString());
                     cantError++;
@@ -165,7 +137,7 @@ public class ImportarService {
     private static int importImputacion(Workbook workbook) throws IOException {
         ImputacionService imputacionService = AppHelper.getImputacionService();
         // Obtener la primera hoja del Excel
-        Sheet sheet = workbook.getSheetAt(SHEET_IMPUTACION);
+        Sheet sheet = workbook.getSheetAt(Constantes.SHEET_IMPUTACION);
         int cantError = 0;
 
         // Iterar sobre las filas
@@ -182,19 +154,19 @@ public class ImportarService {
                     for (Cell cell : row) {
                         // Obtener el tipo de celda y leer el valor
                         switch (cell.getColumnIndex()) {
-                            case COL_IMPUTA_CATEGORIA_COD ->
+                            case Constantes.COL_IMPUTA_CATEGORIA_COD ->
                                 categoria.setCodigo(cell.getStringCellValue());
-                            case COL_IMPUTA_SUBCATEGORIA_COD ->
+                            case Constantes.COL_IMPUTA_SUBCATEGORIA_COD ->
                                 subCategoria.setCodigo(cell.getStringCellValue());
-                            case COL_IMPUTA_PETICION_COD ->
+                            case Constantes.COL_IMPUTA_PETICION_COD ->
                                 peticion.setCodigo(cell.getStringCellValue());
-                            case COL_IMPUTA_FECHA ->
+                            case Constantes.COL_IMPUTA_FECHA ->
                                 imputacion.setFecha(getDateValue(cell));
-                            case COL_IMPUTA_HORA ->
+                            case Constantes.COL_IMPUTA_HORA ->
                                 imputacion.setHorasReal(cell.getNumericCellValue());
-                            case COL_IMPUTA_EXTRA ->
+                            case Constantes.COL_IMPUTA_EXTRA ->
                                 imputacion.setExtra(cell.getStringCellValue());
-                            case COL_IMPUTA_OBSERVACIONES ->
+                            case Constantes.COL_IMPUTA_OBSERVACIONES ->
                                 imputacion.setDescripcion(cell.getStringCellValue());
                         }
                     }
@@ -217,9 +189,9 @@ public class ImportarService {
                     imputacionService.insert(imputacion);
 
                 } catch (TareasApplicationException e) {
-                    Cell cellIncidencia = row.getCell(COL_IMPUTA_INCIDENCIA);
+                    Cell cellIncidencia = row.getCell(Constantes.COL_IMPUTA_INCIDENCIA);
                     if (cellIncidencia == null) {
-                        cellIncidencia = row.createCell(COL_IMPUTA_INCIDENCIA);
+                        cellIncidencia = row.createCell(Constantes.COL_IMPUTA_INCIDENCIA);
                     }
                     cellIncidencia.setCellValue(e.toString());
                     cantError++;

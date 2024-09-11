@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import es.luisev.tareas.repository.SubCategoriaRepository;
+import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
@@ -39,8 +40,7 @@ public class SubCategoriaService {
 
     public SubCategoria insert(SubCategoria subCategoria) throws TareasApplicationException {
         validate(subCategoria);
-        Date ahora = new Date();
-        subCategoria.setFecAlta(ahora.getTime());
+        subCategoria.setFecAlta(AppHelper.getFechaAltaBd());
         return repository.save(subCategoria);
     }
 

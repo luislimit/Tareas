@@ -7,7 +7,6 @@ package es.luisev.tareas.model;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,7 +33,7 @@ public class Categoria extends DBEntity{
     private String codigo;
         
     @Column(name = "fec_alta")
-    private Long fecAlta;    
+    private String fecAlta;    
     
     @Override
     public String toString(){

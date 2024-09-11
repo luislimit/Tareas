@@ -38,7 +38,7 @@ public class SubCategoria extends DBEntity{
     private String nombre;
 
     @Column(name = "fec_alta")
-    private Long fecAlta;    
+    private String fecAlta;    
     
     @Override
     public String toString(){

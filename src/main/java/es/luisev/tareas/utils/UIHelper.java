@@ -14,6 +14,8 @@ import es.luisev.tareas.ui.table.model.DefaultTableModel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -86,7 +88,7 @@ public class UIHelper {
         }
         // Recorrer el array usando sus índices
         for (int i = 0; i < params.length; i++) {
-            String id = ":" + String.valueOf(i+1);
+            String id = ":" + String.valueOf(i + 1);
             texto = texto.replace(id, params[i]);
         }
         return texto;
@@ -149,16 +151,13 @@ public class UIHelper {
         }
     }
 
-    public static Long getDateDB(JDateChooser dateChooser) {
+    public static String getDateDB(JDateChooser dateChooser) {
         Date date = dateChooser.getDate();
-        if (date == null) {
-            return null;
-        }
-        return date.getTime();
+        return AppHelper.fromDateToFechaDb(date);
     }
 
-    public static void setDateChooserValue(JDateChooser dchField, Long valor) {
-        dchField.setDate((valor == null) ? null : new Date(valor));
+    public static void setDateChooserValue(JDateChooser dchField, String valor) throws TareasApplicationException {
+        dchField.setDate((valor == null) ? null : AppHelper.fromFechaDbToDate(valor));
     }
 
     public static Double getDouble(JTextField textField) {

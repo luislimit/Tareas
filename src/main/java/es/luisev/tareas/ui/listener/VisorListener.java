@@ -407,22 +407,22 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
     }
 
     private void actualizaResumenImputacion(List<Imputacion> imputaciones) {
-        Long fechaMin = null;
-        Long fechaMax = null;
+        String fechaMin = null;
+        String fechaMax = null;
         Double totalHorasNormales = 0.0;
         Double totalHorasExtra = 0.0;
         Double totalHoras;
         if (imputaciones != null) {
             for (Imputacion imputacion : imputaciones) {
-                Long fecha = imputacion.getFecha();
+                String fecha = imputacion.getFecha();
                 if (fechaMin == null) {
                     fechaMin = fecha;
                     fechaMax = fecha;
                 } else {
-                    if (fecha != null && fecha < fechaMin) {
+                    if (fecha != null && fecha.compareTo(fechaMin) < 0) {
                         fechaMin = fecha;
                     }
-                    if (fecha != null && fecha > fechaMax) {
+                    if (fecha != null && fecha.compareTo(fechaMin) > 0) {
                         fechaMax = fecha;
                     }
                 }

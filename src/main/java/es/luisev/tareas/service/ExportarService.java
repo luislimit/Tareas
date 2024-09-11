@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -148,10 +148,10 @@ public class ExportarService {
         }
     }
 
-    private static void setCellDate(Row row, int col, Long valor) {
+    private static void setCellDate(Row row, int col, String valor) throws TareasApplicationException  {
         Cell cell = row.createCell(col);
         if (valor != null) {
-            cell.setCellValue(new Date(valor));
+            cell.setCellValue(AppHelper.fromFechaDbToDate(valor));
         }
     }
 

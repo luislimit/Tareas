@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import es.luisev.tareas.repository.PeticionRepository;
+import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
@@ -86,7 +87,7 @@ public class PeticionService extends BaseService {
     public Peticion insert(Peticion peticion) throws TareasApplicationException {
         validate(peticion);
         Date ahora = new Date();
-        peticion.setFecAlta(ahora.getTime());
+        peticion.setFecAlta(AppHelper.getFechaAltaBd());
         return repository.save(peticion);
     }
 

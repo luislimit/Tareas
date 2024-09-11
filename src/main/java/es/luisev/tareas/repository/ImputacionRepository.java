@@ -27,8 +27,8 @@ public interface ImputacionRepository extends JpaRepository<Imputacion, Long> {
     @Query(Constantes.QUERY_IMPUTACION)
     List<Imputacion> findByCriteria(
             @Param("peticiones") List<Peticion> peticion,
-            @Param("imputacionDesde") Long imputacionDesde,
-            @Param("imputacionHasta") Long imputacionHasta,
+            @Param("imputacionDesde") String imputacionDesde,
+            @Param("imputacionHasta") String imputacionHasta,
             @Param("horasImputadasDesde") Double horasImputadasDesde,
             @Param("horasImputadasHasta") Double horasImputadasHasta,
             @Param("extra") String extra

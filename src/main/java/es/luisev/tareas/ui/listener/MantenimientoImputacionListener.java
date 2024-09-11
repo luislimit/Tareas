@@ -23,6 +23,8 @@ import es.luisev.tareas.ui.combobox.model.CmbUsuarioModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -41,34 +43,38 @@ public final class MantenimientoImputacionListener extends ListenerBase {
 
     @Override
     public void evtLimpiar() {
-        Imputacion paramImputacion = (Imputacion) pantalla.getParamObject();
-        Categoria categoria = null;
-        SubCategoria subCategoria = null;
-        Peticion peticion = null;
-        String descripcion = null;
-        Long fecha = (new Date()).getTime(); //Fecha actual por defecto
-        String horas = null;
-        String extra = "N";
-        
-        if (paramImputacion != null) {
-            if (paramImputacion.getPeticion() != null) {
-                categoria = paramImputacion.getPeticion().getCategoria();
-                subCategoria = paramImputacion.getPeticion().getSubCategoria();
-                peticion = paramImputacion.getPeticion();
+        try {
+            Imputacion paramImputacion = (Imputacion) pantalla.getParamObject();
+            Categoria categoria = null;
+            SubCategoria subCategoria = null;
+            Peticion peticion = null;
+            String descripcion = null;
+            String fecha = AppHelper.getFechaAltaBd(); //Fecha actual por defecto
+            String horas = null;
+            String extra = "N";
+            
+            if (paramImputacion != null) {
+                if (paramImputacion.getPeticion() != null) {
+                    categoria = paramImputacion.getPeticion().getCategoria();
+                    subCategoria = paramImputacion.getPeticion().getSubCategoria();
+                    peticion = paramImputacion.getPeticion();
+                }
+                descripcion= paramImputacion.getDescripcion();
+                fecha = paramImputacion.getFecha()!=null?paramImputacion.getFecha():fecha;
+                horas = paramImputacion.getHorasReal()!=null?paramImputacion.getHorasReal().toString():null;
+                extra = paramImputacion.getExtra()!=null?paramImputacion.getExtra():extra;
             }
-            descripcion= paramImputacion.getDescripcion();
-            fecha = paramImputacion.getFecha()!=null?paramImputacion.getFecha():fecha;
-            horas = paramImputacion.getHorasReal()!=null?paramImputacion.getHorasReal().toString():null;
-            extra = paramImputacion.getExtra()!=null?paramImputacion.getExtra():extra;
+            pantalla.getCmbCategoria().setSelectedItem(categoria);
+            pantalla.getCmbSubCategoria().setSelectedItem(subCategoria);
+            pantalla.getCmbPeticion().setSelectedItem(peticion);
+            pantalla.getTxtDescripcion().setText(descripcion);
+            pantalla.getDchFecha().setDate(AppHelper.fromFechaDbToDate(fecha));
+            pantalla.getTxtHoras().setText(horas);
+            pantalla.getTxtHoras().requestFocus();
+            pantalla.getChkExtra().setSelected(extra.equals("S"));
+        } catch (TareasApplicationException ex) {
+            Logger.getLogger(MantenimientoImputacionListener.class.getName()).log(Level.SEVERE, null, ex);
         }
-        pantalla.getCmbCategoria().setSelectedItem(categoria);
-        pantalla.getCmbSubCategoria().setSelectedItem(subCategoria);
-        pantalla.getCmbPeticion().setSelectedItem(peticion);
-        pantalla.getTxtDescripcion().setText(descripcion);
-        pantalla.getDchFecha().setDate(new Date(fecha));
-        pantalla.getTxtHoras().setText(horas);
-        pantalla.getTxtHoras().requestFocus();
-        pantalla.getChkExtra().setSelected(extra.equals("S"));
     }
 
     @Override
@@ -81,13 +87,13 @@ public final class MantenimientoImputacionListener extends ListenerBase {
         ImputacionService service = AppHelper.getImputacionService();
         try {
             String descripcion = pantalla.getTxtDescripcion().getText();
-            Long fecha = UIHelper.getDateDB(pantalla.getDchFecha());
+            String fecha = UIHelper.getDateDB(pantalla.getDchFecha());
             Double horas = UIHelper.getDouble(pantalla.getTxtHoras());
             Long id = paramImputacion == null ? null : paramImputacion.getId();
             Peticion peticion = (Peticion) pantalla.getCmbPeticion().getSelectedItem();
             Usuario usuario = (Usuario) pantalla.getCmbUsuario().getSelectedItem();
             Estado estado = (peticion == null) ? null : peticion.getEstado();
-            Long fecAlta = paramImputacion == null ? null : paramImputacion.getFecAlta();
+            String fecAlta = paramImputacion == null ? null : paramImputacion.getFecAlta();
             String extra = pantalla.getChkExtra().isSelected()?"S":"N";
 
             Imputacion p = Imputacion.builder().

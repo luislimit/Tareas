@@ -201,10 +201,10 @@ public class ImportarService {
         return cantError;
     }
 
-    private static Long getDateValue(Cell cell) {
+    private static String getDateValue(Cell cell) {
         if (DateUtil.isCellDateFormatted(cell)) {
             System.out.print("Fecha " + cell.getDateCellValue() + "\t");
-            return cell.getDateCellValue().getTime();
+            return AppHelper.fromDateToFechaDb(cell.getDateCellValue());
         }
         return null;
     }

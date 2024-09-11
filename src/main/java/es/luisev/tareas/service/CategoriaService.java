@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import es.luisev.tareas.repository.CategoriaRepository;
+import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class CategoriaService {
     public Categoria insert(Categoria categoria) throws TareasApplicationException {
         validate(categoria);
         Date ahora = new Date();
-        categoria.setFecAlta(ahora.getTime());
+        categoria.setFecAlta(AppHelper.getFechaAltaBd());
         return repository.save(categoria);
     }
 

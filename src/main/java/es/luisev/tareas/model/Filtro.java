@@ -25,15 +25,15 @@ public class Filtro {
     Estado estado;
     //
     String asuntoContiene;
-    Long inicioPrevistoDesde;
-    Long inicioPrevistoHasta;
-    Long inicioRealDesde;
-    Long inicioRealHasta;
+    String inicioPrevistoDesde;
+    String inicioPrevistoHasta;
+    String inicioRealDesde;
+    String inicioRealHasta;
     
-    Long finPrevistoDesde;
-    Long finPrevistoHasta;
-    Long finRealDesde;
-    Long finRealHasta;    
+    String finPrevistoDesde;
+    String finPrevistoHasta;
+    String finRealDesde;
+    String finRealHasta;    
     
     Double horasPrevistaDesde;
     Double horasPrevistaHasta;
@@ -44,8 +44,8 @@ public class Filtro {
     Double porcentajeHasta;
     Usuario usuario;
     //
-    Long imputacionDesde;
-    Long imputacionHasta;
+    String imputacionDesde;
+    String imputacionHasta;
     Double horasImputadasDesde;
     Double horasImputadasHasta;
     int tipoHoras;

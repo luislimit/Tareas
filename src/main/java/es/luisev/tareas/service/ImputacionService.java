@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import es.luisev.tareas.repository.ImputacionRepository;
+import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
 import java.util.Date;
@@ -62,8 +63,7 @@ public class ImputacionService extends BaseService {
 
     public Imputacion insert(Imputacion imputacion) throws TareasApplicationException {
         validate(imputacion);
-        Date ahora = new Date();
-        imputacion.setFecAlta(ahora.getTime());
+        imputacion.setFecAlta(AppHelper.getFechaAltaBd());
         if (imputacion.getEstado() == null) {
             imputacion.setEstado(imputacion.getPeticion().getEstado());
         }
@@ -92,6 +92,7 @@ public class ImputacionService extends BaseService {
     }
 
     private void validate(Imputacion imputacion) throws TareasApplicationException {
+        
         if (imputacion.getFecha() == null) {
             TareasApplicationException.raise(UIHelper.getLiteral("error.imputacion.fecha.vacio"));
         }

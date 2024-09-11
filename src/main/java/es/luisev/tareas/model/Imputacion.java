@@ -47,9 +47,9 @@ public class Imputacion extends DBEntity{
     Estado estadoPrevio;    
     
     @Column(name = "fec_alta")
-    private Long fecAlta;
+    private String fecAlta;
 
-    private Long fecha;
+    private String fecha;
 
     @Column(name = "horas_real")
     private Double horasReal;

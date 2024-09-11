@@ -15,10 +15,9 @@ import es.luisev.tareas.service.PeticionService;
 import es.luisev.tareas.service.SubCategoriaService;
 import es.luisev.tareas.service.TipoDocumentoService;
 import es.luisev.tareas.service.UsuarioService;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -66,15 +65,47 @@ public class AppHelper {
         return (DocumentoService) getBean(Constantes.SERVICIO_DOCUMENTO);
     }
 
-    public static String dateBdToString(Long fechaBd) {
-        if (fechaBd == null) {
+    /**
+     * Recibe una cadena en formato YYYYMMDD, retorna DD/MM/YYYY
+     *
+     * @param strFecha
+     * @return
+     */
+    public static String dateBdToString(String strFecha) {
+        if (strFecha == null) {
             return null;
         }
-        Date date = new Date(fechaBd);
-        // Crear un formateador de fecha
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        // Convertir la fecha a una cadena con el formato deseado
+        // Extraer partes de la fecha usando substring
+        String dia = strFecha.substring(6, 8);  // DD
+        String mes = strFecha.substring(4, 6);  // MM
+        String año = strFecha.substring(0, 4);  // YYYY
+
+        // Formatear la fecha en DD/MM/YYYY
+        return dia + "/" + mes + "/" + año;
+    }
+
+    public static String fromDateToFechaDb(Date date) {
+        if (date == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         return sdf.format(date);
+    }
+
+    public static String getFechaAltaBd() {
+        return fromDateToFechaDb(new Date());
+    }
+
+    public static Date fromFechaDbToDate(String dateDb) throws TareasApplicationException {
+        if (dateDb == null) {
+            return null;
+        }
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            return sdf.parse(dateDb);
+        } catch (ParseException e) {
+            throw new TareasApplicationException(e.getMessage());
+        }
     }
 
     public static Usuario getDefaultUser() {

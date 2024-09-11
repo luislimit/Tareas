@@ -46,7 +46,7 @@ public final class MantenimientoCategoriaListener extends ListenerBase {
         try {
             String codigo = pantalla.getTxtCodigo().getText();
             String nombre = pantalla.getTxtNombre().getText();
-            Long fecAlta = paramCategoria == null? null: paramCategoria.getFecAlta();
+            String fecAlta = paramCategoria == null? null: paramCategoria.getFecAlta();
             Long id = paramCategoria == null? null: paramCategoria.getId();
             
             Categoria p = Categoria.builder().

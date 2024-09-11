@@ -41,19 +41,19 @@ public class Peticion extends DBEntity{
     private Usuario usuario;
     
     @Column(name = "fec_alta")
-    private Long fecAlta;
+    private String fecAlta;
 
     @Column(name = "fec_prevista_inicio")
-    private Long fecPrevistaInicio;
+    private String fecPrevistaInicio;
 
     @Column(name = "fec_prevista_fin")
-    private Long fecPrevistaFin;
+    private String fecPrevistaFin;
 
     @Column(name = "fec_real_inicio")
-    private Long fecRealInicio;
+    private String fecRealInicio;
 
     @Column(name = "fec_real_fin")
-    private Long fecRealFin;
+    private String fecRealFin;
 
     @Column(name = "horas_prevista")
     private Double horasPrevista;

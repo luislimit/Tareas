@@ -29,6 +29,7 @@ es\luisev\tareas\ui\listener\MantenimientoCategoriaListener.class
 es\luisev\tareas\ui\listener\RangoFechaFocusListener.class
 es\luisev\tareas\connection\config\DataSourceConfig.class
 es\luisev\tareas\model\Usuario$UsuarioBuilder.class
+es\luisev\tareas\utils\UIHelper.class
 es\luisev\tareas\service\UsuarioService.class
 es\luisev\tareas\ui\combobox\model\CmbCategoriaModel.class
 es\luisev\tareas\ui\MantenimientoPeticionDialog.class

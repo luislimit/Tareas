@@ -3,6 +3,7 @@ es\luisev\tareas\model\SubCategoria.class
 es\luisev\tareas\ui\table\model\DefaultTableModel.class
 es\luisev\tareas\ui\table\cabecera\PeticionTableCabecera.class
 es\luisev\tareas\service\PeticionService.class
+es\luisev\tareas\ui\ExportImportDialog.class
 es\luisev\tareas\model\Categoria.class
 es\luisev\tareas\utils\AppHelper.class
 es\luisev\tareas\model\Categoria$CategoriaBuilderImpl.class
@@ -32,6 +33,7 @@ es\luisev\tareas\model\Usuario$UsuarioBuilder.class
 es\luisev\tareas\utils\UIHelper.class
 es\luisev\tareas\service\UsuarioService.class
 es\luisev\tareas\ui\combobox\model\CmbCategoriaModel.class
+es\luisev\tareas\ui\listener\ExportImportListener.class
 es\luisev\tareas\ui\MantenimientoPeticionDialog.class
 es\luisev\tareas\model\Peticion$PeticionBuilder.class
 es\luisev\tareas\connection\dialect\SQLiteDialect.class
@@ -71,8 +73,8 @@ es\luisev\tareas\model\Estado.class
 es\luisev\tareas\ui\MantenimientoCategoriaDialog.class
 es\luisev\tareas\ui\listener\MantenimientoFiltroListener.class
 es\luisev\tareas\connection\dialect\SQLiteDialect$SQLiteUniqueDelegate.class
+es\luisev\tareas\ui\combobox\listener\CmbTipoExpImpListener.class
 es\luisev\tareas\model\Peticion.class
-es\luisev\tareas\service\BaseService.class
 es\luisev\tareas\ui\listener\ListenerBase.class
 es\luisev\tareas\model\Documento.class
 es\luisev\tareas\ui\MantenimientoFiltroDialog.class

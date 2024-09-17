@@ -14,8 +14,6 @@ import es.luisev.tareas.ui.table.model.DefaultTableModel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Level;

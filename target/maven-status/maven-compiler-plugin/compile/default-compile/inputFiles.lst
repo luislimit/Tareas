@@ -19,7 +19,6 @@ C:\Projects\Tareas\src\main\java\es\luisev\tareas\repository\PeticionRepository.
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\repository\SubCategoriaRepository.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\repository\TipoDocumentoRepository.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\repository\UsuarioRepository.java
-C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\BaseService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\CategoriaService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\DocumentoService.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\service\EstadoService.java
@@ -34,6 +33,7 @@ C:\Projects\Tareas\src\main\java\es\luisev\tareas\TareasApplication.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbCategoriaListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbPeriodoFechaListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbSubCategoriaListener.java
+C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\listener\CmbTipoExpImpListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbCategoriaModel.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbCriteriosPeticionModel.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbEstadoModel.java
@@ -42,6 +42,8 @@ C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbPeticionM
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbSubCategoriaModel.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\combobox\model\CmbUsuarioModel.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\DialogoBase.java
+C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\ExportImportDialog.java
+C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\listener\ExportImportListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\listener\ListenerBase.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\listener\MantenimientoCategoriaListener.java
 C:\Projects\Tareas\src\main\java\es\luisev\tareas\ui\listener\MantenimientoFiltroListener.java

@@ -21,8 +21,8 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface ImputacionRepository extends JpaRepository<Imputacion, Long> {
     
-    @Query("SELECT p FROM Imputacion p WHERE p.peticion IN :peticiones")
-    List<Imputacion> findByPeticiones(@Param("peticiones") List<Peticion> peticion);     
+    @Query("SELECT p FROM Imputacion p WHERE p.peticion.id = :idPeticion")
+    List<Imputacion> findByIdPeticion(@Param("idPeticion") Long idPeticion);     
     
     @Query(Constantes.QUERY_IMPUTACION)
     List<Imputacion> findByCriteria(

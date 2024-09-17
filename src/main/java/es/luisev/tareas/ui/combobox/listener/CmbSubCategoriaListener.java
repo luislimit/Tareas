@@ -36,11 +36,12 @@ public class CmbSubCategoriaListener implements ItemListener {
             Long idSubCategoria = subCategoria.getId();
             peticiones = AppHelper.getPeticionService().findByCategoriaSubCategoria(idCategoria, idSubCategoria);
         }
-        cmbPeticion.setModel(new CmbPeticionModel(peticiones));
-        if (peticiones != null && peticiones.size() == 1) {
+        CmbPeticionModel model = new CmbPeticionModel(peticiones);
+        cmbPeticion.setModel(model);
+       /* if (peticiones != null && peticiones.size() == 1) {
             cmbPeticion.setSelectedIndex(1);
         } else{
             cmbPeticion.setSelectedIndex(-1);
-        }
+        }*/
     }
 }

@@ -18,20 +18,23 @@ import es.luisev.tareas.repository.ImputacionRepository;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
-import java.util.Date;
 
 /**
  *
  * @author Luis-Enrique.Varona
  */
 @Service(Constantes.SERVICIO_IMPUTACION)
-public class ImputacionService extends BaseService {
+public class ImputacionService {
 
     @Autowired
     private ImputacionRepository repository;
 
     public List<Imputacion> findAll() {
         return repository.findAll();
+    }
+    
+    List<Imputacion> findByIdPeticion(Long idPeticion){
+        return repository.findByIdPeticion(idPeticion);
     }
 
     public List<Imputacion> findByCriteria(List<Peticion> peticiones, Filtro criterio) {

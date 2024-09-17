@@ -18,14 +18,13 @@ import es.luisev.tareas.repository.PeticionRepository;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
-import java.util.Date;
 
 /**
  *
  * @author Luis-Enrique.Varona
  */
 @Service(Constantes.SERVICIO_PETICION)
-public class PeticionService extends BaseService {
+public class PeticionService {
 
     @Autowired
     private PeticionRepository repository;
@@ -83,10 +82,18 @@ public class PeticionService extends BaseService {
                 filtro.getTipoListado() // Tipo de listado
                 ); 
     }
+    
+    /**
+     * Retorna la suma de las horas imputadas al peticion
+     * @param id
+     * @return 
+     */
+    public Double sumHorasImputadas(Long id){
+        return repository.sumHorasImputadas(id);
+    }
 
     public Peticion insert(Peticion peticion) throws TareasApplicationException {
         validate(peticion);
-        Date ahora = new Date();
         peticion.setFecAlta(AppHelper.getFechaAltaBd());
         return repository.save(peticion);
     }
@@ -95,11 +102,11 @@ public class PeticionService extends BaseService {
         return repository.findById(id);
     }
 
-    public Peticion findByCodigo(Peticion peticion) {
-        if (peticion == null) {
+    public Peticion findByCodigo(String codigo) {
+        if (codigo == null) {
             return null;
         }
-        List<Peticion> peticiones = repository.findByCodigo(peticion.getCodigo());
+        List<Peticion> peticiones = repository.findByCodigo(codigo);
         if (peticiones != null && peticiones.size() > 0) {
             return peticiones.get(0);
         }
@@ -121,7 +128,7 @@ public class PeticionService extends BaseService {
         if (peticion.getSubCategoria() == null) {
             TareasApplicationException.raise(UIHelper.getLiteral("error.subcategoria.vacio"));
         }
-        Peticion peticionDB = findByCodigo(peticion);
+        Peticion peticionDB = findByCodigo(peticion.getCodigo());
         if (peticionDB != null && (peticion.getId() == null || !peticionDB.getId().equals(peticion.getId()))) {
             TareasApplicationException.raise(UIHelper.getLiteral("error.peticion.codigo.duplicado"));
         }

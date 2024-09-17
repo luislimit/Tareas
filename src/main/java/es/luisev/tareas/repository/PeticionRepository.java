@@ -24,7 +24,10 @@ public interface PeticionRepository extends JpaRepository<Peticion, Long> {
     List<Peticion> findByCategoriaSubCategoria(@Param("idCategoria") Long idCategoria, @Param("idSubCategoria") Long idSubCategoria);  
     
     @Query("SELECT p FROM Peticion p WHERE p.codigo = :codigo")
-    List<Peticion> findByCodigo(@Param("codigo") String codigo);  
+    List<Peticion> findByCodigo(@Param("codigo") String codigo); 
+    
+    @Query("SELECT SUM(p.horasReal) total FROM Imputacion p WHERE p.peticion.id = :id")
+    Double sumHorasImputadas(@Param("id") Long id); 
     
     @Query(Constantes.QUERY_PETICION)
     List<Peticion> findByCriteria(

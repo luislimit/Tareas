@@ -5,6 +5,7 @@
  */
 package es.luisev.tareas.ui.listener;
 
+import es.luisev.tareas.exception.TareasApplicationException;
 import es.luisev.tareas.model.*;
 import es.luisev.tareas.ui.combobox.model.*;
 import es.luisev.tareas.ui.DialogoBase;
@@ -131,40 +132,44 @@ public class MantenimientoFiltroListener extends ListenerBase {
         if (filtro == null) {
             evtLimpiar();
         } else {
-            setComboBoxItem(cmbCategoria, filtro.getCategoria());
-            setComboBoxItem(cmbSubCategoria, filtro.getSubCategoria());
-            cmbCriterio.setSelectedIndex(filtro.getTipoListado());
-            pantalla.getCmbEstado().setSelectedItem(filtro.getEstado());
-            //
-            pantalla.getTxtAsuntoContiene().setText(filtro.getAsuntoContiene());
-            UIHelper.setDateChooserValue(pantalla.getDchInicioPrevistoDesde(), filtro.getInicioPrevistoDesde());
-            UIHelper.setDateChooserValue(pantalla.getDchInicioPrevistoHasta(), filtro.getInicioPrevistoHasta());
-            UIHelper.setDateChooserValue(pantalla.getDchFinPrevistoDesde(), filtro.getFinPrevistoDesde());
-            UIHelper.setDateChooserValue(pantalla.getDchFinPrevistoHasta(), filtro.getFinPrevistoHasta());
-
-            UIHelper.setDateChooserValue(pantalla.getDchInicioRealDesde(), filtro.getInicioRealDesde());
-            UIHelper.setDateChooserValue(pantalla.getDchInicioRealHasta(), filtro.getInicioRealHasta());
-            UIHelper.setDateChooserValue(pantalla.getDchFinRealDesde(), filtro.getFinRealDesde());
-            UIHelper.setDateChooserValue(pantalla.getDchFinRealHasta(), filtro.getFinRealHasta());
-
-            setTextDouble(pantalla.getTxtHorasPrevistaDesde(), filtro.getHorasPrevistaDesde());
-            setTextDouble(pantalla.getTxtHorasPrevistaHasta(), filtro.getHorasPrevistaHasta());
-            setTextDouble(pantalla.getTxtHorasRealesDesde(), filtro.getHorasRealesDesde());
-            setTextDouble(pantalla.getTxtHorasRealesHasta(), filtro.getHorasRealesHasta());
-            
-            setTextDouble(pantalla.getTxtPorcentajeDesde(), filtro.getPorcentajeDesde());
-            setTextDouble(pantalla.getTxtPorcentajeHasta(), filtro.getPorcentajeHasta());
-            setComboBoxItem(pantalla.getCmbUsuario(), filtro.getUsuario());
-            //
-            UIHelper.setDateChooserValue(pantalla.getDchImputacionDesde(), filtro.getImputacionDesde());
-            UIHelper.setDateChooserValue(pantalla.getDchImputacionHasta(), filtro.getImputacionHasta());
-            setTextDouble(pantalla.getTxtHorasImputadasDesde(), filtro.getHorasImputadasDesde());
-            setTextDouble(pantalla.getTxtHorasImputadasHasta(), filtro.getHorasImputadasHasta());
-            pantalla.getCmbTipoHoras().setSelectedIndex(filtro.getTipoHoras());
-            //
-            setComboBoxItem(pantalla.getCmbTipoDocumento(), filtro.getTipoDocumento());
-            pantalla.getTxtNombreContiene().setText(filtro.getNombreContiene());
-            pantalla.getTxtRuta().setText(filtro.getRuta());
+            try {
+                setComboBoxItem(cmbCategoria, filtro.getCategoria());
+                setComboBoxItem(cmbSubCategoria, filtro.getSubCategoria());
+                cmbCriterio.setSelectedIndex(filtro.getTipoListado());
+                pantalla.getCmbEstado().setSelectedItem(filtro.getEstado());
+                //
+                pantalla.getTxtAsuntoContiene().setText(filtro.getAsuntoContiene());
+                UIHelper.setDateChooserValue(pantalla.getDchInicioPrevistoDesde(), filtro.getInicioPrevistoDesde());
+                UIHelper.setDateChooserValue(pantalla.getDchInicioPrevistoHasta(), filtro.getInicioPrevistoHasta());
+                UIHelper.setDateChooserValue(pantalla.getDchFinPrevistoDesde(), filtro.getFinPrevistoDesde());
+                UIHelper.setDateChooserValue(pantalla.getDchFinPrevistoHasta(), filtro.getFinPrevistoHasta());
+                
+                UIHelper.setDateChooserValue(pantalla.getDchInicioRealDesde(), filtro.getInicioRealDesde());
+                UIHelper.setDateChooserValue(pantalla.getDchInicioRealHasta(), filtro.getInicioRealHasta());
+                UIHelper.setDateChooserValue(pantalla.getDchFinRealDesde(), filtro.getFinRealDesde());
+                UIHelper.setDateChooserValue(pantalla.getDchFinRealHasta(), filtro.getFinRealHasta());
+                
+                setTextDouble(pantalla.getTxtHorasPrevistaDesde(), filtro.getHorasPrevistaDesde());
+                setTextDouble(pantalla.getTxtHorasPrevistaHasta(), filtro.getHorasPrevistaHasta());
+                setTextDouble(pantalla.getTxtHorasRealesDesde(), filtro.getHorasRealesDesde());
+                setTextDouble(pantalla.getTxtHorasRealesHasta(), filtro.getHorasRealesHasta());
+                
+                setTextDouble(pantalla.getTxtPorcentajeDesde(), filtro.getPorcentajeDesde());
+                setTextDouble(pantalla.getTxtPorcentajeHasta(), filtro.getPorcentajeHasta());
+                setComboBoxItem(pantalla.getCmbUsuario(), filtro.getUsuario());
+                //
+                UIHelper.setDateChooserValue(pantalla.getDchImputacionDesde(), filtro.getImputacionDesde());
+                UIHelper.setDateChooserValue(pantalla.getDchImputacionHasta(), filtro.getImputacionHasta());
+                setTextDouble(pantalla.getTxtHorasImputadasDesde(), filtro.getHorasImputadasDesde());
+                setTextDouble(pantalla.getTxtHorasImputadasHasta(), filtro.getHorasImputadasHasta());
+                pantalla.getCmbTipoHoras().setSelectedIndex(filtro.getTipoHoras());
+                //
+                setComboBoxItem(pantalla.getCmbTipoDocumento(), filtro.getTipoDocumento());
+                pantalla.getTxtNombreContiene().setText(filtro.getNombreContiene());
+                pantalla.getTxtRuta().setText(filtro.getRuta());
+            } catch (TareasApplicationException ex) {
+                UIHelper.showErrors(dialogo, ex);
+            }
         }
     }
 

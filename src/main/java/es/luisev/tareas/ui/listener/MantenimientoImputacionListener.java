@@ -13,6 +13,7 @@ import es.luisev.tareas.model.Peticion;
 import es.luisev.tareas.model.SubCategoria;
 import es.luisev.tareas.model.Usuario;
 import es.luisev.tareas.service.ImputacionService;
+import es.luisev.tareas.service.PeticionService;
 import es.luisev.tareas.ui.DialogoBase;
 import es.luisev.tareas.ui.MantenimientoImputacionDialog;
 import es.luisev.tareas.ui.combobox.listener.CmbCategoriaListener;
@@ -22,7 +23,6 @@ import es.luisev.tareas.ui.combobox.model.CmbSubCategoriaModel;
 import es.luisev.tareas.ui.combobox.model.CmbUsuarioModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -52,21 +52,22 @@ public final class MantenimientoImputacionListener extends ListenerBase {
             String fecha = AppHelper.getFechaAltaBd(); //Fecha actual por defecto
             String horas = null;
             String extra = "N";
-            
+
             if (paramImputacion != null) {
                 if (paramImputacion.getPeticion() != null) {
                     categoria = paramImputacion.getPeticion().getCategoria();
                     subCategoria = paramImputacion.getPeticion().getSubCategoria();
                     peticion = paramImputacion.getPeticion();
                 }
-                descripcion= paramImputacion.getDescripcion();
-                fecha = paramImputacion.getFecha()!=null?paramImputacion.getFecha():fecha;
-                horas = paramImputacion.getHorasReal()!=null?paramImputacion.getHorasReal().toString():null;
-                extra = paramImputacion.getExtra()!=null?paramImputacion.getExtra():extra;
+                descripcion = paramImputacion.getDescripcion();
+                fecha = paramImputacion.getFecha() != null ? paramImputacion.getFecha() : fecha;
+                horas = paramImputacion.getHorasReal() != null ? paramImputacion.getHorasReal().toString() : null;
+                extra = paramImputacion.getExtra() != null ? paramImputacion.getExtra() : extra;
             }
             pantalla.getCmbCategoria().setSelectedItem(categoria);
             pantalla.getCmbSubCategoria().setSelectedItem(subCategoria);
             pantalla.getCmbPeticion().setSelectedItem(peticion);
+            
             pantalla.getTxtDescripcion().setText(descripcion);
             pantalla.getDchFecha().setDate(AppHelper.fromFechaDbToDate(fecha));
             pantalla.getTxtHoras().setText(horas);
@@ -84,7 +85,7 @@ public final class MantenimientoImputacionListener extends ListenerBase {
         if (!UIHelper.confirmAction(pantalla, UIHelper.getLiteral("confirmacion.guardar"))) {
             return false;
         }
-        ImputacionService service = AppHelper.getImputacionService();
+        ImputacionService imputacionService = AppHelper.getImputacionService();
         try {
             String descripcion = pantalla.getTxtDescripcion().getText();
             String fecha = UIHelper.getDateDB(pantalla.getDchFecha());
@@ -94,8 +95,8 @@ public final class MantenimientoImputacionListener extends ListenerBase {
             Usuario usuario = (Usuario) pantalla.getCmbUsuario().getSelectedItem();
             Estado estado = (peticion == null) ? null : peticion.getEstado();
             String fecAlta = paramImputacion == null ? null : paramImputacion.getFecAlta();
-            String extra = pantalla.getChkExtra().isSelected()?"S":"N";
-
+            String extra = pantalla.getChkExtra().isSelected() ? "S" : "N";
+            
             Imputacion p = Imputacion.builder().
                     id(id).
                     peticion(peticion).
@@ -110,9 +111,23 @@ public final class MantenimientoImputacionListener extends ListenerBase {
                     build();
 
             if (id == null) {
-                service.insert(p);
+                imputacionService.insert(p);
             } else {
-                service.update(p);
+                imputacionService.update(p);
+            }
+            //Calculamos las horas imputadas y las comparamos con las de la peticion
+            PeticionService peticionService = AppHelper.getPeticionService();
+            Double horasImputadas = peticionService.sumHorasImputadas(peticion.getId());
+            // Si las horas exceden las indicadas, actualizamos el valor de horas con el calculado
+            if (horasImputadas > peticion.getHorasReal()){
+                Double horasPrev = peticion.getHorasPrevista();
+                Double porcentaje = (horasPrev ==null || horasPrev ==0)? 0: horasImputadas/horasPrev;
+                if (porcentaje > 100){
+                    porcentaje = 100.0;
+                }
+                peticion.setPorcentaje(porcentaje);
+                peticion.setHorasReal(horasImputadas);
+                peticionService.update(peticion);
             }
             pantalla.setReturnObject(p);
             return true;

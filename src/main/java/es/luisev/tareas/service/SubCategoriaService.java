@@ -17,7 +17,6 @@ import es.luisev.tareas.repository.SubCategoriaRepository;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.Constantes;
 import es.luisev.tareas.utils.UIHelper;
-import java.util.Date;
 
 
 /**

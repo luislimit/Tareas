@@ -39,7 +39,7 @@ public class CmbCategoriaListener implements ItemListener {
         Categoria categoria = (Categoria) e.getItem();
         List<SubCategoria> subCategorias = AppHelper.getSubCategoriaService().findByCategoria(categoria);
         cmbSubCategoria.setModel(new CmbSubCategoriaModel(subCategorias));
-        cmbSubCategoria.setSelectedIndex(subCategorias.size() == 1? 1: -1);
+        //cmbSubCategoria.setSelectedIndex(subCategorias.size() == 1? 1: -1);
         if (cmbPeticion != null) {
             cmbPeticion.setModel(new CmbPeticionModel(null));
         }

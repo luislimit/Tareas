@@ -5,8 +5,6 @@
  */
 package es.luisev.tareas.ui;
 
-import es.luisev.tareas.ui.combobox.listener.CmbPeriodoFechaListener;
-import es.luisev.tareas.ui.combobox.model.CmbPeriodoFecha;
 import es.luisev.tareas.ui.table.cabecera.Cabecera;
 import es.luisev.tareas.ui.table.cabecera.ImputacionTableCabecera;
 import es.luisev.tareas.ui.table.cabecera.PeticionTableCabecera;
@@ -17,7 +15,6 @@ import es.luisev.tareas.ui.listener.VisorMouseListener;
 import es.luisev.tareas.utils.UIHelper;
 import java.awt.Component;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
@@ -32,7 +29,7 @@ import javax.swing.JTree;
 public class VisorForm extends JFrame {
 
     VisorListener visorListener;
-
+    
     /**
      * Creates new form VisorForm
      */
@@ -602,7 +599,7 @@ public class VisorForm extends JFrame {
         tblImputacion.addMouseListener(mouseListener);
         tblDocumento.addMouseListener(mouseListener);
         arbol.addMouseListener(mouseListener);
-        tblPeticion.getSelectionModel().addListSelectionListener(visorListener);
+//        tblPeticion.getSelectionModel().addListSelectionListener(visorListener);
     }
     
     public void initLiterals() {

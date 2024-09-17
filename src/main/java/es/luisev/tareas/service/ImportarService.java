@@ -114,7 +114,7 @@ public class ImportarService {
                     SubCategoria subCategoriaDB = subCategoriaService.findByCodigo(subCategoria);
                     subCategoria = (subCategoriaDB == null) ? subCategoriaService.insert(subCategoria) : subCategoriaDB;
                     // Insertamos la peticion si no existe su código
-                    Peticion peticionDB = peticionService.findByCodigo(peticion);
+                    Peticion peticionDB = peticionService.findByCodigo(peticion.getCodigo());
                     if (peticionDB == null) {
                         peticion.setCategoria(categoria);
                         peticion.setSubCategoria(subCategoria);
@@ -174,7 +174,7 @@ public class ImportarService {
                     Categoria categoriaDB = categoriaService.findByCodigo(categoria);
                     subCategoria.setCategoria(categoria);
                     SubCategoria subCategoriaDB = subCategoriaService.findByCodigo(subCategoria);
-                    Peticion peticionDB = peticionService.findByCodigo(peticion);
+                    Peticion peticionDB = peticionService.findByCodigo(peticion.getCodigo());
                     if (peticionDB == null) {
                         throw new TareasApplicationException("No existe la Petición");
                     }

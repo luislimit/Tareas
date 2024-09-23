@@ -18,9 +18,14 @@ import es.luisev.tareas.ui.combobox.listener.CmbTipoExpImpListener;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
+import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
-
 
 /**
  *
@@ -38,6 +43,19 @@ public final class ExportImportListener extends ListenerBase {
         this.visorForm = (VisorForm) pantalla.getParent();
         filtro = visorForm.getVisorListener().getFiltro();
         iniciaDialogo();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+
+        if (obj.equals(pantalla.getBtnPlantilla())) {
+            evtBtnPlantilla();
+        } else if (obj.equals(pantalla.getBtnFichero())) {
+            evtBtnFichero();
+        } else {
+            super.actionPerformed(e);
+        }
     }
 
     @Override
@@ -60,7 +78,7 @@ public final class ExportImportListener extends ListenerBase {
                 case 1 ->
                     exportInforme();
                 case 2 ->
-                    importEstandar();  
+                    importEstandar();
             }
 
         } catch (TareasApplicationException e) {
@@ -80,20 +98,20 @@ public final class ExportImportListener extends ListenerBase {
 
         ExportarService.exportPeticiones(plantillaName, fileName, listaPeticion, listaImputacion);
 
-        UIHelper.showMessage(pantalla, "exportar.ok", fileName);
+        mostrarFichero(fileName);
     }
 
     private void exportInforme() throws TareasApplicationException {
         String plantillaName = pantalla.getTxtPlantilla().getText();
         String fileName = pantalla.getTxtFichero().getText();
 
-        JTable tblPeticion = ((VisorForm) pantalla.getParent()).getTblPeticion();
-        List<Peticion> listaPeticion = ((PeticionTableModel) tblPeticion.getModel()).getData();
+        List<Peticion> listaPeticion = AppHelper.getPeticionService().findByCriteria(filtro);
         List<Imputacion> listaImputacion = AppHelper.getImputacionService().findByCriteria(listaPeticion, filtro);
-        
+
         ExportarService.expInformeSeguimiento(plantillaName, fileName, listaPeticion, listaImputacion);
 
-        UIHelper.showMessage(pantalla, "exportar.ok", fileName);
+
+        mostrarFichero(fileName);
     }
 
     private void importEstandar() {
@@ -113,4 +131,39 @@ public final class ExportImportListener extends ListenerBase {
         pantalla.getCmbTipo().addItemListener(new CmbTipoExpImpListener(pantalla));
     }
 
+    private void evtBtnPlantilla() {
+        String rutaDefecto = pantalla.getTxtPlantilla().getText();
+        try {
+            File file = UIHelper.showDialogOpenFile(pantalla, rutaDefecto);
+            if (file != null) {
+                pantalla.getTxtPlantilla().setText(file.getAbsolutePath());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ExportImportListener.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void evtBtnFichero() {
+        String rutaDefecto = pantalla.getTxtFichero().getText();
+        try {
+            File file = UIHelper.showDialogNewFile(pantalla, rutaDefecto);
+            if (file != null) {
+                pantalla.getTxtFichero().setText(file.getAbsolutePath());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ExportImportListener.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void mostrarFichero(String archivo) throws TareasApplicationException {
+        if (!UIHelper.confirmAction(dialogo, "exportar.ok", archivo)){
+            return;
+        }
+        try {
+            // Abrir el archivo Excel usando la aplicación predeterminada (Excel) del sistema
+            Desktop.getDesktop().open(new File(archivo));
+        } catch (IOException ex) {
+            throw new TareasApplicationException(ex.getMessage());
+        }
+    }
 }

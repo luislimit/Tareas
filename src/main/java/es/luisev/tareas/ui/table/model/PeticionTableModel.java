@@ -25,39 +25,42 @@ public class PeticionTableModel extends DefaultTableModel<Peticion> {
 
         switch (columnIndex) {
             case 0 -> {
-                return row.getCategoria()==null?null:row.getCategoria().getCodigo();
+                return rowIndex+1;
             }
             case 1 -> {
-                return row.getSubCategoria()==null?null:row.getSubCategoria().getCodigo();
+                return row.getCategoria()==null?null:row.getCategoria().getCodigo();
             }
             case 2 -> {
-                return row.getCodigo();
+                return row.getSubCategoria()==null?null:row.getSubCategoria().getCodigo();
             }
             case 3 -> {
-                return row.getAsunto();
+                return row.getCodigo();
             }
             case 4 -> {
-                return AppHelper.dateBdToString(row.getFecPrevistaInicio());
+                return row.getAsunto();
             }
             case 5 -> {
-                return AppHelper.dateBdToString(row.getFecPrevistaFin());
+                return AppHelper.dateBdToString(row.getFecPrevistaInicio());
             }
             case 6 -> {
-                return AppHelper.dateBdToString(row.getFecRealInicio());
+                return AppHelper.dateBdToString(row.getFecPrevistaFin());
             }
             case 7 -> {
-                return AppHelper.dateBdToString(row.getFecRealFin());
+                return AppHelper.dateBdToString(row.getFecRealInicio());
             }
             case 8 -> {
-                return row.getHorasPrevista();
+                return AppHelper.dateBdToString(row.getFecRealFin());
             }
             case 9 -> {
-                return row.getHorasReal();
+                return row.getHorasPrevista();
             }
             case 10 -> {
-                return row.getPorcentaje();
+                return row.getHorasReal();
             }
             case 11 -> {
+                return row.getPorcentaje();
+            }
+            case 12 -> {
                 return row.getEstado()==null?null:row.getEstado().getNombre();
             }
             default -> {

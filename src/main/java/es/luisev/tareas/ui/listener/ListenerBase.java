@@ -8,8 +8,6 @@ package es.luisev.tareas.ui.listener;
 import es.luisev.tareas.ui.DialogoBase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-
 /**
  *
  * @author Luis-Enrique.Varona
@@ -25,19 +23,14 @@ public abstract class ListenerBase implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
-        
-        if (!(obj instanceof JButton)){
-            return;
-        }
-        String textBtn = ((JButton)obj).getText();
 
-        if (textBtn.equals(dialogo.getBtnLimpiar().getText())) {
+        if (obj.equals(dialogo.getBtnLimpiar())) {
             evtLimpiar();
-        } else if (textBtn.equals(dialogo.getBtnGuardar().getText())){
+        } else if (obj.equals(dialogo.getBtnGuardar())) {
             if (evtGuardar()) {
                 dialogo.dispose();
             }
-        } else if (textBtn.equals(dialogo.getBtnCancelar().getText())) {
+        } else if (obj.equals(dialogo.getBtnCancelar())) {
             evtCancelar();
         }
     }

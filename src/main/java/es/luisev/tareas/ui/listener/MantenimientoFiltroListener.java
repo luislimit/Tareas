@@ -33,7 +33,7 @@ public class MantenimientoFiltroListener extends ListenerBase {
     public void evtLimpiar() {
         pantalla.getCmbCategoria().setSelectedIndex(-1);
         pantalla.getCmbSubCategoria().setSelectedIndex(-1);
-        pantalla.getCmbCriteriosPeticion().setSelectedIndex(0);
+        pantalla.getCmbCriteriosPeticion().setSelectedIndex(-1);
         //Peticion
         pantalla.getTxtAsuntoContiene().setText("");
 
@@ -48,9 +48,8 @@ public class MantenimientoFiltroListener extends ListenerBase {
 
         pantalla.getTxtHorasPrevistaDesde().setText("");
         pantalla.getTxtHorasPrevistaHasta().setText("");        
-        pantalla.getTxtHorasRealesDesde().setText("");
-        pantalla.getTxtHorasRealesHasta().setText("");
-        
+        pantalla.getTxtHorasRealDesde().setText("");
+        pantalla.getTxtHorasRealHasta().setText("");
         pantalla.getTxtPorcentajeDesde().setText("");
         pantalla.getTxtPorcentajeHasta().setText("");
 
@@ -60,11 +59,13 @@ public class MantenimientoFiltroListener extends ListenerBase {
         pantalla.getDchImputacionHasta().setDate(null);
         pantalla.getTxtHorasImputadasDesde().setText("");
         pantalla.getTxtHorasImputadasHasta().setText("");
-        pantalla.getCmbTipoHoras().setSelectedIndex(-1);
+        pantalla.getTxtImputaContiene().setText("");
+        pantalla.getCmbTipoHoras().setSelectedIndex(0);
         //Documento
-        pantalla.getCmbTipoDocumento().setSelectedIndex(-1);
+        pantalla.getCmbTipoDocumento().setSelectedIndex(0);
         pantalla.getTxtNombreContiene().setText("");
         pantalla.getTxtRuta().setText("");
+        pantalla.repaint();
     }
 
     @Override
@@ -89,8 +90,8 @@ public class MantenimientoFiltroListener extends ListenerBase {
         
         filtro.setHorasPrevistaDesde(UIHelper.getDouble(pantalla.getTxtHorasPrevistaDesde()));
         filtro.setHorasPrevistaHasta(UIHelper.getDouble(pantalla.getTxtHorasPrevistaHasta()));
-        filtro.setHorasRealesDesde(UIHelper.getDouble(pantalla.getTxtHorasRealesDesde()));
-        filtro.setHorasRealesHasta(UIHelper.getDouble(pantalla.getTxtHorasRealesHasta()));
+        filtro.setHorasRealesDesde(UIHelper.getDouble(pantalla.getTxtHorasRealDesde()));
+        filtro.setHorasRealesHasta(UIHelper.getDouble(pantalla.getTxtHorasRealHasta()));
 
         filtro.setPorcentajeDesde(UIHelper.getDouble(pantalla.getTxtPorcentajeDesde()));
         filtro.setPorcentajeHasta(UIHelper.getDouble(pantalla.getTxtPorcentajeHasta()));
@@ -99,6 +100,7 @@ public class MantenimientoFiltroListener extends ListenerBase {
         //
         filtro.setImputacionDesde(UIHelper.getDateDB(pantalla.getDchImputacionDesde()));
         filtro.setImputacionHasta(UIHelper.getDateDB(pantalla.getDchImputacionHasta()));
+        filtro.setImputacionContiene(pantalla.getTxtImputaContiene().getText());
         filtro.setHorasImputadasDesde(UIHelper.getDouble(pantalla.getTxtHorasImputadasDesde()));
         filtro.setHorasImputadasHasta(UIHelper.getDouble(pantalla.getTxtHorasImputadasHasta()));
         filtro.setTipoHoras(pantalla.getCmbTipoHoras().getSelectedIndex());
@@ -151,8 +153,8 @@ public class MantenimientoFiltroListener extends ListenerBase {
                 
                 setTextDouble(pantalla.getTxtHorasPrevistaDesde(), filtro.getHorasPrevistaDesde());
                 setTextDouble(pantalla.getTxtHorasPrevistaHasta(), filtro.getHorasPrevistaHasta());
-                setTextDouble(pantalla.getTxtHorasRealesDesde(), filtro.getHorasRealesDesde());
-                setTextDouble(pantalla.getTxtHorasRealesHasta(), filtro.getHorasRealesHasta());
+                setTextDouble(pantalla.getTxtHorasRealDesde(), filtro.getHorasRealesDesde());
+                setTextDouble(pantalla.getTxtHorasRealHasta(), filtro.getHorasRealesHasta());
                 
                 setTextDouble(pantalla.getTxtPorcentajeDesde(), filtro.getPorcentajeDesde());
                 setTextDouble(pantalla.getTxtPorcentajeHasta(), filtro.getPorcentajeHasta());
@@ -160,6 +162,7 @@ public class MantenimientoFiltroListener extends ListenerBase {
                 //
                 UIHelper.setDateChooserValue(pantalla.getDchImputacionDesde(), filtro.getImputacionDesde());
                 UIHelper.setDateChooserValue(pantalla.getDchImputacionHasta(), filtro.getImputacionHasta());
+                pantalla.getTxtImputaContiene().setText(filtro.getImputacionContiene());
                 setTextDouble(pantalla.getTxtHorasImputadasDesde(), filtro.getHorasImputadasDesde());
                 setTextDouble(pantalla.getTxtHorasImputadasHasta(), filtro.getHorasImputadasHasta());
                 pantalla.getCmbTipoHoras().setSelectedIndex(filtro.getTipoHoras());

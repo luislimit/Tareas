@@ -12,11 +12,14 @@ import es.luisev.tareas.ui.table.model.ImputacionTableModel;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
 import es.luisev.tareas.ui.listener.VisorListener;
 import es.luisev.tareas.ui.listener.VisorMouseListener;
+import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
+import static es.luisev.tareas.utils.UIHelper.getLiteral;
 import java.awt.Component;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -57,13 +60,11 @@ public class VisorForm extends JFrame {
         btnBorrar = new javax.swing.JButton();
         sepFiltrarExcel = new javax.swing.JToolBar.Separator();
         btnFiltrar = new javax.swing.JButton();
-        btnExportar = new javax.swing.JButton();
-        btnImportar = new javax.swing.JButton();
+        btnExpImp = new javax.swing.JButton();
         sepUsuario1 = new javax.swing.JToolBar.Separator();
         btnConfiguracion = new javax.swing.JButton();
         btnInformacion = new javax.swing.JButton();
         sepUsuario = new javax.swing.JToolBar.Separator();
-        lblUsuario = new javax.swing.JLabel();
         pnlVisor = new javax.swing.JPanel();
         sppArbol = new javax.swing.JSplitPane();
         scpArbol = new javax.swing.JScrollPane();
@@ -165,27 +166,16 @@ public class VisorForm extends JFrame {
         btnFiltrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolbar.add(btnFiltrar);
 
-        btnExportar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/excel.png"))); // NOI18N
-        btnExportar.setText("Exportar");
-        btnExportar.setToolTipText("Exportar a Excel");
-        btnExportar.setFocusable(false);
-        btnExportar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExportar.setMaximumSize(new java.awt.Dimension(60, 60));
-        btnExportar.setMinimumSize(new java.awt.Dimension(60, 60));
-        btnExportar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolbar.add(btnExportar);
-
-        btnImportar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btnImportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/importar.png"))); // NOI18N
-        btnImportar.setText("Importar");
-        btnImportar.setToolTipText("Importar desde Excel");
-        btnImportar.setFocusable(false);
-        btnImportar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnImportar.setMaximumSize(new java.awt.Dimension(60, 60));
-        btnImportar.setMinimumSize(new java.awt.Dimension(60, 60));
-        btnImportar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolbar.add(btnImportar);
+        btnExpImp.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btnExpImp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/excel.png"))); // NOI18N
+        btnExpImp.setText("Exp/Imp");
+        btnExpImp.setToolTipText("Exportar a Excel");
+        btnExpImp.setFocusable(false);
+        btnExpImp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExpImp.setMaximumSize(new java.awt.Dimension(60, 60));
+        btnExpImp.setMinimumSize(new java.awt.Dimension(60, 60));
+        btnExpImp.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbar.add(btnExpImp);
         toolbar.add(sepUsuario1);
 
         btnConfiguracion.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
@@ -210,12 +200,6 @@ public class VisorForm extends JFrame {
         btnInformacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolbar.add(btnInformacion);
         toolbar.add(sepUsuario);
-
-        lblUsuario.setText(" LVARONA ");
-        lblUsuario.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        lblUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lblUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        toolbar.add(lblUsuario);
 
         sppArbol.setDividerLocation(150);
 
@@ -435,16 +419,14 @@ public class VisorForm extends JFrame {
     private javax.swing.JButton btnCrearDocumento;
     private javax.swing.JButton btnCrearImputacion;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExportar;
+    private javax.swing.JButton btnExpImp;
     private javax.swing.JButton btnFiltrar;
-    private javax.swing.JButton btnImportar;
     private javax.swing.JButton btnInformacion;
     private javax.swing.JLabel lblFechaMaxima;
     private javax.swing.JLabel lblFechaMinima;
     private javax.swing.JLabel lblHorasExtra;
     private javax.swing.JLabel lblHorasNormales;
     private javax.swing.JLabel lblTotalHoras;
-    private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnlDocumento;
     private javax.swing.JPanel pnlImputacion;
     private javax.swing.JPanel pnlImputacionPie;
@@ -492,7 +474,7 @@ public class VisorForm extends JFrame {
     }
 
     public JButton getBtnExcel() {
-        return btnExportar;
+        return btnExpImp;
     }
 
     public JButton getBtnFiltrar() {
@@ -501,10 +483,6 @@ public class VisorForm extends JFrame {
 
     public JButton getBtnInformacion() {
         return btnInformacion;
-    }
-
-    public JLabel getLblUsuario() {
-        return lblUsuario;
     }
 
     public JTable getTblDocumento() {
@@ -559,18 +537,16 @@ public class VisorForm extends JFrame {
         return visorListener;
     }
 
-    public JButton getBtnExportar() {
-        return btnExportar;
-    }
-
-    public JButton getBtnImportar() {
-        return btnImportar;
+    public JButton getBtnExpImp() {
+        return btnExpImp;
     }
 
     private void initForm() {
         initListener();
         initLiterals();
         initModels();
+        Image icon = new ImageIcon(getClass().getResource("/tareas-diarias.png")).getImage();
+        setIconImage(icon);
         visorListener.rellenaArbol();
     }
     private void initListener() {
@@ -583,8 +559,7 @@ public class VisorForm extends JFrame {
 
         btnBorrar.addActionListener(visorListener);
         btnEditar.addActionListener(visorListener);
-        btnExportar.addActionListener(visorListener);
-        btnImportar.addActionListener(visorListener);        
+        btnExpImp.addActionListener(visorListener);
         btnFiltrar.addActionListener(visorListener);
         btnInformacion.addActionListener(visorListener);
         btnConfiguracion.addActionListener(visorListener);
@@ -603,7 +578,10 @@ public class VisorForm extends JFrame {
     }
     
     public void initLiterals() {
-        UIHelper.setWindowTitle(this);
+        String directorioActual = System.getProperty("user.dir");
+        String titulo = getLiteral("VisorForm") + " ("+directorioActual+") - " + AppHelper.getDefaultUser();
+        setTitle(titulo);
+        //
         setTexto(btnFiltrar, "btnFiltrar");
         //
         setTexto(btnCrear, "btnCrearCategoria");
@@ -613,8 +591,7 @@ public class VisorForm extends JFrame {
         setTexto(btnBorrar, "btnBorrar");
         setTexto(btnEditar, "btnEditar");
         //
-        setTexto(btnExportar, "btnExportar");
-        setTexto(btnImportar, "btnImportar");
+        setTexto(btnExpImp, "btnExpImp");
         setTexto(btnInformacion, "btnInformacion");
         setTexto(btnConfiguracion, "btnConfiguracion");
     }

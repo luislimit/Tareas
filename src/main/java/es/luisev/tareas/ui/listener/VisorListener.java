@@ -12,7 +12,6 @@ import es.luisev.tareas.model.DBEntity;
 import es.luisev.tareas.model.Imputacion;
 import es.luisev.tareas.model.Peticion;
 import es.luisev.tareas.model.SubCategoria;
-import es.luisev.tareas.service.ImportarService;
 import es.luisev.tareas.service.PeticionService;
 import es.luisev.tareas.ui.ExportImportDialog;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
@@ -32,8 +31,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -66,8 +63,6 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
 
     private List<Peticion> peticiones;
 
-    private boolean cambioHoras = false;
-
     @Getter
     private Filtro filtro;
 
@@ -89,10 +84,8 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             evtBtnCrear();
         } else if (obj == pantalla.getBtnCrearImputacion()) {
             evtBtnCrearImputacion();
-        } else if (obj.equals(pantalla.getBtnExportar())) {
-            evtBtnExportar();
-        } else if (obj.equals(pantalla.getBtnImportar())) {
-            evtBtnImportar();
+        } else if (obj.equals(pantalla.getBtnExpImp())) {
+            evtBtnExpImp();
         } else if (obj == pantalla.getBtnFiltrar()) {
             evtBtnFiltrar();
         } else if (obj == pantalla.getBtnInformacion()) {
@@ -165,10 +158,9 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                 peticion = imputacionOld.getPeticion();
             }
         }
-        imputacionOld = Imputacion.builder().peticion(peticion).build();
+        imputacionOld = Imputacion.builder().peticion(peticion).horasReal(0.0).build();
         Imputacion imputacionNew = (Imputacion) UIHelper.showDialog(new MantenimientoImputacionDialog(pantalla, imputacionOld));
         if (imputacionNew != null && pantalla.getTbpPanel().getSelectedIndex() == PNL_IMPUTACION) {
-            updateTabPane();
             afterChangeImputacion(imputacionOld, imputacionNew);
         }
     }
@@ -198,7 +190,6 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             if (imputacionOld != null) {
                 Imputacion imputacionNew = (Imputacion) UIHelper.showDialog(new MantenimientoImputacionDialog(pantalla, imputacionOld));
                 if (imputacionNew != null) {
-                    updateTabPane();
                     afterChangeImputacion(imputacionOld, imputacionNew);
                 }
             }
@@ -247,7 +238,6 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                         return;
                     }
                     AppHelper.getImputacionService().delete(imputacionOld.getId());
-                    updateTabPane();
                     Imputacion imputacionNew = Imputacion.builder()
                             .peticion(imputacionOld.getPeticion())
                             .horasReal(0.0)
@@ -394,11 +384,6 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
     private void updateTabPane() {
         switch (pantalla.getTbpPanel().getSelectedIndex()) {
             case PNL_PETICION:
-                if (cambioHoras) {
-                    cambioHoras = false;
-                    Peticion peticion = getPeticionNode();
-                    selectNode(peticion);
-                }
                 break;
             case PNL_IMPUTACION:
                 Peticion peticion = getTblPeticionSelection();
@@ -438,7 +423,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                     if (fecha != null && fecha.compareTo(fechaMin) < 0) {
                         fechaMin = fecha;
                     }
-                    if (fecha != null && fecha.compareTo(fechaMin) > 0) {
+                    if (fecha != null && fecha.compareTo(fechaMax) > 0) {
                         fechaMax = fecha;
                     }
                 }
@@ -458,43 +443,10 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
         pantalla.getTxtTotalHoras().setText(totalHoras.toString());
     }
 
-    private void evtBtnImportar() {
-        if (UIHelper.confirmAction(pantalla, "confirmacion.importar")) {
-            try {
-                String excelFilePath = "c:\\temp\\Peticiones.xlsx"; // Ruta al archivo Excel
-                ImportarService.importFromExcel(excelFilePath);
-                UIHelper.showMessage(pantalla, "importacion.finalizada.ok");
-            } catch (TareasApplicationException e) {
-                UIHelper.showErrors(pantalla, e);
-            }
-        }
-    }
-
-    private void evtBtnExportar() {
+    private void evtBtnExpImp() {
         UIHelper.showDialog(new ExportImportDialog(pantalla));
     }
 
-    /**
-     * Se dispara al seleccionar un elemento en la tabla de Peticiones
-     *
-     * @param e
-     */
-    /*  @Override
-    public void valueChanged(ListSelectionEvent e) {
-        Peticion peticionTabla = getTblPeticionSelection();
-        if (peticionTabla == null) {
-            return;
-        }
-
-        Peticion peticionArbol = getPeticionNode();
-
-        if (peticionArbol != null && peticionTabla != null && peticionTabla.equals(peticionArbol)) {
-            // Si el elemento seleccionado coincide en el árbol y en la tabla, no hacemos nada
-            return;
-        }
-        selectNodeById(pantalla.getArbol(), peticionTabla);
-    }
-     */
     /**
      * Se ejecuta al cambiar el elemento seleccionado el arbol
      *
@@ -612,6 +564,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             actualizaPeticion(peticionOld, imputacionOld.getHorasReal(), 0.0);
             actualizaPeticion(peticionNew, 0.0, imputacionNew.getHorasReal());
         }
+        updateTabPane();
     }
 
     /**
@@ -629,7 +582,7 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             horasCalc = horasCalc == null ? 0.0 : horasCalc;
             //Comprobamos si se estaba haciendo un seguimiento de las horas
             if (!horasImputadas.equals(horasCalc)) {
-                if (!UIHelper.confirmAction(pantalla, "confirmacion.actualizar.peticion", horasReal.toString(), horasCalc.toString())) {
+                if (!UIHelper.confirmAction(pantalla, "confirmacion.actualizar.peticion", horasCalc.toString(), horasImputadas.toString())) {
                     return;
                 }
             }
@@ -642,9 +595,19 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             }
             peticion.setPorcentaje(porcentaje);
             peticion.setHorasReal(horasImputadas);
+            //Actualizar datos en la BBDD
             peticionService.update(peticion);
-            cambioHoras = true;
-
+            //Actualizar la informacion en memoria del árbol
+            int pos = peticiones.indexOf(peticion);
+            peticiones.set(pos, peticion);
+            // Refrescar la información de la tabla en pantalla
+            PeticionTableModel tableModel = (PeticionTableModel) pantalla.getTblPeticion().getModel();
+            List<Peticion> peticionesTabla = tableModel.getData();
+            pos = peticionesTabla.indexOf(peticion);
+            if (pos >= 0) {
+                peticionesTabla.set(pos, peticion);
+                tableModel.fireTableDataChanged();
+            }
         } catch (TareasApplicationException e) {
             UIHelper.showErrors(pantalla, e);
         }

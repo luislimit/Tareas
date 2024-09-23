@@ -121,7 +121,7 @@ public final class MantenimientoImputacionListener extends ListenerBase {
             // Si las horas exceden las indicadas, actualizamos el valor de horas con el calculado
             if (horasImputadas > peticion.getHorasReal()){
                 Double horasPrev = peticion.getHorasPrevista();
-                Double porcentaje = (horasPrev ==null || horasPrev ==0)? 0: horasImputadas/horasPrev;
+                Double porcentaje = (double)Math.round((horasPrev ==null || horasPrev ==0)? 0: horasImputadas/horasPrev *100.0);
                 if (porcentaje > 100){
                     porcentaje = 100.0;
                 }

@@ -37,6 +37,7 @@ es\luisev\tareas\ui\listener\ExportImportListener.class
 es\luisev\tareas\ui\MantenimientoPeticionDialog.class
 es\luisev\tareas\model\Peticion$PeticionBuilder.class
 es\luisev\tareas\connection\dialect\SQLiteDialect.class
+es\luisev\tareas\service\ServiceSupport.class
 es\luisev\tareas\model\TipoDocumento$TipoDocumentoBuilder.class
 es\luisev\tareas\ui\listener\VisorListener.class
 es\luisev\tareas\ui\MantenimientoImputacionDialog.class

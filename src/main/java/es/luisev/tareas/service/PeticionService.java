@@ -24,7 +24,7 @@ import es.luisev.tareas.utils.UIHelper;
  * @author Luis-Enrique.Varona
  */
 @Service(Constantes.SERVICIO_PETICION)
-public class PeticionService {
+public class PeticionService extends ServiceSupport{
 
     @Autowired
     private PeticionRepository repository;
@@ -38,8 +38,6 @@ public class PeticionService {
         Long idSubCategoria = DBEntity.getPK(filtro.getSubCategoria());
        // Long idPeticion = DBEntity.getPK(filtro.getPeticion());
         Long idEstado = DBEntity.getPK(filtro.getEstado());
-        String asuntoContiene = filtro.getAsuntoContiene();
-        asuntoContiene = (asuntoContiene == null) ? null : "%" + asuntoContiene + "%";
 
         String extra;
         switch (filtro.getTipoHoras()) {
@@ -57,7 +55,7 @@ public class PeticionService {
         return repository.findByCriteria(idCategoria,
                 idSubCategoria,
                 idEstado,
-                asuntoContiene,
+                getLikeString(filtro.getAsuntoContiene()),
                 filtro.getInicioPrevistoDesde(),
                 filtro.getInicioPrevistoHasta(),
                 filtro.getInicioRealDesde(),
@@ -72,13 +70,6 @@ public class PeticionService {
                 filtro.getHorasRealesHasta(),
                 filtro.getPorcentajeDesde(),
                 filtro.getPorcentajeHasta(),
-                //
-                filtro.getImputacionDesde(),
-                filtro.getImputacionHasta(),
-                filtro.getHorasImputadasDesde(),
-                filtro.getHorasImputadasHasta(),
-                extra,
-                //
                 filtro.getTipoListado() // Tipo de listado
                 ); 
     }

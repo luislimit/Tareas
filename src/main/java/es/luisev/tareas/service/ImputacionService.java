@@ -24,7 +24,7 @@ import es.luisev.tareas.utils.UIHelper;
  * @author Luis-Enrique.Varona
  */
 @Service(Constantes.SERVICIO_IMPUTACION)
-public class ImputacionService {
+public class ImputacionService extends ServiceSupport{
 
     @Autowired
     private ImputacionRepository repository;
@@ -57,6 +57,7 @@ public class ImputacionService {
                     peticiones,
                     criterio.getImputacionDesde(),
                     criterio.getImputacionHasta(),
+                    getLikeString(criterio.getImputacionContiene()),
                     criterio.getHorasImputadasDesde(),
                     criterio.getHorasImputadasHasta(),
                     extra);

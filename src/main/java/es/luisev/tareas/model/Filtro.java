@@ -46,6 +46,7 @@ public class Filtro {
     //
     String imputacionDesde;
     String imputacionHasta;
+    String imputacionContiene;
     Double horasImputadasDesde;
     Double horasImputadasHasta;
     int tipoHoras;

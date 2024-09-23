@@ -22,7 +22,6 @@ public class CmbCriteriosPeticionModel extends DefaultComboBoxModel<String> {
     public CmbCriteriosPeticionModel() {
         super();
         rellena("");
-        rellena("Sin horas imputadas"); // 
         rellena("Margen de Imputacion (Estimadas > Reales)"); // 
         rellena("Horas sobrepasadas (Reales > Estimadas)"); // 
         rellena("Fecha Inicio atrasada (Inicio Estimado < Inicio Real)"); // 

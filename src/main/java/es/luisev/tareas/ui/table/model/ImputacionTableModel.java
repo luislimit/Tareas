@@ -25,27 +25,30 @@ public class ImputacionTableModel extends DefaultTableModel<Imputacion> {
 
         switch (columnIndex) {
             case 0 -> {
-                return row.getPeticion().getCategoria()==null?null:row.getPeticion().getCategoria().getCodigo();
+                return rowIndex+1;
             }
             case 1 -> {
-                return row.getPeticion().getSubCategoria()==null?null:row.getPeticion().getSubCategoria().getCodigo();
+                return row.getPeticion().getCategoria()==null?null:row.getPeticion().getCategoria().getCodigo();
             }
             case 2 -> {
-                return row.getPeticion().getCodigo();
+                return row.getPeticion().getSubCategoria()==null?null:row.getPeticion().getSubCategoria().getCodigo();
             }
             case 3 -> {
-                return AppHelper.dateBdToString(row.getFecha());
+                return row.getPeticion().getCodigo();
             }
             case 4 -> {
-                return row.getHorasReal();
+                return AppHelper.dateBdToString(row.getFecha());
             }
             case 5 -> {
-                return row.getExtra();
+                return row.getHorasReal();
             }
             case 6 -> {
+                return row.getExtra();
+            }
+            case 7 -> {
                 return row.getDescripcion();
             }            
-            case 7 -> {
+            case 8 -> {
                 return row.getEstado().getNombre();
             }
             default -> {

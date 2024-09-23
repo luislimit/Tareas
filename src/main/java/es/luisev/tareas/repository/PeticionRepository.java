@@ -49,12 +49,6 @@ public interface PeticionRepository extends JpaRepository<Peticion, Long> {
             @Param("horasRealHasta") Double horasRealHasta,
             @Param("porcentajeDesde") Double porcentajeDesde,
             @Param("porcentajeHasta") Double porcentajeHasta,
-            // Datos de las imputaciones
-            @Param("imputacionDesde") String imputacionDesde,
-            @Param("imputacionHasta") String imputacionHasta,
-            @Param("horasImputadasDesde") Double horasImputadasDesde,
-            @Param("horasImputadasHasta") Double horasImputadasHasta,
-            @Param("extra") String extra,
             //
             @Param("tipoListado") int tipoListado
     );              

@@ -14,6 +14,8 @@ import es.luisev.tareas.ui.table.model.DefaultTableModel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -21,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -165,4 +168,39 @@ public class UIHelper {
         String texto = textField.getText();
         return Double.parseDouble(texto);
     }
+
+    public static JFileChooser getJFileChooser(String rutaInicial) throws IOException {
+        File file = new File(rutaInicial);
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle(getLiteral("dialogo.select.file.title"));
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (file.isDirectory()) {
+            chooser.setCurrentDirectory(file);
+        } else {
+            chooser.setSelectedFile(file);
+        }
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        return chooser;
+    }
+
+    public static File showDialogOpenFile(Component component, String rutaInicial) throws IOException {
+        JFileChooser chooser = getJFileChooser(rutaInicial);
+        int state = chooser.showOpenDialog(component);
+        if (state == JFileChooser.APPROVE_OPTION) { // si elige guardar en el archivo
+            return chooser.getSelectedFile();
+        }
+        return null;
+    }
+
+    public static File showDialogNewFile(Component component, String rutaInicial) throws IOException {
+        JFileChooser chooser = getJFileChooser(rutaInicial);
+        int state = chooser.showSaveDialog(component);
+        if (state == JFileChooser.APPROVE_OPTION) { // si elige guardar en el archivo
+            return chooser.getSelectedFile();
+        }
+        return null;
+    }
+
 }

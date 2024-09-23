@@ -80,6 +80,8 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         lblFechaImputacion = new javax.swing.JLabel();
         dchFechaImputacionDesde = new com.toedter.calendar.JDateChooser();
         dchFechaImputacionHasta = new com.toedter.calendar.JDateChooser();
+        lblImputaContiene = new javax.swing.JLabel();
+        txtImputaContiene = new javax.swing.JTextField();
         lblHorasImputadas = new javax.swing.JLabel();
         txtHorasImputadasDesde = new javax.swing.JTextField();
         txtHorasImputadasHasta = new javax.swing.JTextField();
@@ -110,7 +112,7 @@ public class MantenimientoFiltroDialog extends DialogoBase {
 
         lblCriteriosPeticion.setText("Condición");
 
-        cmbCriteriosPeticion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Petiones con margen (Estimadas > Reales)" }));
+        cmbCriteriosPeticion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
         cmbCriteriosPeticion.setToolTipText("");
 
         lblEstado.setText("Estado");
@@ -311,6 +313,8 @@ public class MantenimientoFiltroDialog extends DialogoBase {
 
         dchFechaImputacionHasta.setDateFormatString("dd-MM-yyyy");
 
+        lblImputaContiene.setText("Texto contiene");
+
         lblHorasImputadas.setText("Horas Imputadas ");
 
         lblTipoHoras.setText("Tipo Horas");
@@ -328,16 +332,20 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                 .addComponent(dchFechaImputacionDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dchFechaImputacionHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblImputaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtImputaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHorasImputadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorasImputadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtHorasImputadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHorasImputadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180)
+                .addComponent(txtHorasImputadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTipoHoras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlImputacionLayout.setVerticalGroup(
@@ -353,7 +361,9 @@ public class MantenimientoFiltroDialog extends DialogoBase {
                         .addComponent(txtHorasImputadasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtHorasImputadasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbTipoHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblImputaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtImputaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -515,6 +525,7 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private javax.swing.JLabel lblHorasImputadas;
     private javax.swing.JLabel lblHorasPrevista;
     private javax.swing.JLabel lblHorasReal;
+    private javax.swing.JLabel lblImputaContiene;
     private javax.swing.JLabel lblInicioPrevisto;
     private javax.swing.JLabel lblInicioReal;
     private javax.swing.JLabel lblNombreContiene;
@@ -536,6 +547,7 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     private javax.swing.JTextField txtHorasPrevistaHasta;
     private javax.swing.JTextField txtHorasRealDesde;
     private javax.swing.JTextField txtHorasRealHasta;
+    private javax.swing.JTextField txtImputaContiene;
     private javax.swing.JTextField txtNombreContiene;
     private javax.swing.JTextField txtPorcentajeDesde;
     private javax.swing.JTextField txtPorcentajeHasta;
@@ -679,11 +691,11 @@ public class MantenimientoFiltroDialog extends DialogoBase {
         return txtHorasPrevistaHasta;
     }
 
-    public JTextField getTxtHorasRealesDesde() {
+    public JTextField getTxtHorasRealDesde() {
         return txtHorasRealDesde;
     }
 
-    public JTextField getTxtHorasRealesHasta() {
+    public JTextField getTxtHorasRealHasta() {
         return txtHorasRealHasta;
     }
 
@@ -702,4 +714,10 @@ public class MantenimientoFiltroDialog extends DialogoBase {
     public JTextField getTxtPorcentajeHasta() {
         return txtPorcentajeHasta;
     }
+
+    public JTextField getTxtImputaContiene() {
+        return txtImputaContiene;
+    }
+    
+    
 }

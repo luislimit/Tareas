@@ -39,8 +39,10 @@ public class ExportImportDialog extends DialogoBase {
         cmbTipo = new javax.swing.JComboBox<>();
         lblPlantilla = new javax.swing.JLabel();
         txtPlantilla = new javax.swing.JTextField();
+        btnPlantilla = new javax.swing.JButton();
         lblFichero = new javax.swing.JLabel();
         txtFichero = new javax.swing.JTextField();
+        btnFichero = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -54,7 +56,11 @@ public class ExportImportDialog extends DialogoBase {
 
         lblPlantilla.setText("Plantilla");
 
+        btnPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder-open.png"))); // NOI18N
+
         lblFichero.setText("Fichero");
+
+        btnFichero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder-open.png"))); // NOI18N
 
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/limpiar.png"))); // NOI18N
@@ -78,7 +84,7 @@ public class ExportImportDialog extends DialogoBase {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
@@ -92,10 +98,16 @@ public class ExportImportDialog extends DialogoBase {
                                 .addComponent(lblFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblTipo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFichero)
-                            .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPlantilla))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,11 +120,13 @@ public class ExportImportDialog extends DialogoBase {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPlantilla))
+                    .addComponent(lblPlantilla)
+                    .addComponent(btnPlantilla))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFichero)
-                    .addComponent(txtFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFichero))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -128,6 +142,9 @@ public class ExportImportDialog extends DialogoBase {
     protected void initListener() {
         initComponents();
         ExportImportListener listener = new ExportImportListener(this);
+        btnPlantilla.addActionListener(listener);
+        btnFichero.addActionListener(listener);
+        
         btnGuardar.addActionListener(listener);
         btnCancelar.addActionListener(listener);
         btnLimpiar.addActionListener(listener);
@@ -136,8 +153,10 @@ public class ExportImportDialog extends DialogoBase {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnFichero;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnPlantilla;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JLabel lblFichero;
     private javax.swing.JLabel lblPlantilla;
@@ -172,6 +191,14 @@ public class ExportImportDialog extends DialogoBase {
 
     public JTextField getTxtPlantilla() {
         return txtPlantilla;
+    }
+
+    public JButton getBtnFichero() {
+        return btnFichero;
+    }
+
+    public JButton getBtnPlantilla() {
+        return btnPlantilla;
     }
 
 

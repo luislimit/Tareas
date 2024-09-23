@@ -29,6 +29,7 @@ public interface ImputacionRepository extends JpaRepository<Imputacion, Long> {
             @Param("peticiones") List<Peticion> peticion,
             @Param("imputacionDesde") String imputacionDesde,
             @Param("imputacionHasta") String imputacionHasta,
+            @Param("imputacionContiene") String imputacionContiene,
             @Param("horasImputadasDesde") Double horasImputadasDesde,
             @Param("horasImputadasHasta") Double horasImputadasHasta,
             @Param("extra") String extra

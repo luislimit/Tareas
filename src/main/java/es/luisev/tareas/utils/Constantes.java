@@ -59,6 +59,7 @@ public class Constantes {
     private static final String WHERE_IMPUTACION = 
              "(:imputacionDesde is null or (i.fecha is not null and i.fecha >= :imputacionDesde)) and "
             + "(:imputacionHasta is null or (i.fecha is not null and i.fecha <= :imputacionHasta)) and "
+            + "(:imputacionContiene is null or (i.descripcion is not null and i.descripcion like :imputacionContiene)) and "
             + "(:horasImputadasDesde is null or (i.horasReal is not null and i.horasReal >= :horasImputadasDesde)) and "
             + "(:horasImputadasHasta is null or (i.horasReal is not null and i.horasReal <= :horasImputadasHasta)) and "            
             + "(:extra is null or (i.extra is not null and i.extra = :extra)) ";
@@ -95,12 +96,11 @@ public static final String QUERY_PETICION
             +  "(p.descripcion is not null and p.descripcion LIKE :asuntoContiene)"
             + ") and "
             + "(" 
-            +  "(:tipoListado != 1 and " + WHERE_IMPUTACION+ ") or "
-            +  "(:tipoListado = 1 and NOT " + WHERE_IMPUTACION +") or "
-            +  "(:tipoListado = 2 and (p.horasReal is null or p.horasReal < p.horasPrevista)) or" 
-            +  "(:tipoListado = 3 and ((p.horasPrevista is null and p.horasReal>0) or p.horasReal > p.horasPrevista)) or " 
-            +  "(:tipoListado = 4 and p.fecPrevistaInicio < p.fecRealInicio) or " 
-            +  "(:tipoListado = 5 and p.fecPrevistaFin < p.fecRealFin)"             
+            +  "(:tipoListado <= 0) or "
+            +  "(:tipoListado = 1 and (p.horasReal is null or p.horasReal < p.horasPrevista)) or" 
+            +  "(:tipoListado = 2 and ((p.horasPrevista is null and p.horasReal>0) or p.horasReal > p.horasPrevista)) or " 
+            +  "(:tipoListado = 3 and p.fecPrevistaInicio < p.fecRealInicio) or " 
+            +  "(:tipoListado = 4 and p.fecPrevistaFin < p.fecRealFin)"             
             + ")";        
    
     public static final String QUERY_IMPUTACION = 

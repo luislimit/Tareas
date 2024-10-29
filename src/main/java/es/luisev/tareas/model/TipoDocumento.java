@@ -26,11 +26,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @Table (name="t_tipodocumento")
-@ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 public class TipoDocumento extends DBEntity{
     
     @ToString.Include
     private String nombre;
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }       
    
  }

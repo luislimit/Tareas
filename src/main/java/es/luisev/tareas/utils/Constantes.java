@@ -106,4 +106,11 @@ public static final String QUERY_PETICION
     public static final String QUERY_IMPUTACION = 
              "SELECT i FROM Imputacion i WHERE " + WHERE_IMPUTACION +  " and i.peticion IN :peticiones";
  
+
+    public static final String QUERY_DOCUMENTO = 
+             "SELECT i FROM Documento i WHERE " 
+                + "(:documentoContiene is null or (i.descripcion is not null and i.descripcion like :documentoContiene)) and "
+                + "(:ficheroContiene   is null or (i.fichero     is not null and i.fichero     like :ficheroContiene)) and "
+                + "(:idTipoDocumento   is null or i.tipoDocumento.id = :idTipoDocumento) and "
+                + "(i.peticion IN :peticiones)";
 }

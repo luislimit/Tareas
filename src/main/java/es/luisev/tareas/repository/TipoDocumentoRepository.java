@@ -15,5 +15,6 @@ import es.luisev.tareas.model.TipoDocumento;
 
 @Repository
 public interface TipoDocumentoRepository extends JpaRepository<TipoDocumento, Long> {
+   
 }
 

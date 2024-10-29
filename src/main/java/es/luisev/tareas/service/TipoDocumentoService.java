@@ -8,11 +8,11 @@ package es.luisev.tareas.service;
 import es.luisev.tareas.model.TipoDocumento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import es.luisev.tareas.repository.TipoDocumentoRepository;
 import es.luisev.tareas.utils.Constantes;
+
 /**
  *
  * @author Luis-Enrique.Varona
@@ -22,7 +22,7 @@ public class TipoDocumentoService {
 
     @Autowired
     private TipoDocumentoRepository repository;
-    
+
     public List<TipoDocumento> findAll() {
         return repository.findAll();
     }
@@ -45,5 +45,5 @@ public class TipoDocumentoService {
 
     public void delete(Long id) {
         repository.deleteById(id);
-    }    
+    }
 }

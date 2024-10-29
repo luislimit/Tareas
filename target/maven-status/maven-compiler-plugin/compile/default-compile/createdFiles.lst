@@ -12,11 +12,13 @@ es\luisev\tareas\ui\combobox\model\CmbSubCategoriaModel.class
 es\luisev\tareas\repository\PeticionRepository.class
 es\luisev\tareas\model\TipoDocumento$TipoDocumentoBuilderImpl.class
 es\luisev\tareas\connection\dialect\SQLiteDialect$2.class
+es\luisev\tareas\ui\MantenimientoDocumentoDialog.class
 es\luisev\tareas\exception\TareasApplicationException.class
 es\luisev\tareas\ui\combobox\model\CmbPeticionModel.class
 es\luisev\tareas\ui\table\model\ImputacionTableModel.class
 es\luisev\tareas\service\EstadoService.class
 es\luisev\tareas\ui\combobox\listener\CmbSubCategoriaListener.class
+es\luisev\tareas\ui\listener\MantenimientoDocumentoListener.class
 es\luisev\tareas\service\ExportarService.class
 es\luisev\tareas\ui\combobox\model\CmbEstadoModel.class
 es\luisev\tareas\repository\TipoDocumentoRepository.class
@@ -41,6 +43,7 @@ es\luisev\tareas\service\ServiceSupport.class
 es\luisev\tareas\model\TipoDocumento$TipoDocumentoBuilder.class
 es\luisev\tareas\ui\listener\VisorListener.class
 es\luisev\tareas\ui\MantenimientoImputacionDialog.class
+es\luisev\tareas\ui\combobox\model\CmbTipoDocumentoModel.class
 es\luisev\tareas\model\Usuario.class
 es\luisev\tareas\utils\LiteralesSingleton.class
 es\luisev\tareas\repository\UsuarioRepository.class
@@ -50,6 +53,7 @@ es\luisev\tareas\ui\combobox\model\CmbCriteriosPeticionModel.class
 es\luisev\tareas\ui\combobox\model\CmbUsuarioModel.class
 es\luisev\tareas\utils\Constantes.class
 es\luisev\tareas\repository\EstadoRepository.class
+es\luisev\tareas\ui\table\cabecera\DocumentoTableCabecera.class
 es\luisev\tareas\ui\listener\MantenimientoSubCategoriaListener.class
 es\luisev\tareas\model\Filtro$FiltroBuilder.class
 es\luisev\tareas\service\ImportarService.class
@@ -79,6 +83,7 @@ es\luisev\tareas\model\Peticion.class
 es\luisev\tareas\ui\listener\ListenerBase.class
 es\luisev\tareas\model\Documento.class
 es\luisev\tareas\ui\MantenimientoFiltroDialog.class
+es\luisev\tareas\ui\table\model\DocumentoTableModel.class
 es\luisev\tareas\ui\table\model\PeticionTableModel.class
 es\luisev\tareas\repository\ImputacionRepository.class
 es\luisev\tareas\service\SubCategoriaService.class

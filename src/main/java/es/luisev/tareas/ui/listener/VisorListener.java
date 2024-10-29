@@ -9,6 +9,7 @@ import es.luisev.tareas.exception.TareasApplicationException;
 import es.luisev.tareas.model.Categoria;
 import es.luisev.tareas.model.Filtro;
 import es.luisev.tareas.model.DBEntity;
+import es.luisev.tareas.model.Documento;
 import es.luisev.tareas.model.Imputacion;
 import es.luisev.tareas.model.Peticion;
 import es.luisev.tareas.model.SubCategoria;
@@ -16,11 +17,14 @@ import es.luisev.tareas.service.PeticionService;
 import es.luisev.tareas.ui.ExportImportDialog;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
 import es.luisev.tareas.ui.MantenimientoCategoriaDialog;
+import es.luisev.tareas.ui.MantenimientoDocumentoDialog;
 import es.luisev.tareas.ui.MantenimientoFiltroDialog;
 import es.luisev.tareas.ui.MantenimientoImputacionDialog;
 import es.luisev.tareas.ui.MantenimientoPeticionDialog;
 import es.luisev.tareas.ui.MantenimientoSubCategoriaDialog;
 import es.luisev.tareas.ui.VisorForm;
+import es.luisev.tareas.ui.table.model.DefaultTableModel;
+import es.luisev.tareas.ui.table.model.DocumentoTableModel;
 import es.luisev.tareas.ui.table.model.ImputacionTableModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
@@ -78,6 +82,8 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             evtBtnBorrar();
         } else if (obj.equals(pantalla.getBtnEditar())) {
             evtBtnEditar();
+        } else if (obj == pantalla.getBtnCrearDocumento()) {
+            evtBtnCrearDocumento();            
         } else if (obj == pantalla.getBtnConfiguracion()) {
 
         } else if (obj.equals(pantalla.getBtnCrear())) {
@@ -125,8 +131,32 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
         }
     }
 
+    /**
+     * @return La peticion asociada al elemento seleccionado
+     */
+    private Peticion getPeticionSeleccionada() {
+        Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+        Peticion peticion = null;
+        if (focusedComponent == pantalla.getArbol()) {
+            peticion = getPeticionNode();
+        } else if (focusedComponent == pantalla.getTblPeticion()) {
+            peticion = getTblPeticionSelection();
+        } else if (focusedComponent == pantalla.getTblImputacion()) {
+            Imputacion imputacion = getTblImputacionSelection();
+            if (imputacion != null) {
+                peticion = imputacion.getPeticion();
+            }
+        } else if (focusedComponent == pantalla.getTblDocumento()) {      
+            Documento documento = getTblDocumentoSelection();
+            if (documento != null) {
+                peticion = documento.getPeticion();
+            }       
+        }
+        return peticion;
+    }
+    
     private void evtBtnCrear() {
-        Peticion peticion = getPeticionNode();
+        Peticion peticion = getPeticionSeleccionada();
         Object result;
 
         if (peticion == null) {
@@ -145,24 +175,21 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
     }
 
     private void evtBtnCrearImputacion() {
-        Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        Peticion peticion = null;
-        Imputacion imputacionOld;
-        if (focusedComponent == pantalla.getArbol()) {
-            peticion = getPeticionNode();
-        } else if (focusedComponent == pantalla.getTblPeticion()) {
-            peticion = getTblPeticionSelection();
-        } else if (focusedComponent == pantalla.getTblImputacion()) {
-            imputacionOld = getTblImputacionSelection();
-            if (imputacionOld != null) {
-                peticion = imputacionOld.getPeticion();
-            }
-        }
-        imputacionOld = Imputacion.builder().peticion(peticion).horasReal(0.0).build();
+        Peticion peticion = getPeticionSeleccionada();
+        Imputacion imputacionOld = Imputacion.builder().peticion(peticion).horasReal(0.0).build();
         Imputacion imputacionNew = (Imputacion) UIHelper.showDialog(new MantenimientoImputacionDialog(pantalla, imputacionOld));
         if (imputacionNew != null && pantalla.getTbpPanel().getSelectedIndex() == PNL_IMPUTACION) {
             afterChangeImputacion(imputacionOld, imputacionNew);
         }
+    }
+    
+    private void evtBtnCrearDocumento(){
+        Peticion peticion = getPeticionSeleccionada();
+        Documento documentoOld = Documento.builder().peticion(peticion).build();
+        Documento documentoNew = (Documento) UIHelper.showDialog(new MantenimientoDocumentoDialog(pantalla, documentoOld));
+        if (documentoNew != null && pantalla.getTbpPanel().getSelectedIndex() == PNL_DOCUMENTO) {
+            updateTabPane();
+        }        
     }
 
     /**
@@ -184,7 +211,14 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
             Peticion peticion = getTblPeticionSelection();
             if (peticion != null) {
                 result = UIHelper.showDialog(new MantenimientoPeticionDialog(pantalla, peticion));
-            }
+            }    
+        } else if (focusedComponent == pantalla.getTblDocumento()) {
+            Documento documento = getTblDocumentoSelection();
+            if (documento != null) {
+                if (UIHelper.showDialog(new MantenimientoDocumentoDialog(pantalla, documento)) != null) {
+                    updateTabPane();
+                }
+            }            
         } else if (focusedComponent == pantalla.getTblImputacion()) {
             Imputacion imputacionOld = getTblImputacionSelection();
             if (imputacionOld != null) {
@@ -204,7 +238,6 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
      * Borra el elemento seleccionado
      */
     public void evtBtnBorrar() {
-
         try {
             Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
             if (focusedComponent == pantalla.getArbol()) {
@@ -243,6 +276,15 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                             .horasReal(0.0)
                             .build();
                     afterChangeImputacion(imputacionOld, imputacionNew);
+                }
+            } else if (focusedComponent == pantalla.getTblDocumento()) {
+                Documento documentoOld = getTblDocumentoSelection();
+                if (documentoOld != null) {
+                    if (!UIHelper.confirmAction(pantalla, "confirmacion.borrar.documento")) {
+                        return;
+                    }
+                    AppHelper.getDocumentoService().delete(documentoOld.getId());
+                    updateTabPane();
                 }
             }
 
@@ -354,46 +396,37 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
         }
     }
 
-    /* Retorna la peticionArbol seleccionada en la tabla de peticiones */
     private Peticion getTblPeticionSelection() {
-        JTable tblPeticion = pantalla.getTblPeticion();
-        int selectedRow = tblPeticion.getSelectedRow();
-        List<Peticion> lista = ((PeticionTableModel) tblPeticion.getModel()).getData();
-        Peticion peticion = null;
-        if (selectedRow >= 0) {
-            peticion = lista.get(selectedRow);
-        }
-        return peticion;
+        return (Peticion) UIHelper.getTableSelection(pantalla.getTblPeticion());
     }
 
-    /* Retorna la peticionArbol seleccionada en la tabla de peticiones */
     private Imputacion getTblImputacionSelection() {
-        JTable tblImputacion = pantalla.getTblImputacion();
-        int selectedRow = tblImputacion.getSelectedRow();
-        List<Imputacion> lista = ((ImputacionTableModel) tblImputacion.getModel()).getData();
-        Imputacion imputacion = null;
-        if (selectedRow >= 0) {
-            imputacion = lista.get(selectedRow);
-        }
-        return imputacion;
+      return (Imputacion) UIHelper.getTableSelection(pantalla.getTblImputacion());
     }
 
+    private Documento getTblDocumentoSelection() {
+      return (Documento) UIHelper.getTableSelection(pantalla.getTblDocumento());
+    }    
+    
     /**
      * Actualiza la información de la pestaña activa
      */
     private void updateTabPane() {
+        if (pantalla.getTbpPanel().getSelectedIndex() == PNL_PETICION){
+            return;
+        }
+        Peticion peticion = getTblPeticionSelection();
+        List<Peticion> peticionesFiltradas = null;
+        if (peticion == null) {
+            peticionesFiltradas = ((PeticionTableModel) pantalla.getTblPeticion().getModel()).getData();
+        } else {
+            peticionesFiltradas = new ArrayList();
+            peticionesFiltradas.add(peticion);
+        }
+                
+        
         switch (pantalla.getTbpPanel().getSelectedIndex()) {
-            case PNL_PETICION:
-                break;
             case PNL_IMPUTACION:
-                Peticion peticion = getTblPeticionSelection();
-                List<Peticion> peticionesFiltradas = null;
-                if (peticion == null) {
-                    peticionesFiltradas = ((PeticionTableModel) pantalla.getTblPeticion().getModel()).getData();
-                } else {
-                    peticionesFiltradas = new ArrayList();
-                    peticionesFiltradas.add(peticion);
-                }
                 List<Imputacion> imputaciones = AppHelper.getImputacionService().findByCriteria(peticionesFiltradas, filtro);
                 ImputacionTableModel tableModel = (ImputacionTableModel) pantalla.getTblImputacion().getModel();
                 tableModel.clearData();
@@ -404,6 +437,13 @@ public class VisorListener implements ActionListener, TreeSelectionListener, Tre
                 break;
 
             case PNL_DOCUMENTO:
+                List<Documento> documentos = AppHelper.getDocumentoService().findByCriteria(peticionesFiltradas, filtro);
+                DocumentoTableModel tableModelDoc = (DocumentoTableModel) pantalla.getTblDocumento().getModel();
+                tableModelDoc.clearData();
+                tableModelDoc.setData(documentos);
+                tableModelDoc.fireTableDataChanged();
+                pantalla.getTblDocumento().clearSelection();
+                break;                
         }
     }
 

@@ -12,6 +12,8 @@ import es.luisev.tareas.ui.table.model.ImputacionTableModel;
 import es.luisev.tareas.ui.table.model.PeticionTableModel;
 import es.luisev.tareas.ui.listener.VisorListener;
 import es.luisev.tareas.ui.listener.VisorMouseListener;
+import es.luisev.tareas.ui.table.cabecera.DocumentoTableCabecera;
+import es.luisev.tareas.ui.table.model.DocumentoTableModel;
 import es.luisev.tareas.utils.AppHelper;
 import es.luisev.tareas.utils.UIHelper;
 import static es.luisev.tareas.utils.UIHelper.getLiteral;
@@ -218,7 +220,6 @@ public class VisorForm extends JFrame {
                 "Categoría", "SubCategoría", "Petición", "Asunto", "Inicio Programado", "Fin Programado", "Inicio Real", "Fin Real", "Horas Programadas", "Horas Reales", "Estado"
             }
         ));
-        tblPeticion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblPeticion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scpPeticion.setViewportView(tblPeticion);
 
@@ -253,7 +254,6 @@ public class VisorForm extends JFrame {
             }
         ));
         tblImputacion.setToolTipText("");
-        tblImputacion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblImputacion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scpImputacion.setViewportView(tblImputacion);
 
@@ -353,10 +353,9 @@ public class VisorForm extends JFrame {
 
             },
             new String [] {
-                "Categoría", "SubCategoría", "Petición", "Documento", "Ruta", "Tipo documento", "Observaciones"
+                "Categoría", "SubCategoría", "Petición", "Tipo documento", "Documento", "Observaciones"
             }
         ));
-        tblDocumento.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblDocumento.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scpDocumento.setViewportView(tblDocumento);
 
@@ -604,5 +603,10 @@ public class VisorForm extends JFrame {
         Cabecera cabeceraImputacion = new ImputacionTableCabecera();
         ImputacionTableModel imputacionTableModel = new ImputacionTableModel(cabeceraImputacion);
         UIHelper.setTableModel(tblImputacion, imputacionTableModel);
+        //
+        Cabecera cabeceraDocumento = new DocumentoTableCabecera();
+        DocumentoTableModel documentoTableModel = new DocumentoTableModel(cabeceraDocumento);
+        UIHelper.setTableModel(tblDocumento, documentoTableModel);
+
     }
 }

@@ -144,7 +144,7 @@ public class UIHelper {
 
     public static void setTableModel(JTable table, DefaultTableModel tableModel) {
         table.setModel(tableModel);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        //table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         Cabecera cabecera = tableModel.getCabecera();
         // Dar el ancho a las columnas de la tabla
         for (int i = 0; i < cabecera.getColumnSizes().size(); i++) {
@@ -195,6 +195,10 @@ public class UIHelper {
     }
 
     public static File showDialogNewFile(Component component, String rutaInicial) throws IOException {
+        //Si no se indica la ruta nos posicionamos en la ruta de inicio de la aplicacion
+        if (rutaInicial == null || rutaInicial.isBlank()){
+            rutaInicial = System.getProperty("user.dir");
+        }
         JFileChooser chooser = getJFileChooser(rutaInicial);
         int state = chooser.showSaveDialog(component);
         if (state == JFileChooser.APPROVE_OPTION) { // si elige guardar en el archivo
@@ -203,4 +207,8 @@ public class UIHelper {
         return null;
     }
 
+    public static Object getTableSelection(JTable table) {
+        int selectedRow = table.getSelectedRow();
+        return selectedRow == -1? null: ((DefaultTableModel) table.getModel()).getSelectedRow(selectedRow);
+    }    
 }
